@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sharmin Sirajudeen — CV</title>
+<meta name="description" content="Curriculum Vitae of Sharmin Sirajudeen — founder of Drengr, Android Staff Engineer. Two versions: designed and minimal." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F4C5C'/><text x='16' y='22' font-size='18' font-family='monospace' fill='white' text-anchor='middle'>S</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F7F8;--ink:#0B1A1F;--body:#33474e;--muted:#6a7f86;--faint:#9aabb1;
+    --line:#dce5e8;--teal:#0F4C5C;--teal-bright:#11808F;--teal-wash:#e9f2f3;--amber:#FB6A3C;
+    --gridline:rgba(15,76,92,.055);
+    --display:"Bricolage Grotesque",-apple-system,sans-serif;
+    --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;min-height:100vh;background:var(--paper);color:var(--body);font-family:var(--sans);font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(var(--gridline) 1px,transparent 1px),linear-gradient(90deg,var(--gridline) 1px,transparent 1px);
+    background-size:64px 64px;
+    display:flex;align-items:center;justify-content:center;padding:48px 24px;}
+  a{text-decoration:none;}
+  ::selection{background:var(--amber);color:#fff;}
+  .wrap{max-width:760px;width:100%;}
+  .back{font-family:var(--mono);font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:7px;margin-bottom:34px;}
+  .back:hover{color:var(--teal);}
+  .eyebrow{font-family:var(--mono);font-size:12.5px;font-weight:500;color:var(--teal-bright);display:inline-flex;align-items:center;gap:8px;}
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(251,106,60,.18);}
+  h1{font-family:var(--display);font-weight:700;color:var(--ink);font-size:clamp(2rem,5vw,3rem);line-height:1.05;letter-spacing:-.025em;margin:16px 0 0;max-width:16ch;}
+  h1 .ph{color:var(--teal);}
+  .sub{font-size:1.05rem;color:var(--body);margin:14px 0 0;max-width:52ch;line-height:1.5;}
+
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px;}
+  @media(max-width:620px){.cards{grid-template-columns:1fr;}}
+  .card{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(11,26,31,.1);}
+  .mark{position:absolute;top:-11px;left:-11px;width:24px;height:24px;border-radius:50%;background:var(--amber);color:#fff;
+    font-family:var(--mono);font-size:12px;font-weight:600;display:grid;place-items:center;border:2.5px solid var(--paper);box-shadow:0 3px 10px rgba(251,106,60,.4);}
+  .ct{font-family:var(--display);font-weight:700;font-size:1.35rem;color:var(--ink);letter-spacing:-.01em;}
+  .ctag{font-family:var(--mono);font-size:11px;color:var(--teal-bright);margin-top:3px;}
+  .cd{font-size:14.5px;color:var(--body);margin:12px 0 20px;line-height:1.5;flex:1;}
+  .acts{display:flex;gap:9px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;padding:10px 15px;border-radius:10px;transition:.16s;}
+  .btn-p{background:var(--teal);color:#fff;}
+  .btn-p:hover{background:var(--teal-bright);}
+  .btn-g{background:#fff;color:var(--ink);border:1px solid var(--line);}
+  .btn-g:hover{border-color:var(--teal-bright);color:var(--teal);}
+  .foot{font-family:var(--mono);font-size:11.5px;color:var(--faint);margin-top:34px;}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">← &nbsp;back to portfolio</a>
+    <span class="eyebrow">// curriculum vitae</span>
+    <h1>Two CVs. Same story, <span class="ph">different dress.</span></h1>
+    <p class="sub">Same facts, two treatments — pick whichever fits the moment. View it in the browser, or grab the PDF.</p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="mark">1</span>
+        <div class="ct">Designed</div>
+        <div class="ctag">Set-of-Mark · engineering grid</div>
+        <div class="cd">The distinctive one — Drengr's own visual language applied to a CV. Built to be remembered.</div>
+        <div class="acts">
+          <a class="btn btn-p" href="cv-designed.html" target="_blank" rel="noopener">View →</a>
+          <a class="btn btn-g" href="Sharmin_Sirajudeen_CV_Designed.pdf" download="Sharmin_Sirajudeen_CV.pdf">↓ PDF</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <span class="mark">2</span>
+        <div class="ct">Minimal</div>
+        <div class="ctag">clean · official · ATS-friendly</div>
+        <div class="cd">Sober and conventional — same killer type, no ornament. The one for formal and background-check contexts.</div>
+        <div class="acts">
+          <a class="btn btn-p" href="cv-minimal.html" target="_blank" rel="noopener">View →</a>
+          <a class="btn btn-g" href="Sharmin_Sirajudeen_CV.pdf" download="Sharmin_Sirajudeen_CV.pdf">↓ PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">Sharmin Sirajudeen · Founder, Drengr · Android Staff Engineer · Dubai, UAE</div>
+  </div>
+</body>
+</html>

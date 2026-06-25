@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sharmin Sirajudeen — CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14202a;--body:#2c3a41;--muted:#5f6f79;--faint:#90a0a8;
+    --line:#dde4e7;--teal:#0F4C5C;--teal-soft:#11616f;--teal-wash:#eef4f5;
+    --display:"Bricolage Grotesque",Georgia,serif;
+    --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:var(--sans);color:var(--body);background:#e9edf0;font-size:10.3px;line-height:1.52;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  .page{width:210mm;min-height:297mm;margin:16px auto;background:#fff;padding:16mm 16mm 13mm;box-shadow:0 4px 26px rgba(16,24,31,.13);}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;border-bottom:1.5px solid var(--teal);padding-bottom:11px;margin-bottom:14px;}
+  .name{font-family:var(--display);font-size:27px;font-weight:700;letter-spacing:-.02em;line-height:1.02;color:var(--ink);margin:0;}
+  .title{font-family:var(--display);font-size:11.5px;color:var(--teal);font-weight:600;margin:4px 0 0;}
+  .contact{text-align:right;font-family:var(--mono);font-size:8.6px;line-height:1.9;color:var(--muted);}
+  .contact a{color:var(--muted);text-decoration:none;}
+  .contact .k{color:var(--faint);}
+
+  section{margin-bottom:12px;}
+  h2{font-family:var(--mono);font-size:8.5px;font-weight:600;color:var(--teal);letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px;display:flex;align-items:center;gap:11px;}
+  h2::after{content:"";flex:1;height:1px;background:var(--line);}
+
+  .summary{font-size:10.4px;line-height:1.62;color:var(--body);margin:0;}
+  .summary b{color:var(--ink);font-weight:600;}
+  .summary .co{color:var(--teal);font-weight:600;}
+
+  .job{margin-bottom:10px;}
+  .job:last-child{margin-bottom:0;}
+  .job-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;}
+  .role{font-family:var(--display);font-weight:700;font-size:11.6px;color:var(--ink);letter-spacing:-.01em;}
+  .role .co{color:var(--teal);}
+  .when{font-family:var(--mono);font-size:8.7px;color:var(--muted);white-space:nowrap;}
+  .where{font-family:var(--mono);font-size:8.7px;color:var(--faint);margin:1px 0 5px;}
+  .where a{color:var(--faint);text-decoration:none;}
+  ul{margin:4px 0 0;padding-left:14px;}
+  li{margin-bottom:2.5px;color:var(--body);}
+  li::marker{color:var(--teal-soft);}
+  li b{color:var(--ink);font-weight:600;}
+
+  .ship{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{font-family:var(--mono);font-size:9px;font-weight:500;color:var(--teal);background:var(--teal-wash);border:1px solid #d6e3e6;border-radius:6px;padding:4px 10px;font-variant-numeric:tabular-nums;}
+  .chip.solid{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+  .grid2{display:grid;grid-template-columns:1.12fr 1fr;gap:0 26px;}
+  .skrow{display:flex;gap:9px;margin-bottom:4px;}
+  .skrow:last-child{margin-bottom:0;}
+  .skk{font-family:var(--mono);font-size:8.3px;font-weight:500;color:var(--teal);flex:0 0 62px;padding-top:1px;letter-spacing:.04em;text-transform:uppercase;}
+  .skv{color:var(--body);flex:1;}
+  .edu{margin-bottom:7px;}
+  .edu:last-child{margin-bottom:0;}
+  .edu-d{font-family:var(--display);font-weight:700;font-size:10.4px;color:var(--ink);}
+  .edu-m{font-family:var(--mono);font-size:8.5px;color:var(--muted);margin-top:1px;}
+
+  .personal{font-family:var(--mono);font-size:8.7px;color:var(--body);margin:0;}
+  .personal b{color:var(--ink);}
+  .personal .sep{color:var(--line);margin:0 7px;}
+
+  .dl-bar{position:fixed;top:16px;right:16px;z-index:100;}
+  .dl-btn{display:inline-flex;align-items:center;gap:7px;background:var(--teal);color:#fff;font-family:var(--sans);font-size:12px;font-weight:600;padding:9px 15px;border-radius:9px;text-decoration:none;box-shadow:0 4px 14px rgba(15,76,92,.3);transition:background .15s;}
+  .dl-btn:hover{background:#11616f;}
+  @media print{.dl-bar{display:none!important;}}
+  @media screen and (max-width:560px){.dl-bar{top:10px;right:10px;}}
+  @page{size:A4;margin:0;}
+  @media print{body{background:#fff;}.page{box-shadow:none;margin:0;width:210mm;min-height:auto;padding:14mm 15mm 11mm;}a{color:var(--muted)!important;}section,.job{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="dl-bar"><a class="dl-btn" href="Sharmin_Sirajudeen_CV.pdf" download="Sharmin_Sirajudeen_CV.pdf">↓&nbsp;Download PDF</a></div>
+<div class="page">
+
+  <header>
+    <div>
+      <h1 class="name">Sharmin Sirajudeen</h1>
+      <div class="title">Founder, Drengr &nbsp;·&nbsp; Staff Software Engineer</div>
+    </div>
+    <div class="contact">
+      <div><a href="mailto:sharminsirajudeen11@gmail.com">sharminsirajudeen11@gmail.com</a><span class="k"> · </span>+971 50 546 1936</div>
+      <div>Dubai, United Arab Emirates</div>
+      <div><a href="https://drengr.dev">drengr.dev</a><span class="k"> · </span><a href="https://github.com/SharminSirajudeen">github.com/SharminSirajudeen</a></div>
+      <div><a href="https://www.linkedin.com/in/sharmin-sirajudeen/">linkedin.com/in/sharmin-sirajudeen</a></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Profile</h2>
+    <p class="summary">
+      Software engineer with <b>~10 years</b> building and leading mobile products used by millions across the
+      Middle East, the UK, and India. Helped take two companies from small teams to regional scale —
+      <span class="co">Talabat</span> (joined a ~25-person tech team that grew into one of MENA's largest delivery
+      platforms; 10M+ installs) and <span class="co">Floward</span> (Android Staff Engineer; 1M+ installs;
+      highest code contributor in their GitHub to date). Now founder of <span class="co">Drengr</span>, pioneering
+      a <b>framework-blind</b> approach to mobile product analytics and AI-driven app automation — a clean break
+      from a decade of brittle, framework-coupled tooling. Deep across native Android (Kotlin / Java / Jetpack
+      Compose), Flutter, and systems programming in Rust.
+    </p>
+  </section>
+
+  <section>
+    <h2>Experience</h2>
+
+    <div class="job">
+      <div class="job-head">
+        <div><span class="role">Founder — <span class="co">Drengr</span></span></div>
+        <div class="when">2024 — Present</div>
+      </div>
+      <div class="where">Dubai, UAE · drengr.dev</div>
+      <ul>
+        <li>Building Drengr, a developer-tools and mobile-analytics SaaS — a cloud platform plus embeddable SDK
+            that gives engineering teams and AI agents a <b>framework-blind</b> way to observe, analyze, and
+            automate mobile app behaviour (native, Flutter, React Native, web-views, games).</li>
+        <li>Attacking a large, growing market with a <b>zero-code, framework-blind SDK</b> and an open-core
+            distribution model built for bottoms-up developer adoption.</li>
+        <li>Sole founder across the full stack: product, engineering (Rust core; native Android / iOS / Flutter
+            SDKs; ClickHouse analytics), go-to-market, and developer relations.</li>
+        <li>Model: recurring software subscriptions and SDK licensing, sold to developers and technology
+            companies worldwide.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div><span class="role">Android Staff Engineer — <span class="co">Floward</span></span></div>
+        <div class="when">Jul 2021 — Present</div>
+      </div>
+      <div class="where">Dubai, UAE</div>
+      <ul>
+        <li>Staff Android engineer for Floward, a gifting platform across the Middle East and the UK
+            (<b>customer app: 1M+ installs</b>), contributing across Android and Flutter.</li>
+        <li>Own architecture, stability, and scalability of the Android codebase; maintain CI/CD, QA, and
+            release pipelines; drive feature planning and cross-platform interoperability.</li>
+        <li><b>Highest code contributor</b> to the Floward customer-app codebase.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div><span class="role">Senior Android Engineer — <span class="co">Talabat</span></span></div>
+        <div class="when">Dec 2015 — Apr 2021</div>
+      </div>
+      <div class="where">Dubai, UAE</div>
+      <ul>
+        <li>Joined when the tech team was <b>~25 people</b>; grew with the company as it scaled into one of
+            MENA's largest food-delivery platforms (<b>10M+ installs</b>; later part of Delivery Hero).</li>
+        <li>Progressed mid-level → senior; built core UI and business logic; introduced in-app analytics and
+            A/B testing.</li>
+        <li>Helped lead the codebase migration to Kotlin and the team's adoption of Agile / Scrum.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Selected Products Shipped</h2>
+    <div class="ship">
+      <span class="chip solid">Talabat — 10M+ installs</span>
+      <span class="chip solid">Floward — 1M+ installs</span>
+      <span class="chip">Floward Rider</span>
+      <span class="chip">Carriage</span>
+      <span class="chip">Otlob</span>
+      <span class="chip">iFood.jo</span>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section>
+      <h2>Skills</h2>
+      <div class="skrow"><span class="skk">Lang</span><span class="skv">Kotlin, Java, Dart, Rust, SQL</span></div>
+      <div class="skrow"><span class="skk">Mobile</span><span class="skv">Android, Jetpack Compose, Coroutines, Flutter, Dagger 2, Room; MVVM / MVI / MVP</span></div>
+      <div class="skrow"><span class="skk">Data</span><span class="skv">Rust services, ClickHouse, REST APIs, CI/CD</span></div>
+      <div class="skrow"><span class="skk">Practice</span><span class="skv">Technical leadership, system architecture, Agile / Scrum, product development</span></div>
+    </section>
+    <section>
+      <h2>Education</h2>
+      <div class="edu">
+        <div class="edu-d">M.Tech, Computer Engineering</div>
+        <div class="edu-m">Sarabhai Inst. of Science &amp; Technology — CUSAT, India · 2014</div>
+      </div>
+      <div class="edu">
+        <div class="edu-d">B.Tech, Computer Engineering</div>
+        <div class="edu-m">University of Kerala, India · 2011</div>
+      </div>
+    </section>
+  </div>
+
+  <section style="margin-top:12px;">
+    <h2>Personal</h2>
+    <p class="personal">
+      <b>Nationality:</b> Indian<span class="sep">·</span><b>Based in:</b> Dubai, UAE<span class="sep">·</span>
+      <b>Languages:</b> English (fluent)<span class="sep">·</span><b>Date of birth:</b> 11 Nov 1989
+    </p>
+  </section>
+
+</div>
+</body>
+</html>
