@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sharmin Sirajudeen — Founder, Drengr</title>
+<meta name="description" content="Founder of Drengr. Ten years shipping Android at scale — Talabat (10M+ installs), Floward (1M+). Building a framework-blind way to give AI agents and engineering teams eyes and hands on any mobile app." />
+<meta property="og:title" content="Sharmin Sirajudeen — Founder, Drengr" />
+<meta property="og:description" content="Ten years shipping Android at scale. Now building Drengr — eyes and hands for AI on mobile." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F4C5C'/><text x='16' y='22' font-size='18' font-family='monospace' fill='white' text-anchor='middle'>S</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* screen-capture palette — cool paper, teal, annotation amber */
+    --paper:#F4F7F8;
+    --ink:#0B1A1F;
+    --body:#33474e;
+    --muted:#6a7f86;
+    --faint:#9aabb1;
+    --line:#dce5e8;
+    --teal:#0F4C5C;
+    --teal-bright:#11808F;
+    --teal-2:#159AAB;
+    --teal-wash:#e9f2f3;
+    --amber:#FB6A3C;          /* Set-of-Mark annotation marker */
+    --amber-ink:#c64a23;
+    --screen:#08171C;          /* dark "device screen" */
+    --screen-2:#0c2a33;
+    --gridline:rgba(15,76,92,.055);
+    --red:#E5484D;
+    --green:#30A46C;
+    /* type */
+    --display:"Bricolage Grotesque",-apple-system,Segoe UI,sans-serif;
+    --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    /* spacing (8px) */
+    --s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--body);
+    font-family:var(--sans);font-size:17px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    background-image:
+      linear-gradient(var(--gridline) 1px,transparent 1px),
+      linear-gradient(90deg,var(--gridline) 1px,transparent 1px);
+    background-size:64px 64px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--s5);}
+  a{color:var(--teal-bright);text-decoration:none;}
+  ::selection{background:var(--amber);color:#fff;}
+
+  .mono{font-family:var(--mono);}
+  .eyebrow{
+    font-family:var(--mono);font-size:12.5px;font-weight:500;letter-spacing:.04em;
+    color:var(--teal-bright);text-transform:none;display:inline-flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 4px rgba(251,106,60,.18);}
+
+  /* ── Nav ───────────────────────────────── */
+  nav{position:sticky;top:0;z-index:50;background:rgba(244,247,248,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav-in{max-width:var(--maxw);margin:0 auto;padding:14px var(--s5);display:flex;align-items:center;justify-content:space-between;}
+  .brand{font-family:var(--mono);font-weight:600;color:var(--ink);font-size:15px;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;}
+  .brand .sq{width:22px;height:22px;border-radius:6px;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:13px;}
+  .nav-links{display:flex;gap:var(--s5);font-size:14px;}
+  .nav-links a{color:var(--muted);font-weight:500;}
+  .nav-links a:hover{color:var(--ink);}
+  @media(max-width:640px){.nav-links{display:none;}}
+
+  /* ── Hero ──────────────────────────────── */
+  .hero{position:relative;padding:var(--s9) 0 var(--s8);overflow:hidden;}
+  .hero .coord{position:absolute;font-family:var(--mono);font-size:11px;color:var(--faint);letter-spacing:.05em;}
+  .hero .c-tl{top:18px;left:max(var(--s5),calc(50% - var(--maxw)/2 + var(--s5)));}
+  .hero .c-br{bottom:18px;right:max(var(--s5),calc(50% - var(--maxw)/2 + var(--s5)));}
+  h1{
+    font-family:var(--display);font-weight:700;color:var(--ink);
+    font-size:clamp(2.6rem,7vw,4.5rem);line-height:1.02;letter-spacing:-.025em;margin:18px 0 0;max-width:14ch;
+  }
+  h1 .ph{color:var(--teal);}
+  .lede{font-size:clamp(1.05rem,2.2vw,1.3rem);color:var(--body);max-width:60ch;margin:var(--s5) 0 0;line-height:1.5;}
+  .lede b{color:var(--ink);font-weight:600;}
+
+  /* annotated credential cards */
+  .creds{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--s4);margin:var(--s7) 0 0;max-width:760px;}
+  @media(max-width:560px){.creds{grid-template-columns:1fr;}}
+  .cred{position:relative;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:0 1px 0 rgba(11,26,31,.03);transition:transform .18s ease,box-shadow .18s ease;}
+  .cred:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(11,26,31,.09);}
+  .mark{
+    position:absolute;top:-11px;left:-11px;width:24px;height:24px;border-radius:50%;
+    background:var(--amber);color:#fff;font-family:var(--mono);font-size:12px;font-weight:600;
+    display:grid;place-items:center;border:2.5px solid var(--paper);
+    box-shadow:0 3px 10px rgba(251,106,60,.4);
+    animation:pop .5s cubic-bezier(.2,1.3,.4,1) both;
+  }
+  .cred:nth-child(1) .mark{animation-delay:.15s;}
+  .cred:nth-child(2) .mark{animation-delay:.30s;}
+  @keyframes pop{from{opacity:0;transform:scale(.3);}to{opacity:1;transform:scale(1);}}
+  .cred-co{font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--teal);letter-spacing:-.01em;}
+  .cred-metric{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;margin-left:7px;}
+  .cred-role{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:5px;line-height:1.45;}
+
+  .cta-row{display:flex;flex-wrap:wrap;gap:var(--s3);margin-top:var(--s7);align-items:center;}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:15px;padding:12px 20px;border-radius:11px;transition:.18s;}
+  .btn-primary{background:var(--teal);color:#fff;}
+  .btn-primary:hover{background:var(--teal-bright);transform:translateY(-1px);}
+  .btn-ghost{color:var(--ink);border:1px solid var(--line);background:#fff;}
+  .btn-ghost:hover{border-color:var(--teal-2);color:var(--teal);}
+  .hero-foot{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:var(--s6);}
+
+  /* ── Section frame ─────────────────────── */
+  section.block{padding:var(--s9) 0;border-top:1px solid var(--line);}
+  .sec-head{font-family:var(--display);font-weight:700;color:var(--ink);font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.08;letter-spacing:-.02em;margin:14px 0 0;max-width:20ch;}
+  .sec-lede{font-size:1.08rem;color:var(--body);max-width:62ch;margin:var(--s4) 0 0;}
+  .sec-lede b{color:var(--ink);font-weight:600;}
+
+  /* three verbs */
+  .verbs{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s4);margin-top:var(--s7);}
+  @media(max-width:720px){.verbs{grid-template-columns:1fr;}}
+  .verb{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden;}
+  .verb .tool{font-family:var(--mono);font-size:13px;color:var(--teal-bright);font-weight:600;}
+  .verb .vh{font-family:var(--display);font-weight:700;font-size:1.25rem;color:var(--ink);margin:10px 0 6px;}
+  .verb p{margin:0;font-size:14.5px;color:var(--body);}
+  .verb .vnum{position:absolute;right:14px;top:10px;font-family:var(--mono);font-size:12px;color:var(--faint);}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s6);}
+  .pill{font-family:var(--mono);font-size:12.5px;color:var(--teal);background:var(--teal-wash);border:1px solid #d3e2e5;border-radius:7px;padding:6px 11px;}
+  .hood{margin-top:var(--s7);}
+  .hood-h{font-family:var(--mono);font-size:12.5px;color:var(--teal-bright);margin-bottom:14px;}
+  .hood-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .spec{background:#fff;padding:14px 16px;}
+  .spec .sk{display:block;font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-bottom:5px;}
+  .spec .sv{font-family:var(--display);font-weight:700;font-size:1.02rem;color:var(--ink);}
+  @media(max-width:720px){.hood-grid{grid-template-columns:1fr 1fr;}}
+  @media(max-width:480px){.hood-grid{grid-template-columns:1fr;}}
+
+  /* ── Origin — dark device screen ───────── */
+  .screen{background:var(--screen);color:#cfe0e3;border-top:none;position:relative;overflow:hidden;}
+  .screen::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;}
+  .screen .wrap{position:relative;}
+  .screen .eyebrow{color:#5ec6d6;}
+  .screen .eyebrow::before{background:var(--amber);}
+  .screen .sec-head{color:#fff;max-width:24ch;}
+  .origin-body{font-size:1.06rem;color:#a9c0c5;max-width:64ch;margin:var(--s5) 0 0;line-height:1.66;}
+  .origin-body b{color:#eaf3f4;font-weight:600;}
+  .tests{display:flex;gap:5px;margin:var(--s6) 0 var(--s2);flex-wrap:wrap;}
+  .t{width:22px;height:22px;border-radius:5px;}
+  .t.red{background:var(--red);box-shadow:0 0 14px rgba(229,72,77,.4);}
+  .t.green{background:var(--green);}
+  .tests-cap{font-family:var(--mono);font-size:12px;color:#6b8a90;}
+  blockquote{margin:var(--s8) 0 0;padding:0 0 0 22px;border-left:3px solid var(--amber);}
+  blockquote q{font-family:var(--display);font-weight:600;font-size:clamp(1.4rem,3.4vw,2.1rem);line-height:1.25;color:#fff;letter-spacing:-.015em;}
+  blockquote q .hl{color:#ffb38f;}
+  blockquote q::before,blockquote q::after{content:"";}
+  .journey{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:var(--s7);font-family:var(--mono);font-size:13px;}
+  .journey .j{color:#7fa3a9;padding:5px 10px;border:1px solid rgba(255,255,255,.1);border-radius:7px;}
+  .journey .j.now{color:#08171C;background:#5ec6d6;border-color:#5ec6d6;font-weight:600;}
+  .journey .arrow{color:#456;}
+
+  /* ── Timeline ──────────────────────────── */
+  .tl{margin-top:var(--s7);border-left:2px solid var(--line);padding-left:var(--s6);position:relative;}
+  .tl-item{position:relative;padding-bottom:var(--s7);}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:"";position:absolute;left:calc(-1 * var(--s6) - 7px);top:6px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2.5px solid var(--teal);}
+  .tl-item.now::before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 4px rgba(251,106,60,.18);}
+  .tl-when{font-family:var(--mono);font-size:12.5px;color:var(--teal-bright);font-weight:500;}
+  .tl-role{font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--ink);margin:4px 0 0;}
+  .tl-role .co{color:var(--teal);}
+  .tl-desc{font-size:15px;color:var(--body);margin:7px 0 0;max-width:60ch;}
+  .tl-desc b{color:var(--ink);font-weight:600;}
+  .tl-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;}
+  .chip{font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--teal);background:#fff;border:1px solid #d3e2e5;border-radius:7px;padding:4px 10px;font-variant-numeric:tabular-nums;}
+  .chip.solid{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+  /* ── Contact ───────────────────────────── */
+  .contact{text-align:left;}
+  .contact .sec-head{max-width:24ch;}
+  .mailbtn{display:inline-flex;align-items:center;gap:10px;margin-top:var(--s6);font-family:var(--mono);font-size:1.05rem;color:#fff;background:var(--teal);padding:14px 22px;border-radius:12px;font-weight:500;}
+  .mailbtn:hover{background:var(--teal-bright);}
+  .contact-links{margin-top:var(--s5);display:flex;gap:var(--s5);flex-wrap:wrap;font-family:var(--mono);font-size:14px;}
+
+  footer{border-top:1px solid var(--line);padding:var(--s6) 0;color:var(--muted);font-family:var(--mono);font-size:12.5px;}
+  .foot-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="brand"><span class="sq">S</span>Sharmin&nbsp;Sirajudeen</div>
+    <div class="nav-links">
+      <a href="#drengr">Drengr</a>
+      <a href="#origin">Origin</a>
+      <a href="#work">Track record</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <span class="coord c-tl">0,0</span>
+  <span class="coord c-br">100,100</span>
+  <div class="wrap">
+    <span class="eyebrow">drengr_look() &nbsp;→&nbsp; reading screen</span>
+    <h1>I build developer&nbsp;tools for <span class="ph">mobile.</span></h1>
+    <p class="lede">
+      After ten years shipping Android at scale, I'm building <b>Drengr</b> — <b>eyes and hands</b> for AI
+      on any mobile app, no matter how it's built. A framework-blind break from a decade of brittle, coupled
+      tooling.
+    </p>
+
+    <div class="creds">
+      <div class="cred">
+        <span class="mark">1</span>
+        <span class="cred-co">Talabat</span><span class="cred-metric">10M+ installs</span>
+        <div class="cred-role">Senior Android Engineer · part of Delivery Hero</div>
+      </div>
+      <div class="cred">
+        <span class="mark">2</span>
+        <span class="cred-co">Floward</span><span class="cred-metric">1M+ installs</span>
+        <div class="cred-role">Android &amp; Flutter Lead · #1 code contributor</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://drengr.dev">View Drengr&nbsp;↗</a>
+      <a class="btn btn-ghost" href="https://github.com/SharminSirajudeen">GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/sharmin-sirajudeen/">LinkedIn</a>
+    </div>
+    <div class="hero-foot">// the amber markers are how Drengr annotates a screen it's looking at</div>
+  </div>
+</header>
+
+<!-- ── DRENGR ── -->
+<section class="block" id="drengr">
+  <div class="wrap">
+    <span class="eyebrow">// what i'm building</span>
+    <h2 class="sec-head">Three verbs. No&nbsp;XPath.</h2>
+    <p class="sec-lede">
+      For a decade, every mobile tool broke the same way — bound to the framework, shattered by the next UI
+      change. <b>Drengr is the clean break.</b> AI can browse the web, yet it still can't reliably tap a phone;
+      Drengr changes that. A zero-code, framework-blind SDK and cloud service that lets AI agents and
+      engineering teams <b>see, understand, and act</b> on any mobile app — working from what's on the screen,
+      not a fragile UI tree. So it covers what nothing else can: native, Flutter, React Native, web-views,
+      and games alike.
+    </p>
+
+    <div class="verbs">
+      <div class="verb">
+        <span class="vnum">01</span>
+        <div class="vh">Framework-blind</div>
+        <p>Native, Flutter, React Native, web-views, games — it reads the rendered screen, so nothing's off-limits.</p>
+      </div>
+      <div class="verb">
+        <span class="vnum">02</span>
+        <div class="vh">Zero-code capture</div>
+        <p>Drop in the SDK and product analytics start flowing — no manual event tagging to write or maintain.</p>
+      </div>
+      <div class="verb">
+        <span class="vnum">03</span>
+        <div class="vh">Built for AI agents</div>
+        <p>An actuation layer agents drive to observe and operate live apps — no selectors, no XPath, nothing brittle.</p>
+      </div>
+    </div>
+
+    <div class="hood">
+      <div class="hood-h">// under the hood</div>
+      <div class="hood-grid">
+        <div class="spec"><span class="sk">core engine</span><span class="sv">Rust</span></div>
+        <div class="spec"><span class="sk">SDKs</span><span class="sv">Android · iOS · Flutter</span></div>
+        <div class="spec"><span class="sk">analytics pipeline</span><span class="sv">ClickHouse</span></div>
+        <div class="spec"><span class="sk">distribution</span><span class="sv">Open-core, bottoms-up</span></div>
+        <div class="spec"><span class="sk">business model</span><span class="sv">SaaS + SDK licensing</span></div>
+        <div class="spec"><span class="sk">interface</span><span class="sv">look · do · query — no XPath</span></div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <span class="pill">Mobile analytics</span>
+      <span class="pill">App automation</span>
+      <span class="pill">Developer tools</span>
+      <span class="pill">Agent tooling</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── ORIGIN (dark device screen) ── -->
+<section class="block screen" id="origin">
+  <div class="wrap">
+    <span class="eyebrow">// where it started</span>
+    <h2 class="sec-head">Years of watching test suites rot faster than we could maintain them.</h2>
+    <p class="origin-body">
+      For about ten years I built Android apps. I was genuinely thrilled when I first found <b>Espresso</b> —
+      a framework from Google, deeply integrated with the SDK, that could simulate real user behaviour. I
+      wrote hundreds of tests. Then reality set in. Tests passed locally and failed on CI over animation
+      timing. Tests that worked on a Pixel broke on a Samsung. A designer moved a button into a
+      <b>BottomSheet</b> and forty tests turned red overnight — none of them testing that button. I spent
+      more time maintaining the suite than it ever saved me. I moved through Appium, UIAutomator, Maestro —
+      each a refinement of the same idea: match elements by ID or XPath, and break the moment the UI evolves.
+    </p>
+
+    <div class="tests" aria-hidden="true">
+      <span class="t red"></span><span class="t red"></span><span class="t red"></span><span class="t green"></span><span class="t red"></span><span class="t red"></span><span class="t green"></span><span class="t red"></span><span class="t red"></span><span class="t red"></span><span class="t green"></span><span class="t red"></span>
+    </div>
+    <div class="tests-cap">// "the UI tests are red again" — and everyone nods like it's weather</div>
+
+    <blockquote>
+      <q>If Espresso — <span class="hl">Google's best</span> — was the ceiling, the problem wasn't the
+      implementation. It was the entire approach.</q>
+    </blockquote>
+
+    <div class="journey">
+      <span class="j">Espresso</span><span class="arrow">→</span>
+      <span class="j">UIAutomator</span><span class="arrow">→</span>
+      <span class="j">Appium</span><span class="arrow">→</span>
+      <span class="j">Maestro</span><span class="arrow">→</span>
+      <span class="j now">Drengr</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRACK RECORD ── -->
+<section class="block" id="work">
+  <div class="wrap">
+    <span class="eyebrow">// the receipts</span>
+    <h2 class="sec-head">Ten years shipping mobile to millions.</h2>
+
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-when">2015 — 2021</div>
+        <div class="tl-role">Senior Android Engineer, <span class="co">Talabat</span></div>
+        <p class="tl-desc">Joined when the tech team was ~25 people; grew with the company as it scaled into
+          one of MENA's largest food-delivery platforms — <b>later part of Delivery Hero</b>. Built core UI
+          and business logic; introduced in-app analytics and A/B testing; helped lead the move to Kotlin.</p>
+        <div class="tl-chips"><span class="chip solid">10M+ installs</span><span class="chip">part of Delivery Hero</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when">2021 — Present</div>
+        <div class="tl-role">Android &amp; Flutter Lead, <span class="co">Floward</span></div>
+        <p class="tl-desc">Lead Android engineering and oversee the Flutter team for a gifting platform across
+          the Middle East and the UK. Own architecture, CI/CD, and release pipelines. <b>Highest code
+          contributor</b> in their GitHub to date.</p>
+        <div class="tl-chips"><span class="chip solid">1M+ installs</span><span class="chip">Middle East + UK</span></div>
+      </div>
+      <div class="tl-item now">
+        <div class="tl-when">2024 — Present</div>
+        <div class="tl-role">Founder, <span class="co">Drengr</span></div>
+        <p class="tl-desc">Building a framework-blind mobile-analytics and AI-actuation platform — eyes and
+          hands for AI on any app. Rust core, native SDKs, ClickHouse analytics. Sold as subscriptions + SDK.</p>
+        <div class="tl-chips"><span class="chip">drengr.dev</span><span class="chip">building in public</span></div>
+      </div>
+    </div>
+
+    <p class="sec-lede" style="margin-top:var(--s7)">
+      M.Tech, Computer Engineering — CUSAT, India (2014). Based in Dubai, UAE.
+    </p>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="block contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">drengr_do(reach_out)</span>
+    <h2 class="sec-head">Building in mobile, AI, or developer tools?</h2>
+    <a class="mailbtn" href="mailto:sharminsirajudeen11@gmail.com">sharminsirajudeen11@gmail.com&nbsp;↗</a>
+    <div class="contact-links">
+      <a href="https://drengr.dev">drengr.dev</a>
+      <a href="https://github.com/SharminSirajudeen">github.com/SharminSirajudeen</a>
+      <a href="https://www.linkedin.com/in/sharmin-sirajudeen/">linkedin.com/in/sharmin-sirajudeen</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <span>© 2026 Sharmin Sirajudeen</span>
+    <span>built framework-blind · drengr.dev</span>
+  </div>
+</footer>
+
+</body>
+</html>
