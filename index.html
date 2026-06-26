@@ -188,6 +188,26 @@
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
   }
+
+  /* ── CV modal ───────────────────────────── */
+  .cv-modal{position:fixed;inset:0;z-index:200;display:none;}
+  .cv-modal.open{display:block;}
+  .cv-backdrop{position:absolute;inset:0;background:rgba(8,23,28,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);}
+  .cv-panel{position:absolute;top:3vh;left:50%;transform:translateX(-50%);width:min(900px,94vw);height:94vh;
+    background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(8,23,28,.42);}
+  .cv-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line);background:#fff;flex:0 0 auto;}
+  .cv-eye{font-family:var(--mono);font-size:12px;color:var(--teal-bright);display:inline-flex;align-items:center;gap:7px;}
+  .cv-eye::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber);}
+  .cv-actions{display:flex;align-items:center;gap:9px;}
+  .cv-switch{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--teal);background:var(--teal-wash);border:1px solid #d3e2e5;border-radius:8px;padding:7px 12px;cursor:pointer;}
+  .cv-switch:hover{border-color:var(--teal-bright);}
+  .cv-dl{font-family:var(--sans);font-size:13px;font-weight:600;color:#fff;background:var(--teal);border-radius:8px;padding:8px 13px;text-decoration:none;}
+  .cv-dl:hover{background:var(--teal-bright);}
+  .cv-x{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:#fff;color:var(--muted);font-size:19px;line-height:1;cursor:pointer;}
+  .cv-x:hover{color:var(--ink);border-color:var(--teal-bright);}
+  .cv-frame{flex:1 1 auto;width:100%;border:0;background:#e9edf0;}
+  @media(max-width:560px){.cv-panel{top:0;width:100vw;height:100vh;border-radius:0;}.cv-dl .lbl{display:none;}}
 </style>
 </head>
 <body>
@@ -199,6 +219,7 @@
       <a href="#drengr">Drengr</a>
       <a href="#origin">Origin</a>
       <a href="#work">Track record</a>
+      <a href="cv-designed.html" data-cv-open>CV</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -234,7 +255,7 @@
       <a class="btn btn-primary" href="https://drengr.dev">View Drengr&nbsp;↗</a>
       <a class="btn btn-ghost" href="https://github.com/SharminSirajudeen">GitHub</a>
       <a class="btn btn-ghost" href="https://www.linkedin.com/in/sharmin-sirajudeen/">LinkedIn</a>
-      <a class="btn btn-ghost" href="cv.html" target="_blank" rel="noopener">CV</a>
+      <a class="btn btn-ghost" href="cv-designed.html" data-cv-open>CV</a>
     </div>
     <div class="hero-foot">// the amber markers are how Drengr annotates a screen it's looking at</div>
   </div>
@@ -376,7 +397,7 @@
       <a href="https://drengr.dev">drengr.dev</a>
       <a href="https://github.com/SharminSirajudeen">github.com/SharminSirajudeen</a>
       <a href="https://www.linkedin.com/in/sharmin-sirajudeen/">linkedin.com/in/sharmin-sirajudeen</a>
-      <a href="cv.html" target="_blank" rel="noopener">CV</a>
+      <a href="cv-designed.html" data-cv-open>CV</a>
     </div>
   </div>
 </section>
@@ -387,6 +408,40 @@
     <span>built framework-blind · drengr.dev</span>
   </div>
 </footer>
+
+<!-- ── CV modal ── -->
+<div class="cv-modal" id="cvModal" aria-hidden="true">
+  <div class="cv-backdrop" data-cv-close></div>
+  <div class="cv-panel" role="dialog" aria-modal="true" aria-label="Curriculum Vitae of Sharmin Sirajudeen">
+    <div class="cv-bar">
+      <span class="cv-eye">// curriculum vitae</span>
+      <div class="cv-actions">
+        <button class="cv-switch" id="cvSwitch" type="button">⇄ switch look</button>
+        <a class="cv-dl" id="cvDownload" href="Sharmin_Sirajudeen_CV_Designed.pdf" download="Sharmin_Sirajudeen_CV.pdf">↓ <span class="lbl">Download PDF</span></a>
+        <button class="cv-x" data-cv-close type="button" aria-label="Close CV">×</button>
+      </div>
+    </div>
+    <iframe class="cv-frame" id="cvFrame" src="about:blank" title="Curriculum Vitae of Sharmin Sirajudeen"></iframe>
+  </div>
+</div>
+
+<script>
+(function(){
+  var modal=document.getElementById('cvModal'),frame=document.getElementById('cvFrame'),
+      dl=document.getElementById('cvDownload'),sw=document.getElementById('cvSwitch'),cur='designed',
+      docs={designed:'cv-designed.html',minimal:'cv-minimal.html'},
+      pdfs={designed:'Sharmin_Sirajudeen_CV_Designed.pdf',minimal:'Sharmin_Sirajudeen_CV.pdf'};
+  function load(v){cur=v;frame.src=docs[v];dl.setAttribute('href',pdfs[v]);}
+  function open(e){if(e)e.preventDefault();if(frame.getAttribute('src')==='about:blank')load('designed');
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  var i,o=document.querySelectorAll('[data-cv-open]'),c=document.querySelectorAll('[data-cv-close]');
+  for(i=0;i<o.length;i++)o[i].addEventListener('click',open);
+  for(i=0;i<c.length;i++)c[i].addEventListener('click',close);
+  sw.addEventListener('click',function(){load(cur==='designed'?'minimal':'designed');});
+  document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.keyCode===27)&&modal.classList.contains('open'))close();});
+})();
+</script>
 
 </body>
 </html>
