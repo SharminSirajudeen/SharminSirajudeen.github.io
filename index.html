@@ -189,6 +189,54 @@
     *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
   }
 
+  /* ── hero: pinned scroll cinematic (look → annotate → act) ── */
+  .hero{padding:0;overflow:visible;}
+  .intro{position:relative;max-width:1280px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:minmax(0,1fr) 332px;gap:56px;align-items:start;}
+  .intro-content{min-width:0;}
+  .intro-content .hero{padding:96px 0 56px;}
+  .intro-content #drengr{border-top:none;padding-top:0;padding-bottom:46vh;}
+  .intro-phone{position:sticky;top:0;align-self:start;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;}
+  @media(max-width:900px){
+    .intro{grid-template-columns:1fr;gap:0;}
+    .intro-phone{position:static;height:auto;order:-1;padding:84px 0 4px;}
+    .intro-content .hero{padding:22px 0 36px;}
+    .intro-content #drengr{padding-bottom:0;}
+  }
+  /* phone */
+  .phone{position:relative;width:286px;height:580px;background:#0a161b;border-radius:44px;padding:12px;box-shadow:0 40px 90px rgba(11,26,31,.26),inset 0 0 0 2px rgba(255,255,255,.04);}
+  .pscreen{position:relative;width:100%;height:100%;background:#fff;border-radius:33px;overflow:hidden;}
+  .island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:100px;height:25px;background:#0a161b;border-radius:13px;z-index:6;}
+  .pstatus{display:flex;justify-content:space-between;align-items:center;padding:12px 21px 0;font-family:var(--mono);font-size:10.5px;color:var(--ink);font-weight:600;}
+  .pstatus .pd{display:flex;gap:3px;}.pstatus .pd i{width:4px;height:4px;border-radius:50%;background:var(--ink);opacity:.55;}
+  .papp{padding:28px 15px 15px;display:flex;flex-direction:column;gap:13px;}
+  .pui{position:relative;border-radius:11px;background:var(--teal-wash);border:1px solid #d8e4e6;}
+  .pui-title{background:none;border:none;}.pui-title b{font-family:var(--display);font-size:18px;color:var(--ink);font-weight:700;}
+  .pui-search{height:40px;}.pui-search::after{content:"";position:absolute;left:13px;top:50%;transform:translateY(-50%);width:13px;height:13px;border:2px solid var(--muted);border-radius:50%;opacity:.5;}
+  .pui-row{height:50px;}.pui-row::before{content:"";position:absolute;left:12px;top:12px;width:26px;height:26px;border-radius:8px;background:#cddde0;}
+  .pui-card{height:90px;}
+  .pui-btn{height:46px;background:var(--teal);border-color:var(--teal);margin-top:3px;}
+  /* agent: reticle / scan / markers / tap / readout */
+  .reticle{position:absolute;z-index:7;width:56px;height:56px;left:0;top:0;pointer-events:none;opacity:0;}
+  .reticle b{position:absolute;width:11px;height:11px;border:2px solid var(--amber);}
+  .reticle .rc-tl{top:0;left:0;border-right:none;border-bottom:none}.reticle .rc-tr{top:0;right:0;border-left:none;border-bottom:none}
+  .reticle .rc-bl{bottom:0;left:0;border-right:none;border-top:none}.reticle .rc-br{bottom:0;right:0;border-left:none;border-top:none}
+  .reticle .rdot{position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:var(--amber);}
+  .scanline{position:absolute;z-index:5;left:6px;right:6px;height:2px;background:linear-gradient(90deg,transparent,var(--amber),transparent);opacity:0;box-shadow:0 0 16px 2px rgba(251,106,60,.55);}
+  .mk{position:absolute;z-index:8;width:21px;height:21px;border-radius:50%;background:var(--amber);color:#fff;font-family:var(--mono);font-size:11px;font-weight:600;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 3px 9px rgba(251,106,60,.45);opacity:0;transform:scale(.4);}
+  .tap{position:absolute;z-index:7;width:44px;height:44px;border-radius:50%;border:2.5px solid var(--amber);opacity:0;}
+  .tap::after{content:"";position:absolute;inset:13px;border-radius:50%;background:rgba(251,106,60,.35);}
+  .preadout{position:absolute;z-index:9;bottom:15px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;color:#fff;background:rgba(10,22,27,.9);padding:6px 11px;border-radius:8px;white-space:nowrap;opacity:0;}
+  /* caption below phone */
+  .cap{position:relative;height:80px;width:min(340px,86%);}
+  .cact{position:absolute;inset:0;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .4s ease;text-align:center;}
+  .cact .cm{font-family:var(--mono);font-size:12px;color:var(--teal-bright);}
+  .cact .ct{font-family:var(--display);font-weight:700;font-size:1.18rem;color:var(--ink);margin-top:4px;display:block;letter-spacing:-.01em;}
+  .cact .cs{font-size:13px;color:var(--muted);margin-top:4px;display:block;line-height:1.4;}
+  @media(prefers-reduced-motion:reduce){.cact{transition:none}}
+  /* dark band: tap blooms into a circle reveal */
+  #origin{clip-path:circle(0% at 80% 54%);}
+  @media(prefers-reduced-motion:reduce){#origin{clip-path:none !important;}}
+
   /* ── CV modal ───────────────────────────── */
   .cv-modal{position:fixed;inset:0;z-index:200;display:none;}
   .cv-modal.open{display:block;}
@@ -225,41 +273,40 @@
   </div>
 </nav>
 
-<!-- ── HERO ── -->
-<header class="hero">
-  <span class="coord c-tl">0,0</span>
-  <span class="coord c-br">100,100</span>
-  <div class="wrap">
-    <span class="eyebrow">drengr_look() &nbsp;→&nbsp; reading screen</span>
-    <h1>I build developer&nbsp;tools for <span class="ph">mobile.</span></h1>
-    <p class="lede">
-      After ten years shipping Android at scale, I'm building <b>Drengr</b> — <b>eyes and hands</b> for AI
-      on any mobile app, no matter how it's built. A framework-blind break from a decade of brittle, coupled
-      tooling.
-    </p>
+<!-- ── INTRO: sticky-phone cinematic (top → dark band) ── -->
+<div class="intro" id="intro">
+  <div class="intro-content">
+    <header class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">drengr_look() &nbsp;→&nbsp; reading screen</span>
+        <h1>I build developer&nbsp;tools for <span class="ph">mobile.</span></h1>
+        <p class="lede">
+          After ten years shipping Android at scale, I'm building <b>Drengr</b> — <b>eyes and hands</b> for AI
+          on any mobile app, no matter how it's built. A framework-blind break from a decade of brittle,
+          coupled tooling.
+        </p>
 
-    <div class="creds">
-      <div class="cred">
-        <span class="mark">1</span>
-        <span class="cred-co">Talabat</span><span class="cred-metric">10M+ installs</span>
-        <div class="cred-role">Senior Android Engineer · part of Delivery Hero</div>
-      </div>
-      <div class="cred">
-        <span class="mark">2</span>
-        <span class="cred-co">Floward</span><span class="cred-metric">1M+ installs</span>
-        <div class="cred-role">Android Staff Engineer · #1 code contributor</div>
-      </div>
-    </div>
+        <div class="creds">
+          <div class="cred">
+            <span class="mark">1</span>
+            <span class="cred-co">Talabat</span><span class="cred-metric">10M+ installs</span>
+            <div class="cred-role">Senior Android Engineer · part of Delivery Hero</div>
+          </div>
+          <div class="cred">
+            <span class="mark">2</span>
+            <span class="cred-co">Floward</span><span class="cred-metric">1M+ installs</span>
+            <div class="cred-role">Android Staff Engineer · #1 code contributor</div>
+          </div>
+        </div>
 
-    <div class="cta-row">
-      <a class="btn btn-primary" href="https://drengr.dev">View Drengr&nbsp;↗</a>
-      <a class="btn btn-ghost" href="https://github.com/SharminSirajudeen">GitHub</a>
-      <a class="btn btn-ghost" href="https://www.linkedin.com/in/sharmin-sirajudeen/">LinkedIn</a>
-      <a class="btn btn-ghost" href="cv-designed.html" data-cv-open>CV</a>
-    </div>
-    <div class="hero-foot">// the amber markers are how Drengr annotates a screen it's looking at</div>
-  </div>
-</header>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://drengr.dev">View Drengr&nbsp;↗</a>
+          <a class="btn btn-ghost" href="https://github.com/SharminSirajudeen">GitHub</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/sharmin-sirajudeen/">LinkedIn</a>
+          <a class="btn btn-ghost" href="cv-designed.html" data-cv-open>CV</a>
+        </div>
+      </div>
+    </header>
 
 <!-- ── DRENGR ── -->
 <section class="block" id="drengr">
@@ -313,6 +360,33 @@
     </div>
   </div>
 </section>
+  </div><!-- /intro-content -->
+
+  <aside class="intro-phone" aria-hidden="true">
+    <div class="phone">
+      <div class="island"></div>
+      <div class="pscreen" id="pscreen">
+        <div class="pstatus"><span>9:41</span><span class="pd"><i></i><i></i><i></i></span></div>
+        <div class="papp">
+          <div class="pui pui-title"><b>Discover</b></div>
+          <div class="pui pui-search" data-el></div>
+          <div class="pui pui-row" data-el></div>
+          <div class="pui pui-card" data-el></div>
+          <div class="pui pui-btn" data-el></div>
+        </div>
+        <div class="scanline" id="pscan"></div>
+        <div class="reticle" id="preticle"><b class="rc-tl"></b><b class="rc-tr"></b><b class="rc-bl"></b><b class="rc-br"></b><span class="rdot"></span></div>
+        <div class="tap" id="ptap"></div>
+        <div class="preadout" id="preadout">drengr_look()</div>
+      </div>
+    </div>
+    <div class="cap">
+      <div class="cact" data-a="1"><span class="cm">drengr_look()</span><span class="ct">It sees the screen.</span><span class="cs">Reads what's actually rendered — framework-blind.</span></div>
+      <div class="cact" data-a="2"><span class="cm">// 4 elements mapped</span><span class="ct">It understands every element.</span><span class="cs">Each control, located and labelled.</span></div>
+      <div class="cact" data-a="3"><span class="cm">drengr_do(tap)</span><span class="ct">And it acts.</span><span class="cs">Tap, type, swipe — no selectors, no XPath.</span></div>
+    </div>
+  </aside>
+</div><!-- /intro -->
 
 <!-- ── ORIGIN (dark device screen) ── -->
 <section class="block screen" id="origin">
@@ -376,7 +450,7 @@
         <div class="tl-when">2024 — Present</div>
         <div class="tl-role">Founder, <span class="co">Drengr</span></div>
         <p class="tl-desc">Building a framework-blind mobile-analytics and AI-actuation platform — eyes and
-          hands for AI on any app. Rust core, native SDKs, ClickHouse analytics. Sold as subscriptions + SDK.</p>
+          hands for AI on any app. Rust core, native SDKs, ClickHouse analytics. Model: subscriptions + SDK.</p>
         <div class="tl-chips"><span class="chip">drengr.dev</span><span class="chip">building in public</span></div>
       </div>
     </div>
@@ -440,6 +514,67 @@
   for(i=0;i<c.length;i++)c[i].addEventListener('click',close);
   sw.addEventListener('click',function(){load(cur==='designed'?'minimal':'designed');});
   document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.keyCode===27)&&modal.classList.contains('open'))close();});
+})();
+</script>
+
+<script>
+/* hero scroll cinematic: look → annotate → act */
+(function(){
+  var scene=document.getElementById('intro'); if(!scene) return;
+  var origin=document.getElementById('origin'), phoneRail=document.querySelector('.intro-phone'), maxRv=0;
+  var screen=document.getElementById('pscreen'),reticle=document.getElementById('preticle'),
+      scan=document.getElementById('pscan'),tap=document.getElementById('ptap'),readout=document.getElementById('preadout'),
+      cacts=document.querySelectorAll('.cact'),els=screen.querySelectorAll('[data-el]'),markers=[];
+  els.forEach(function(el,i){var m=document.createElement('span');m.className='mk';m.textContent=(i+1);screen.appendChild(m);markers.push({node:m,el:el});});
+  function clamp(v,a,b){return v<a?a:v>b?b:v;}
+  function lerp(a,b,t){return a+(b-a)*t;}
+  function place(n,cx,cy){n.style.left=(cx-n.offsetWidth/2)+'px';n.style.top=(cy-n.offsetHeight/2)+'px';}
+  function center(el){return {x:el.offsetLeft+el.offsetWidth/2,y:el.offsetTop+el.offsetHeight/2};}
+  var raf=null;
+  function frame(){
+    raf=null;
+    var rect=scene.getBoundingClientRect(),total=scene.offsetHeight-window.innerHeight;
+    var p=clamp(-rect.top/total,0,1);
+    var look=clamp(p/0.36,0,1),ann=clamp((p-0.34)/0.30,0,1),act=clamp((p-0.66)/0.30,0,1);
+    var H=screen.clientHeight,W=screen.clientWidth;
+    reticle.style.opacity=act>=1?0:1;
+    var sweepY=lerp(0.16,0.78,look)*H;
+    if(act<0.02) place(reticle,W*0.5,sweepY);
+    scan.style.opacity=0;
+    markers.forEach(function(m,i){var t=clamp((ann-i*0.16)/0.4,0,1);m.node.style.opacity=t;m.node.style.transform='scale('+lerp(.4,1,t)+')';place(m.node,m.el.offsetLeft,m.el.offsetTop);});
+    var btn=els[els.length-1],bc=center(btn);btn.style.transition='transform .1s ease, filter .12s ease';
+    if(act>0){
+      reticle.style.opacity=1;
+      place(reticle,lerp(W*0.5,bc.x,clamp(act/0.5,0,1)),lerp(0.78*H,bc.y,clamp(act/0.5,0,1)));
+      var tp=clamp((act-0.5)/0.5,0,1);
+      tap.style.opacity=tp>0?(1-tp):0;tap.style.transform='scale('+lerp(.4,1.8,tp)+')';place(tap,bc.x,bc.y);
+      var pr=tp>0.06&&tp<0.55;btn.style.transform=pr?'scale(.965)':'';btn.style.filter=pr?'brightness(1.22)':'';
+    }else{tap.style.opacity=0;btn.style.transform='';btn.style.filter='';}
+    readout.style.opacity=(p>0.02&&p<0.98)?1:0;
+    readout.textContent=act>0.45?'drengr_do(tap, 0.5, 0.9)':(ann>0.3?'drengr_look() → 4 elements':'drengr_look()');
+    var idx=act>0.25?2:(ann>0.3?1:0);
+    cacts.forEach(function(a,i){var on=i===idx;a.style.opacity=on?1:0;a.style.transform=on?'translateY(0)':'translateY(10px)';});
+    if(origin){
+      var orr=origin.getBoundingClientRect();
+      var rv=clamp((window.innerHeight-orr.top)/(window.innerHeight*0.82),0,1);
+      if(rv>maxRv) maxRv=rv;
+      var cx=0.82*window.innerWidth-orr.left, cy=0.45*window.innerHeight-orr.top;
+      var R=maxRv*Math.hypot(window.innerWidth,window.innerHeight)*1.15;
+      origin.style.clipPath = maxRv>=0.995 ? 'none' : ('circle('+R.toFixed(0)+'px at '+cx.toFixed(0)+'px '+cy.toFixed(0)+'px)');
+      if(phoneRail) phoneRail.style.opacity=clamp(1-rv*1.25,0,1);
+    }
+  }
+  function onScroll(){if(!raf)raf=requestAnimationFrame(frame);}
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    markers.forEach(function(m){m.node.style.opacity=1;m.node.style.transform='scale(1)';place(m.node,m.el.offsetLeft,m.el.offsetTop);});
+    reticle.style.opacity=1;var _b=center(els[els.length-1]);place(reticle,_b.x,_b.y);
+    readout.style.opacity=1;readout.textContent='drengr_do(tap, 0.5, 0.9)';
+    cacts[2].style.opacity=1;cacts[2].style.transform='none';
+  }else{
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll);
+    window.addEventListener('load',frame);frame();
+  }
 })();
 </script>
 
