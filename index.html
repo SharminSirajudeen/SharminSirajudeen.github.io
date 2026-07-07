@@ -516,14 +516,22 @@
       docs={designed:'cv-designed.html',minimal:'cv-minimal.html'},
       pdfs={designed:'Sharmin_Sirajudeen_CV_Designed.pdf',minimal:'Sharmin_Sirajudeen_CV.pdf'};
   function load(v){cur=v;frame.src=docs[v];dl.setAttribute('href',pdfs[v]);}
-  function open(e){if(e)e.preventDefault();if(frame.getAttribute('src')==='about:blank')load('designed');
-    modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
-  function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+  function show(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function open(e){if(e)e.preventDefault();if(frame.getAttribute('src')==='about:blank')load('designed');sw.style.display='';show();}
+  function openLook(v,locked){load(v);sw.style.display=locked?'none':'';show();}
+  function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';
+    if((location.hash||'').toLowerCase().indexOf('#cv')===0&&history.replaceState)history.replaceState(null,'',location.pathname+location.search);}
   var i,o=document.querySelectorAll('[data-cv-open]'),c=document.querySelectorAll('[data-cv-close]');
   for(i=0;i<o.length;i++)o[i].addEventListener('click',open);
   for(i=0;i<c.length;i++)c[i].addEventListener('click',close);
   sw.addEventListener('click',function(){load(cur==='designed'?'minimal':'designed');});
   document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.keyCode===27)&&modal.classList.contains('open'))close();});
+  // #cv1 designed(locked) · #cv2 minimal(locked) · #cv default(switch shown)
+  function fromHash(){var h=(location.hash||'').toLowerCase();
+    if(h==='#cv1')openLook('designed',true);
+    else if(h==='#cv2')openLook('minimal',true);
+    else if(h==='#cv')openLook('designed',false);}
+  fromHash();window.addEventListener('hashchange',fromHash);
 })();
 </script>
 
