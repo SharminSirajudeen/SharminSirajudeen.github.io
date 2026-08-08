@@ -84,7 +84,7 @@
   .nav-links{display:flex;gap:var(--s5);font-size:14px;}
   .nav-links a{color:var(--muted);font-weight:500;}
   .nav-links a:hover{color:var(--ink);}
-  @media(max-width:640px){.nav-links{display:none;}}
+  @media(max-width:700px){.nav-links{display:none;}}  /* 6 links need ~660px of row before they wrap */
 
   /* ── Hero ──────────────────────────────── */
   .hero{position:relative;padding:var(--s9) 0 var(--s8);overflow:hidden;}
@@ -261,6 +261,11 @@
   .cv-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line);background:#fff;flex:0 0 auto;}
   .cv-eye{font-family:var(--mono);font-size:12px;color:var(--teal-bright);display:inline-flex;align-items:center;gap:7px;}
   .cv-eye::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber);}
+  .cv-title{display:inline-flex;align-items:center;gap:9px;min-width:0;}
+  .cv-copy{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--muted);background:#fff;
+    border:1px solid var(--line);border-radius:7px;padding:5px 9px;cursor:pointer;white-space:nowrap;}
+  .cv-copy:hover{color:var(--teal);border-color:var(--teal-bright);}
+  .cv-copy.done{color:var(--teal);border-color:var(--teal);background:var(--teal-wash);}
   .cv-actions{display:flex;align-items:center;gap:9px;}
   .cv-switch{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--teal);background:var(--teal-wash);border:1px solid #d3e2e5;border-radius:8px;padding:7px 12px;cursor:pointer;}
   .cv-switch:hover{border-color:var(--teal-bright);}
@@ -271,6 +276,8 @@
   .cv-frame{flex:1 1 auto;width:100%;border:0;background:#e9edf0;}
   @media(max-width:560px){.cv-panel{top:0;width:100vw;height:100vh;border-radius:0;}.cv-dl .lbl{display:none;}}
 </style>
+<!-- #origin starts clipped to 0% and is revealed by the scroll script; without JS it would never appear. -->
+<noscript><style>#origin{clip-path:none !important;}</style></noscript>
 </head>
 <body>
 
@@ -281,6 +288,7 @@
       <a href="#drengr">Drengr</a>
       <a href="#origin">Origin</a>
       <a href="#work">Track record</a>
+      <a href="#how">How I work</a>
       <a href="cv-designed.html" data-cv-open>CV</a>
       <a href="#contact">Contact</a>
     </div>
@@ -309,7 +317,7 @@
           <div class="cred">
             <span class="mark">2</span>
             <span class="cred-co">Floward</span><span class="cred-metric">1M+ installs</span>
-            <div class="cred-role">Android Staff Engineer · #1 code contributor</div>
+            <div class="cred-role">Staff Software Engineer, Android · #1 code contributor</div>
           </div>
         </div>
 
@@ -453,8 +461,8 @@
         <div class="tl-chips"><span class="chip solid">10M+ installs</span><span class="chip">part of Delivery Hero</span></div>
       </div>
       <div class="tl-item">
-        <div class="tl-when">2021 — 2026</div>
-        <div class="tl-role">Android Staff Engineer, <span class="co">Floward</span></div>
+        <div class="tl-when">2021 — Aug 2026</div>
+        <div class="tl-role">Staff Software Engineer - Android, <span class="co">Floward</span></div>
         <p class="tl-desc">Staff Android engineer for a gifting platform across the Middle East and the UK,
           contributing across Android and Flutter. Own architecture, CI/CD, and release pipelines. <b>Highest code
           contributor</b> in their GitHub to date.</p>
@@ -475,11 +483,26 @@
   </div>
 </section>
 
+<!-- ── HOW I WORK ── -->
+<section class="block" id="how">
+  <div class="wrap">
+    <span class="eyebrow">// how i work</span>
+    <h2 class="sec-head">Knowing what to reject is the job now.</h2>
+    <p class="sec-lede">
+      I architect and review; <b>AI agents write much of the first draft</b>. Ten years of production
+      judgement is what makes that safe. It's how one engineer ships a Rust core, native Android, iOS and
+      Flutter SDKs, and a ClickHouse pipeline at a scope that would conventionally need a team.
+    </p>
+  </div>
+</section>
+
 <!-- ── CONTACT ── -->
 <section class="block contact" id="contact">
   <div class="wrap">
     <span class="eyebrow">drengr_do(reach_out)</span>
     <h2 class="sec-head">Building in mobile, AI, or developer tools?</h2>
+    <p class="sec-lede">Drengr is what I'm building. I'm also open to <b>Staff / Lead mobile roles</b> and
+      selected contract work.</p>
     <a class="mailbtn" href="mailto:sharminsirajudeen11@gmail.com">sharminsirajudeen11@gmail.com&nbsp;↗</a>
     <div class="contact-links">
       <a href="https://drengr.dev">drengr.dev</a>
@@ -502,7 +525,11 @@
   <div class="cv-backdrop" data-cv-close></div>
   <div class="cv-panel" role="dialog" aria-modal="true" aria-label="Curriculum Vitae of Sharmin Sirajudeen">
     <div class="cv-bar">
-      <span class="cv-eye">// curriculum vitae</span>
+      <span class="cv-title">
+        <span class="cv-eye">// curriculum vitae</span>
+        <button class="cv-copy" id="cvCopy" type="button"
+                aria-label="Copy a shareable link to this CV">⧉ copy link</button>
+      </span>
       <div class="cv-actions">
         <button class="cv-switch" id="cvSwitch" type="button">⇄ switch look</button>
         <a class="cv-dl" id="cvDownload" href="Sharmin_Sirajudeen_CV_Designed.pdf" download="Sharmin_Sirajudeen_CV.pdf">↓ <span class="lbl">Download PDF</span></a>
@@ -517,19 +544,53 @@
 (function(){
   var modal=document.getElementById('cvModal'),frame=document.getElementById('cvFrame'),
       dl=document.getElementById('cvDownload'),sw=document.getElementById('cvSwitch'),cur='designed',
-      docs={designed:'cv-designed.html',minimal:'cv-minimal.html'},
+      docs={designed:'cv-designed.html',minimal:'cv.html'},
       pdfs={designed:'Sharmin_Sirajudeen_CV_Designed.pdf',minimal:'Sharmin_Sirajudeen_CV.pdf'};
+  var panel=modal.querySelector('.cv-panel'),xBtn=modal.querySelector('.cv-x'),lastFocus=null;
   function load(v){cur=v;frame.src=docs[v];dl.setAttribute('href',pdfs[v]);}
-  function show(){modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';}
+  function show(){lastFocus=document.activeElement;
+    modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';
+    if(xBtn)xBtn.focus();}
   function open(e){if(e)e.preventDefault();if(frame.getAttribute('src')==='about:blank')load('designed');sw.style.display='';show();}
   function openLook(v,locked){load(v);sw.style.display=locked?'none':'';show();}
   function close(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';
+    if(lastFocus&&lastFocus.focus)lastFocus.focus();lastFocus=null;
     if((location.hash||'').toLowerCase().indexOf('#cv')===0&&history.replaceState)history.replaceState(null,'',location.pathname+location.search);}
+  // keep Tab inside the dialog — aria-modal="true" promises containment
+  function focusables(){var all=panel.querySelectorAll('button,a[href],iframe'),out=[],i;
+    for(i=0;i<all.length;i++)if(all[i].offsetParent!==null)out.push(all[i]);
+    return out;}
   var i,o=document.querySelectorAll('[data-cv-open]'),c=document.querySelectorAll('[data-cv-close]');
   for(i=0;i<o.length;i++)o[i].addEventListener('click',open);
   for(i=0;i<c.length;i++)c[i].addEventListener('click',close);
   sw.addEventListener('click',function(){load(cur==='designed'?'minimal':'designed');});
-  document.addEventListener('keydown',function(e){if((e.key==='Escape'||e.keyCode===27)&&modal.classList.contains('open'))close();});
+  // shareable deep-link to whichever CV is on screen: #cv1 designed · #cv2 minimal
+  var cp=document.getElementById('cvCopy'),cpT=null;
+  function shareUrl(){return location.origin+location.pathname+(cur==='designed'?'#cv1':'#cv2');}
+  function flash(msg){cp.textContent=msg;cp.classList.add('done');
+    clearTimeout(cpT);cpT=setTimeout(function(){cp.textContent='⧉ copy link';cp.classList.remove('done');},1800);}
+  cp.addEventListener('click',function(){
+    var url=shareUrl();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){flash('✓ copied');},function(){legacy(url);});
+    }else legacy(url);
+  });
+  function legacy(url){ // file:// and older Safari have no async clipboard
+    var t=document.createElement('textarea');t.value=url;t.setAttribute('readonly','');
+    t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();
+    try{document.execCommand('copy');flash('✓ copied');}catch(e){flash('press ⌘C');}
+    document.body.removeChild(t);
+  }
+  document.addEventListener('keydown',function(e){
+    if(!modal.classList.contains('open'))return;
+    if(e.key==='Escape'||e.keyCode===27){close();return;}
+    if(e.key==='Tab'||e.keyCode===9){
+      var f=focusables();if(!f.length)return;
+      var first=f[0],last=f[f.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+    }
+  });
   // #cv1 designed(locked) · #cv2 minimal(locked) · #cv default(switch shown)
   function fromHash(){var h=(location.hash||'').toLowerCase();
     if(h==='#cv1')openLook('designed',true);
