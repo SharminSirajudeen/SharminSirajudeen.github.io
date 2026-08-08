@@ -178,7 +178,14 @@
   .tl{margin-top:var(--s7);border-left:2px solid var(--line);padding-left:var(--s6);position:relative;}
   .tl-item{position:relative;padding-bottom:var(--s7);}
   .tl-item:last-child{padding-bottom:0;}
-  .tl-item::before{content:"";position:absolute;left:calc(-1 * var(--s6) - 7px);top:6px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2.5px solid var(--teal);}
+  /* `*{box-sizing}` does not match pseudo-elements, so this dot was rendering
+     at 17px (12 + 2x2.5 border) while positioned as if 12px. Sized border-box
+     so width means drawn width; the item's box starts 34px right of the rule
+     (2px border + 32px padding), so left must be -(34 + 8.5 - 1) = -41.5px to
+     put the 17px dot's centre on the rule's centre. */
+  .tl-item::before{content:"";position:absolute;box-sizing:border-box;
+    left:calc(-1 * var(--s6) - 9.5px);top:6px;width:17px;height:17px;
+    border-radius:50%;background:var(--paper);border:2.5px solid var(--teal);}
   .tl-item.now::before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 4px rgba(251,106,60,.18);}
   .tl-when{font-family:var(--mono);font-size:12.5px;color:var(--teal-bright);font-weight:500;}
   .tl-role{font-family:var(--display);font-weight:700;font-size:1.2rem;color:var(--ink);margin:4px 0 0;}
