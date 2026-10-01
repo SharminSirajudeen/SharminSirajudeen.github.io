@@ -93,7 +93,7 @@
   <div class="top">
     <button class="icon" id="back" aria-label="Back to my books">‹ Books</button>
     <b id="title"></b>
-    <div class="tools"><button class="icon" id="tocBtn" aria-label="Contents">☰</button><button class="icon" id="aaBtn" aria-label="Text settings">Aa</button></div>
+    <div class="tools"><button class="icon" id="tocBtn" aria-label="Contents">☰</button><button class="icon" id="aaBtn" aria-label="Text settings">Aa</button><button class="icon" id="fsBtn" aria-label="Full screen" hidden>⛶</button></div>
   </div>
   <div class="viewport" id="vp">
     <div class="flow" id="flow"></div>
@@ -249,6 +249,20 @@
     if (book) { const f = frac; layout(); page = Math.min(pages - 1, Math.round(f * pages)); show(); }
   }
 
+  // Full screen: Android, iPad and desktop browsers; iPhone Safari does not support it, so the button stays hidden there.
+  const root = document.documentElement;
+  const fsOn = () => document.fullscreenElement || document.webkitFullscreenElement;
+  const fsSupported = !!((root.requestFullscreen || root.webkitRequestFullscreen) && (document.fullscreenEnabled || document.webkitFullscreenEnabled));
+  $("fsBtn").hidden = !fsSupported;
+  $("fsBtn").onclick = () => {
+    try {
+      const r = fsOn() ? (document.exitFullscreen || document.webkitExitFullscreen).call(document)
+                       : (root.requestFullscreen || root.webkitRequestFullscreen).call(root);
+      if (r && r.catch) r.catch(() => {});
+    } catch {}
+  };
+  const fsLabel = () => $("fsBtn").setAttribute("aria-label", fsOn() ? "Exit full screen" : "Full screen");
+  document.addEventListener("fullscreenchange", fsLabel); document.addEventListener("webkitfullscreenchange", fsLabel);
   $("zl").onclick = () => turn(-1); $("zr").onclick = () => turn(1);
   $("zc").onclick = () => { closePanels(); document.body.classList.toggle("calm"); };
   $("aaBtn").onclick = () => { $("tocP").hidden = true; $("aa").hidden = !$("aa").hidden; };
@@ -258,7 +272,7 @@
   $("bigger").onclick = () => { prefs.size = Math.min(32, prefs.size + 2); applyPrefs(); };
   $("fonts").onclick = e => { const b = e.target.closest("button"); if (b) { prefs.font = b.dataset.f; applyPrefs(); } };
   $("themes").onclick = e => { const b = e.target.closest("button"); if (b) { prefs.theme = b.dataset.t; applyPrefs(); } };
-  $("back").onclick = () => { closePanels(); document.body.classList.remove("calm"); $("reader").hidden = true; $("shelf").hidden = false; renderShelf(); };
+  $("back").onclick = () => { closePanels(); if (fsOn()) $("fsBtn").click(); document.body.classList.remove("calm"); $("reader").hidden = true; $("shelf").hidden = false; renderShelf(); };
   $("vp").addEventListener("contextmenu", e => e.preventDefault());
   let x0 = null;
   $("vp").addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
