@@ -4,246 +4,278 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Story Reader Demo</title>
+<title>Ebook Reader Demo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Grandstander:wght@600;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
-  /* Layout: a phone-sized reader on the left, "what happens behind it" notes on the right; stacks on phones. */
+  /* Layout: full-screen reader, minimal chrome; shelf screen first. Reader themes are the book's, not the device's. */
   :root {
-    --bg: #EEF3F2; --surface: #FFFFFF; --ink: #10302E; --muted: #4E6764; --line: #D3DEDC;
-    --accent: #E9A21A; --accent-ink: #3A2600; --sea: #1F6F6A; --lock: #8A9B98; --stamp: rgba(16,48,46,.42);
-    --display: "Grandstander", "Trebuchet MS", system-ui, sans-serif;
-    --body: "Atkinson Hyperlegible", -apple-system, "Segoe UI", sans-serif;
+    --page: #FFFFFF; --text: #1B1B1B; --muted: #6E6E6E; --line: #E4E4E4; --chrome: #F6F6F6; --accent: #0F6E8C;
+    --serif: "Literata", Georgia, "Times New Roman", serif;
+    --sans: "Atkinson Hyperlegible", -apple-system, "Segoe UI", sans-serif;
+    --size: 19px;
   }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --bg: #0C1A1A; --surface: #13292A; --ink: #E4F0EE; --muted: #9DB5B1; --line: #26413F;
-    --accent: #F2B437; --accent-ink: #2A1B00; --sea: #5FB8B0; --lock: #6E8582; --stamp: rgba(16,48,46,.42); color-scheme: dark } }
-  :root[data-theme="dark"] {
-    --bg: #0C1A1A; --surface: #13292A; --ink: #E4F0EE; --muted: #9DB5B1; --line: #26413F;
-    --accent: #F2B437; --accent-ink: #2A1B00; --sea: #5FB8B0; --lock: #6E8582; --stamp: rgba(16,48,46,.42); color-scheme: dark }
+  body[data-theme-book="sepia"] { --page: #F4ECD8; --text: #3B2F22; --muted: #7A6A55; --line: #E2D6BC; --chrome: #EFE4CB; }
+  body[data-theme-book="dark"] { --page: #121212; --text: #D9D9D9; --muted: #8A8A8A; --line: #2A2A2A; --chrome: #1C1C1C; --accent: #6CC3DD; color-scheme: dark; }
   * { box-sizing: border-box; }
-  body { background: var(--bg); color: var(--ink); font: 16px/1.55 var(--body); margin: 0; padding-inline: 16px; padding-block: 24px 40px; }
-  .wrap { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 40px; align-items: start; }
-  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
-  .eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--sea); }
-
-  /* Device */
-  .device { background: var(--surface); border: 1px solid var(--line); border-radius: 28px; overflow: hidden; box-shadow: 0 18px 50px rgba(16,48,46,.12); min-height: 640px; display: flex; flex-direction: column; }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); font-size: 14px; }
-  .bar b { font-family: var(--display); font-size: 17px; }
-  .linkbtn { background: none; border: 0; color: var(--sea); font: inherit; font-weight: 700; cursor: pointer; padding: 4px 0; }
-  .screen { padding: 22px 20px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
-  label { font-size: 14px; font-weight: 700; }
-  input { font: inherit; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--ink); width: 100%; }
-  .btn { font: 700 16px var(--body); padding: 13px 18px; border-radius: 12px; border: 0; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
-  .btn:disabled { opacity: .5; cursor: default; }
-  .note { font-size: 13px; color: var(--muted); margin: 0; }
-  .code { font: 800 22px var(--display); letter-spacing: .3em; color: var(--sea); }
-  .err { color: #C2412D; font-size: 14px; margin: 0; }
+  html, body { height: 100%; }
+  body { margin: 0; background: var(--page); color: var(--text); font: 16px/1.5 var(--sans); }
+  button { font: inherit; color: inherit; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  [hidden] { display: none !important; }
 
   /* Shelf */
-  .shelf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-  .book { border: 0; background: none; padding: 0; text-align: left; cursor: pointer; font: inherit; color: inherit; display: flex; flex-direction: column; gap: 6px; }
-  .cover { aspect-ratio: 3 / 4; max-width: 100%; border-radius: 10px; display: grid; place-items: center; text-align: center; padding: 12px; font: 800 17px/1.15 var(--display); color: #fff; position: relative; overflow: hidden; }
-  .book small { font-size: 13px; color: var(--muted); }
-  .book.locked { cursor: default; }
-  .book.locked .cover { filter: grayscale(.85); opacity: .55; }
-  .pill { position: absolute; top: 8px; left: 8px; font: 700 11px var(--body); letter-spacing: .06em; text-transform: uppercase; background: rgba(255,255,255,.92); color: #10302E; border-radius: 999px; padding: 3px 8px; }
-  .prog { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
-  .prog i { display: block; height: 100%; background: var(--sea); }
+  .shelf { max-width: 760px; margin: 0 auto; padding: 28px 16px 40px; display: flex; flex-direction: column; gap: 22px; }
+  .shelf h1 { font: 600 28px/1.2 var(--serif); margin: 0; }
+  .shelf p { margin: 0; color: var(--muted); }
+  .books { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 18px; }
+  .book { border: 0; background: none; padding: 0; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 8px; }
+  .cover { aspect-ratio: 2 / 3; max-width: 100%; border-radius: 4px; padding: 14px; display: flex; align-items: flex-end; color: #fff; font: 600 17px/1.2 var(--serif); box-shadow: 0 6px 18px rgba(0,0,0,.18); }
+  .book small { color: var(--muted); font-size: 13px; }
+  .bar2 { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; } .bar2 i { display: block; height: 100%; background: var(--accent); }
+  .own { border: 1.5px dashed var(--line); border-radius: 10px; padding: 16px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  .own p { flex: 1 1 260px; font-size: 14px; }
+  .btn { border: 0; border-radius: 8px; padding: 10px 16px; background: var(--accent); color: #fff; font-weight: 700; cursor: pointer; }
+  .err { color: #B3261E; font-size: 14px; }
 
   /* Reader */
-  .reader { padding: 0; gap: 0; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
-  .page { position: relative; flex: 1; display: grid; place-items: center; background: #FFFDF6; touch-action: pan-y; }
-  .page svg { width: 100%; height: auto; display: block; pointer-events: none; }
-  .tap { position: absolute; top: 0; bottom: 0; width: 50%; border: 0; background: none; cursor: pointer; }
-  .tap.prev { left: 0; } .tap.next { right: 0; }
-  .rfoot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--line); font-size: 14px; }
-  .rfoot .btn { padding: 9px 14px; font-size: 14px; }
-  .dots { display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; }
-  .dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
-  .dots i.on { background: var(--sea); }
-  .loading { position: absolute; inset: 0; display: grid; place-items: center; font-size: 13px; color: #4E6764; background: #FFFDF6; }
+  .reader { position: fixed; inset: 0; display: flex; flex-direction: column; background: var(--page); padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .top, .foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 14px; color: var(--muted); font-size: 13px; transition: opacity .2s; }
+  .top b { color: var(--text); font-weight: 700; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+  .icon { border: 0; background: none; cursor: pointer; padding: 6px 8px; border-radius: 6px; font-weight: 700; color: var(--text); }
+  .icon:hover { background: var(--chrome); }
+  .tools { display: flex; gap: 2px; flex: none; }
+  .viewport { position: relative; flex: 1; overflow: hidden; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+  .flow { position: absolute; top: 0; left: 0; height: 100%; font: var(--size)/1.6 var(--font, var(--serif)); text-align: justify; hyphens: auto; column-fill: auto; transition: transform .25s ease; }
+  .flow h1, .flow h2, .flow h3 { font-family: var(--serif); text-align: left; line-height: 1.25; margin: .2em 0 1em; break-after: avoid; }
+  .flow p { margin: 0; text-indent: 1.4em; }
+  .flow p.first, .flow h1 + p, .flow h2 + p, .flow h3 + p { text-indent: 0; }
+  .flow img { max-width: 100%; max-height: 80vh; display: block; margin: 1em auto; break-inside: avoid; }
+  .zone { position: absolute; top: 0; bottom: 0; width: 30%; border: 0; background: none; cursor: pointer; z-index: 2; }
+  .zone.l { left: 0; } .zone.r { right: 0; } .zone.c { left: 30%; width: 40%; }
+  .mark { color: var(--muted); font-size: 11px; text-align: center; padding: 0 14px 6px; }
+  .prog { height: 3px; background: var(--line); margin: 0 14px; border-radius: 2px; overflow: hidden; } .prog i { display: block; height: 100%; background: var(--accent); }
+  body.calm .top, body.calm .foot .hint { opacity: .0; }
 
-  /* Notes */
-  .side { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
-  .side h1 { font-size: clamp(28px, 4vw, 40px); line-height: 1.1; }
-  .side p { margin: 0; color: var(--muted); max-width: 62ch; }
-  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
-  .steps li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; padding: 12px 12px; border-radius: 14px; transition: background .2s; }
-  .steps li.now { background: var(--surface); box-shadow: 0 0 0 1.5px var(--accent) inset; }
-  .steps .n { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font: 800 15px var(--display); background: var(--surface); border: 1.5px solid var(--line); }
-  .steps li.now .n { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-  .steps b { display: block; font-size: 16px; }
-  .steps span { display: block; font-size: 14.5px; color: var(--muted); }
-  .limits { border-top: 1px solid var(--line); padding-top: 16px; font-size: 14px; color: var(--muted); }
-  .limits b { color: var(--ink); }
-  @media (max-width: 820px) { .wrap { grid-template-columns: minmax(0, 1fr); } .device { min-height: 600px; } }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+  /* Panels */
+  .panel { position: absolute; top: calc(50px + env(safe-area-inset-top, 0px)); right: 12px; z-index: 5; width: min(320px, calc(100% - 24px)); background: var(--page); color: var(--text); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 34px rgba(0,0,0,.2); padding: 16px; display: flex; flex-direction: column; gap: 14px; max-height: 70vh; overflow: auto; }
+  .row { display: flex; gap: 8px; align-items: center; justify-content: space-between; }
+  .row > span { font-size: 13px; color: var(--muted); }
+  .seg { display: flex; gap: 6px; }
+  .seg button { border: 1.5px solid var(--line); background: var(--chrome); border-radius: 8px; padding: 8px 12px; cursor: pointer; min-width: 44px; }
+  .seg button[aria-pressed="true"] { border-color: var(--accent); }
+  .sw { width: 34px; height: 34px; border-radius: 50%; padding: 0 !important; min-width: 0 !important; }
+  .toc { list-style: none; margin: 0; padding: 0; }
+  .toc button { width: 100%; text-align: left; border: 0; background: none; padding: 10px 6px; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .toc button[aria-current="true"] { color: var(--accent); font-weight: 700; }
+  @media (max-width: 500px) { .flow { text-align: left; } }
+  @media (prefers-reduced-motion: reduce) { .flow { transition: none; } }
 </style>
 </head>
 <body>
 
+<main class="shelf" id="shelf">
+  <div>
+    <h1>My books</h1>
+    <p>Signed in as asha@example.com · demo</p>
+  </div>
+  <div class="books" id="books"></div>
+  <div class="own">
+    <p><b>Try a real book file.</b> Open any EPUB from your computer to see it in this reader. The file stays on this device; nothing is uploaded.</p>
+    <label class="btn" for="file" tabindex="0">Open an EPUB</label>
+    <input id="file" type="file" accept=".epub,application/epub+zip" hidden>
+  </div>
+  <p class="err" id="err" hidden></p>
+</main>
 
-<div class="wrap">
-  <section class="device" aria-label="Reader demo" id="app"></section>
+<section class="reader" id="reader" hidden aria-label="Reader">
+  <div class="top">
+    <button class="icon" id="back" aria-label="Back to my books">‹ Books</button>
+    <b id="title"></b>
+    <div class="tools"><button class="icon" id="tocBtn" aria-label="Contents">☰</button><button class="icon" id="aaBtn" aria-label="Text settings">Aa</button></div>
+  </div>
+  <div class="viewport" id="vp">
+    <div class="flow" id="flow"></div>
+    <button class="zone l" id="zl" aria-label="Previous page"></button>
+    <button class="zone c" id="zc" aria-label="Show or hide menus"></button>
+    <button class="zone r" id="zr" aria-label="Next page"></button>
+    <div class="panel" id="aa" hidden>
+      <div class="row"><span>Text size</span><div class="seg"><button id="smaller" aria-label="Smaller text">A−</button><button id="bigger" aria-label="Larger text">A+</button></div></div>
+      <div class="row"><span>Font</span><div class="seg" id="fonts"><button data-f="serif">Serif</button><button data-f="sans">Sans</button></div></div>
+      <div class="row"><span>Page</span><div class="seg" id="themes">
+        <button class="sw" data-t="white" style="background:#fff" aria-label="White"></button>
+        <button class="sw" data-t="sepia" style="background:#F4ECD8" aria-label="Sepia"></button>
+        <button class="sw" data-t="dark" style="background:#121212" aria-label="Dark"></button></div></div>
+    </div>
+    <div class="panel" id="tocP" hidden><ul class="toc" id="toc"></ul></div>
+  </div>
+  <div class="foot"><span id="where"></span><span id="left"></span></div>
+  <div class="prog"><i id="bar"></i></div>
+  <div class="mark" id="mark">Order #1042 · asha@example.com</div>
+</section>
 
-  <aside class="side">
-    <div class="eyebrow">Working demo</div>
-    <h1>Your picture books, read on your own site</h1>
-    <p>Families buy the ebook in your Shopify shop, exactly as they buy the printed book today. Then they read it here, one page at a time. Try it: the email and code are filled in for you.</p>
-    <ol class="steps" id="steps">
-      <li data-s="signin"><span class="n">1</span><div><b>Sign in with the order email</b><span>No new password. The reader checks your shop for a paid order with this email.</span></div></li>
-      <li data-s="code"><span class="n">2</span><div><b>Enter the one-time code</b><span>Sent to that email, so only the buyer can open their books.</span></div></li>
-      <li data-s="shelf"><span class="n">3</span><div><b>See only the books they bought</b><span>Other titles show as locked, with a link back to your shop.</span></div></li>
-      <li data-s="reader"><span class="n">4</span><div><b>Read one page at a time</b><span>Each page is a picture of your printed page, so the artwork and layout stay exactly as you designed them. Every page carries the buyer's order number. The book file itself never leaves our server.</span></div></li>
-    </ol>
-    <p class="limits"><b>What no reader can stop:</b> a screenshot, or a phone camera pointed at the screen. The order number on each page shows whose copy it was.</p>
-    <p class="note">Demo only: the shop check and the code are simulated in this page, and the story is a sample written for the demo.</p>
-  </aside>
-</div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script>
 (() => {
-  const DEMO = { email: "asha@example.com", code: "4821", order: "1042" };
-  const BOOKS = [
-    { id: "boat", title: "Mina's Paper Boat", color: "#1F6F6A", owned: true },
-    { id: "kite", title: "The Kite That Stayed", color: "#C2412D", owned: false },
-    { id: "moon", title: "A Lamp for the Moon", color: "#3B4A8C", owned: false },
-    { id: "well", title: "Down the Old Well", color: "#6A5A2E", owned: false }
-  ];
-  const STORY = [
-    { t: "Mina folded a boat from yesterday's newspaper. \"Where will you go?\" she asked.", s: { sky: "#BFE0F2", rain: false, boat: [200, 205], extra: "girl" } },
-    { t: "The rain made a river down Banyan Lane, and the little boat sailed away.", s: { sky: "#9FB8C8", rain: true, boat: [120, 215] } },
-    { t: "It passed a frog on a flowerpot, who waved one wet hand.", s: { sky: "#9FB8C8", rain: true, boat: [90, 215], extra: "frog" } },
-    { t: "It slipped under the gate, where the old cat was fast asleep.", s: { sky: "#A9BFCB", rain: true, boat: [230, 215], extra: "cat" } },
-    { t: "At the corner it met the big drain, dark and very loud.", s: { sky: "#8EA3B0", rain: true, boat: [170, 215], extra: "drain" } },
-    { t: "\"Not that way!\" called a sparrow, and nudged the boat with her beak.", s: { sky: "#A9BFCB", rain: true, boat: [150, 215], extra: "bird" } },
-    { t: "The boat spun into a puddle as wide as the whole sky.", s: { sky: "#BFE0F2", rain: false, boat: [190, 222], extra: "puddle" } },
-    { t: "When the sun came out, Mina found it waiting, a little soggy and very proud.", s: { sky: "#FBE3A6", rain: false, boat: [200, 215], extra: "sun" } }
-  ];
-  const store = {
-    get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
-    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+  const SAMPLE = {
+    id: "sample", title: "The Lighthouse Twins", color: "#0F6E8C",
+    chapters: [
+      ["Chapter 1 · The Lamp Goes Out", [
+        "Nobody on Kallan Island remembered the lighthouse ever going dark, so when it did, on the first night of the monsoon, the whole village came out of their houses to stare at the black tower on the rocks.",
+        "Meera and her brother Arun stood at the front of the crowd. They were twins, eleven years old, and they had grown up close enough to the lighthouse to read by its beam through their bedroom window.",
+        "\"It's the bulb,\" said Mr. Varghese, who ran the tea shop and had an opinion about everything. \"Old bulbs go. That's all.\"",
+        "\"It isn't a bulb,\" Arun whispered. \"It's a lamp. A big one. Grandpa said it was brought here on a boat from Kochi.\"",
+        "Meera wasn't listening. She was watching the narrow path that wound up the rocks to the lighthouse door, and on that path, just for a moment, she saw a torch flicker and then go out.",
+        "Someone was up there.",
+        "Out at sea, far beyond the reef, a fishing boat sounded its horn: one long note, then two short ones. Without the light, the boats had nothing to steer by. The reef had sunk three ships in her grandfather's lifetime, and he never stopped telling the stories.",
+        "\"Arun,\" Meera said quietly. \"Get your shoes.\""
+      ]],
+      ["Chapter 2 · Ninety-Nine Steps", [
+        "The path was slick with rain. Arun went first because he had the torch, and Meera came behind him, counting the stone steps under her breath the way their grandfather always had.",
+        "Ninety-seven. Ninety-eight. Ninety-nine.",
+        "The lighthouse door was open. It was never open. A brass padlock lay on the ground, not broken but unlocked, its key still in it.",
+        "Inside, the air smelled of oil and salt. An iron staircase spiralled up into darkness. Somewhere above them, footsteps crossed the floor and stopped.",
+        "\"Hello?\" Arun called, and his voice rang round the walls and came back to him three times.",
+        "No one answered. But a moment later, a small round tin rolled down the stairs, clinking on every step, and stopped against Meera's foot.",
+        "She picked it up. It was a lamp-wick tin, older than anything she had ever held, and scratched into the lid were four words: FOR THE NEXT KEEPER.",
+        "Meera looked up the dark staircase. Then she looked at her brother. He was already climbing."
+      ]],
+      ["Chapter 3 · The Keeper's Logbook", [
+        "At the top of the tower, the great lamp sat inside its cage of glass like a sleeping animal. The room was empty, but the logbook on the desk lay open, and the last entry was written in fresh ink.",
+        "Light failed 7:42 pm. Wick spent. Spare wicks taken. Whoever finds this: the reef does not wait.",
+        "\"Taken by who?\" Arun said. \"Why would anyone steal wicks?\"",
+        "Meera was already turning the tin over in her hands. It rattled. She pried the lid open and found, rolled tight inside, a single new wick, white as a seashell.",
+        "\"Someone wanted the light out,\" she said slowly. \"And someone else wanted us to be able to light it again.\"",
+        "Far below, the fishing boat sounded its horn again, closer now. Much closer.",
+        "Arun found the matches. Meera found the lever that opened the lamp. Neither of them had ever done this before, but they had watched their grandfather do it a hundred times, and their hands remembered more than they did.",
+        "When the wick caught, the lamp drank the flame and the great lens began to turn, and a beam of light swept out across the black water, across the reef, across the little boat that was turning, just in time, towards home."
+      ]]
+    ]
   };
-  const app = document.getElementById("app");
+  const OTHERS = [["A Kite for Monsoon", "#9A3B26"], ["The Tea Garden Secret", "#3E5C2E"]];
+
+  const $ = id => document.getElementById(id);
+  const store = { get(k, d) { try { const v = JSON.parse(localStorage.getItem(k)); return v ?? d; } catch { return d; } },
+                  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
+  const prefs = Object.assign({ size: 19, font: "serif", theme: "white" }, store.get("reader-prefs", {}));
+  let book = null, ch = 0, page = 0, pages = 1, pageW = 0, frac = 0;
+
   const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  let state = { view: "signin", page: store.get("demo-page") || 0 };
+  const sampleBook = () => ({ ...SAMPLE, chapters: SAMPLE.chapters.map(([t, ps]) => ({ title: t,
+    html: `<h2>${esc(t)}</h2>` + ps.map((p, i) => `<p${i ? "" : ' class="first"'}>${esc(p)}</p>`).join("") })) });
 
-  function extra(kind) {
-    switch (kind) {
-      case "girl": return '<circle cx="90" cy="150" r="16" fill="#6B3E26"/><rect x="76" y="166" width="28" height="44" rx="10" fill="#E9A21A"/>';
-      case "frog": return '<rect x="40" y="170" width="44" height="40" rx="6" fill="#B5643C"/><ellipse cx="62" cy="160" rx="20" ry="13" fill="#4C9A3F"/><circle cx="54" cy="150" r="5" fill="#fff"/><circle cx="70" cy="150" r="5" fill="#fff"/><circle cx="54" cy="150" r="2" fill="#111"/><circle cx="70" cy="150" r="2" fill="#111"/>';
-      case "cat": return '<rect x="40" y="110" width="8" height="100" fill="#7A6A55"/><rect x="62" y="110" width="8" height="100" fill="#7A6A55"/><rect x="84" y="110" width="8" height="100" fill="#7A6A55"/><ellipse cx="300" cy="196" rx="30" ry="14" fill="#E07B39"/><circle cx="326" cy="188" r="11" fill="#E07B39"/><path d="M320 180 l3 -9 l5 8 M329 179 l4 -8 l3 9" fill="#E07B39"/>';
-      case "drain": return '<rect x="290" y="200" width="70" height="30" rx="4" fill="#2B3338"/><g stroke="#55626A" stroke-width="4"><path d="M300 200v30M314 200v30M328 200v30M342 200v30"/></g>';
-      case "bird": return '<ellipse cx="210" cy="190" rx="16" ry="11" fill="#8A5A3B"/><circle cx="224" cy="182" r="7" fill="#8A5A3B"/><path d="M230 182 l9 2 l-9 3z" fill="#E9A21A"/>';
-      case "puddle": return '<ellipse cx="200" cy="228" rx="160" ry="18" fill="#BFE0F2" opacity=".8"/>';
-      case "sun": return '<circle cx="320" cy="60" r="30" fill="#F2B437"/>';
-      default: return "";
+  function renderShelf() {
+    const pos = store.get("pos-sample", { ch: 0, frac: 0 });
+    const pct = Math.round(((pos.ch + pos.frac) / SAMPLE.chapters.length) * 100);
+    $("books").innerHTML = `<button class="book" id="open-sample"><span class="cover" style="background:${SAMPLE.color}">${SAMPLE.title}</span>
+      <span class="bar2"><i style="width:${pct}%"></i></span><small>${pct}% read</small></button>` +
+      OTHERS.map(([t, c]) => `<div class="book" aria-disabled="true"><span class="cover" style="background:${c};opacity:.45">${t}</span><small>Not bought · Buy in shop</small></div>`).join("");
+    $("open-sample").onclick = () => openBook(sampleBook());
+  }
+
+  // EPUB: read container.xml -> OPF -> spine; each spine item becomes one chapter.
+  async function loadEpub(file) {
+    const zip = await JSZip.loadAsync(file);
+    const xml = async p => new DOMParser().parseFromString(await zip.file(p).async("text"), "application/xml");
+    const rootPath = (await xml("META-INF/container.xml")).querySelector("rootfile").getAttribute("full-path");
+    const base = rootPath.includes("/") ? rootPath.slice(0, rootPath.lastIndexOf("/") + 1) : "";
+    const opf = await xml(rootPath);
+    const items = {}; opf.querySelectorAll("manifest > item").forEach(i => items[i.getAttribute("id")] = i.getAttribute("href"));
+    const title = opf.getElementsByTagName("dc:title")[0]?.textContent || file.name.replace(/\.epub$/i, "");
+    const resolve = (from, href) => { const parts = (from.slice(0, from.lastIndexOf("/") + 1) + href).split("/"), out = [];
+      parts.forEach(p => p === ".." ? out.pop() : p !== "." && out.push(p)); return decodeURIComponent(out.join("/")); };
+    const chapters = [];
+    for (const ref of opf.querySelectorAll("spine > itemref")) {
+      const path = base + items[ref.getAttribute("idref")]; const f = zip.file(decodeURIComponent(path)); if (!f) continue;
+      const doc = new DOMParser().parseFromString(await f.async("text"), "application/xhtml+xml");
+      const body = doc.body || doc.querySelector("body"); if (!body) continue;
+      body.querySelectorAll("script, style, link, iframe, object, embed").forEach(n => n.remove());
+      body.querySelectorAll("*").forEach(n => [...n.attributes].forEach(a => { if (/^on/i.test(a.name) || a.name === "style") n.removeAttribute(a.name); }));
+      for (const img of body.querySelectorAll("img, image")) {
+        const src = img.getAttribute("src") || img.getAttribute("xlink:href") || img.getAttribute("href");
+        const imgFile = src && zip.file(resolve(path, src));
+        if (imgFile) { const url = URL.createObjectURL(await imgFile.async("blob")); img.setAttribute(img.tagName.toLowerCase() === "img" ? "src" : "href", url); }
+      }
+      const text = body.textContent.trim(); if (!text && !body.querySelector("img, image")) continue;
+      const h = body.querySelector("h1, h2, h3");
+      chapters.push({ title: (h?.textContent || text.slice(0, 40) || `Section ${chapters.length + 1}`).trim(), html: body.innerHTML });
     }
-  }
-  function pageSVG(i) {
-    const p = STORY[i], s = p.s, [bx, by] = s.boat;
-    const rain = s.rain ? '<g stroke="#ffffff" stroke-opacity=".7" stroke-width="2">' + Array.from({ length: 22 }, (_, k) => {
-      const x = (k * 37) % 400, y = (k * 53) % 170; return `<path d="M${x} ${y} l-6 14"/>`; }).join("") + "</g>" : "";
-    const words = p.t.split(" "), lines = [""];
-    words.forEach(w => { if ((lines[lines.length - 1] + " " + w).trim().length > 34) lines.push(w); else lines[lines.length - 1] = (lines[lines.length - 1] + " " + w).trim(); });
-    const text = lines.map((l, k) => `<text x="200" y="${292 + k * 26}" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="19" fill="#10302E">${esc(l)}</text>`).join("");
-    return `<svg viewBox="0 0 400 400" role="img" aria-label="${esc(p.t)}">
-      <rect width="400" height="400" fill="#FFFDF6"/>
-      <rect x="0" y="0" width="400" height="240" fill="${s.sky}"/>
-      <rect x="0" y="210" width="400" height="30" fill="#5E8FA3"/>
-      ${rain}${extra(s.extra)}
-      <path d="M${bx - 30} ${by - 8} h60 l-12 16 h-36z" fill="#F4F1E8" stroke="#10302E" stroke-width="2"/>
-      <path d="M${bx} ${by - 8} v-26 l18 22z" fill="#FFFFFF" stroke="#10302E" stroke-width="2"/>
-      ${text}
-      <text x="200" y="392" text-anchor="middle" font-family="Atkinson Hyperlegible, sans-serif" font-size="11" fill="rgba(16,48,46,.45)">Order #${DEMO.order} · ${DEMO.email} · page ${i + 1} of ${STORY.length}</text>
-      <text x="200" y="120" text-anchor="middle" transform="rotate(-24 200 120)" font-family="Atkinson Hyperlegible, sans-serif" font-size="22" font-weight="700" fill="rgba(255,255,255,.28)">Order #${DEMO.order}</text>
-    </svg>`;
+    if (!chapters.length) throw new Error("No readable chapters");
+    return { id: "file", title, chapters };
   }
 
-  function setStep() {
-    document.querySelectorAll("#steps li").forEach(li => li.classList.toggle("now", li.dataset.s === state.view));
-  }
-  function go(view) { state.view = view; render(); }
-
-  function render() {
-    setStep();
-    if (state.view === "signin") {
-      app.innerHTML = `<div class="bar"><b>Reading Room</b><span class="note">sindhujohn.com</span></div>
-      <form class="screen" id="f"><h2>Open your books</h2>
-        <label for="email">Email you bought with</label>
-        <input id="email" type="email" value="${DEMO.email}" autocomplete="email" required>
-        <button class="btn">Send me a code</button>
-        <p class="note">We check your shop's orders for this email. No password to remember.</p></form>`;
-      app.querySelector("#f").onsubmit = e => { e.preventDefault(); go("code"); };
-    } else if (state.view === "code") {
-      app.innerHTML = `<div class="bar"><b>Reading Room</b><button class="linkbtn" id="back">Back</button></div>
-      <form class="screen" id="f"><h2>Check your email</h2>
-        <p class="note">In the demo, the code we "sent" to ${esc(DEMO.email)} is <span class="code">${DEMO.code}</span></p>
-        <label for="code">Code from the email</label>
-        <input id="code" inputmode="numeric" maxlength="4" value="${DEMO.code}" required>
-        <p class="err" id="err" hidden>That code doesn't match. Use ${DEMO.code}.</p>
-        <button class="btn">Open my shelf</button></form>`;
-      app.querySelector("#back").onclick = () => go("signin");
-      app.querySelector("#f").onsubmit = e => { e.preventDefault();
-        if (app.querySelector("#code").value.trim() === DEMO.code) go("shelf"); else app.querySelector("#err").hidden = false; };
-    } else if (state.view === "shelf") {
-      const pct = Math.round(((state.page + 1) / STORY.length) * 100);
-      app.innerHTML = `<div class="bar"><b>Asha's shelf</b><button class="linkbtn" id="out">Sign out</button></div>
-      <div class="screen"><p class="note">1 book bought · order #${DEMO.order}</p><div class="shelf">${BOOKS.map(b => `
-        <button class="book ${b.owned ? "" : "locked"}" data-id="${b.id}" ${b.owned ? "" : 'aria-disabled="true"'}>
-          <span class="cover" style="background:${b.color}">${b.owned ? "" : '<span class="pill">Buy in shop</span>'}${esc(b.title)}</span>
-          ${b.owned ? `<span class="prog"><i style="width:${pct}%"></i></span><small>Page ${state.page + 1} of ${STORY.length}</small>` : "<small>Not bought yet</small>"}
-        </button>`).join("")}</div></div>`;
-      app.querySelector("#out").onclick = () => go("signin");
-      app.querySelectorAll(".book").forEach(b => b.onclick = () => { if (!b.classList.contains("locked")) go("reader"); });
-    } else {
-      app.innerHTML = `<div class="bar"><button class="linkbtn" id="shelf">‹ Shelf</button><b>Mina's Paper Boat</b><span class="note" id="pn"></span></div>
-      <div class="screen reader"><div class="page" id="pg"></div>
-      <div class="rfoot"><button class="btn" id="prev">Back</button><div class="dots" id="dots"></div><button class="btn" id="next">Next</button></div></div>`;
-      app.querySelector("#shelf").onclick = () => go("shelf");
-      app.querySelector("#prev").onclick = () => turn(-1);
-      app.querySelector("#next").onclick = () => turn(1);
-      const pg = app.querySelector("#pg");
-      pg.oncontextmenu = e => e.preventDefault();
-      let x0 = null;
-      pg.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
-      pg.addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) turn(dx < 0 ? 1 : -1); x0 = null; });
-      showPage();
-    }
+  function openBook(b) {
+    book = b; const pos = b.id === "sample" ? store.get("pos-sample", { ch: 0, frac: 0 }) : { ch: 0, frac: 0 };
+    $("shelf").hidden = true; $("reader").hidden = false; $("title").textContent = b.title;
+    $("toc").innerHTML = b.chapters.map((c, i) => `<li><button data-i="${i}">${esc(c.title)}</button></li>`).join("");
+    loadChapter(Math.min(pos.ch, b.chapters.length - 1), pos.frac);
   }
 
-  function showPage() {
-    const pg = app.querySelector("#pg"); if (!pg) return;
-    // In the real reader each page is fetched from a link that expires in minutes; here we mimic the short load.
-    pg.innerHTML = '<div class="loading">Loading page ' + (state.page + 1) + '…</div>';
-    setTimeout(() => {
-      pg.innerHTML = pageSVG(state.page) + '<button class="tap prev" aria-label="Previous page"></button><button class="tap next" aria-label="Next page"></button>';
-      pg.querySelector(".prev").onclick = () => turn(-1);
-      pg.querySelector(".next").onclick = () => turn(1);
-    }, 180);
-    app.querySelector("#pn").textContent = `${state.page + 1} / ${STORY.length}`;
-    app.querySelector("#dots").innerHTML = STORY.map((_, i) => `<i class="${i === state.page ? "on" : ""}"></i>`).join("");
-    app.querySelector("#prev").disabled = state.page === 0;
-    app.querySelector("#next").textContent = state.page === STORY.length - 1 ? "The end" : "Next";
+  function layout() {
+    const vp = $("vp"), flow = $("flow"), pad = Math.max(20, Math.min(64, vp.clientWidth * .08), (vp.clientWidth - 680) / 2);
+    pageW = vp.clientWidth;
+    Object.assign(flow.style, { width: pageW + "px", padding: `24px ${pad}px`, columnWidth: (pageW - 2 * pad) + "px", columnGap: 2 * pad + "px" });
+    document.documentElement.style.setProperty("--size", prefs.size + "px");
+    flow.style.setProperty("--font", prefs.font === "sans" ? "var(--sans)" : "var(--serif)");
+    pages = Math.max(1, Math.round(flow.scrollWidth / pageW));
+  }
+  function loadChapter(i, f = 0) {
+    ch = i; $("flow").innerHTML = book.chapters[i].html; layout();
+    page = Math.min(pages - 1, Math.round(f * pages)); show();
+    $("toc").querySelectorAll("button").forEach(b => b.setAttribute("aria-current", +b.dataset.i === ch));
+  }
+  function show() {
+    $("flow").style.transform = `translateX(${-page * pageW}px)`;
+    frac = pages > 1 ? page / pages : 0;
+    const total = (ch + (page + 1) / pages) / book.chapters.length;
+    $("bar").style.width = Math.round(total * 100) + "%";
+    $("where").textContent = `Page ${page + 1} of ${pages} · ${Math.round(total * 100)}%`;
+    const words = $("flow").textContent.trim().split(/\s+/).length, left = Math.ceil(words * (1 - (page + 1) / pages) / 200);
+    $("left").textContent = left > 0 ? `${left} min left in chapter` : (ch < book.chapters.length - 1 ? "Next chapter ›" : "The end");
+    if (book.id === "sample") store.set("pos-sample", { ch, frac });
   }
   function turn(d) {
-    const n = state.page + d;
-    if (n < 0) return;
-    if (n >= STORY.length) { go("shelf"); return; }
-    state.page = n; store.set("demo-page", n); showPage();
+    closePanels();
+    if (page + d >= 0 && page + d < pages) { page += d; show(); return; }
+    if (d > 0 && ch < book.chapters.length - 1) loadChapter(ch + 1, 0);
+    else if (d < 0 && ch > 0) { loadChapter(ch - 1, 0); page = pages - 1; show(); }
   }
-  document.addEventListener("keydown", e => {
-    if (state.view !== "reader") return;
-    if (e.key === "ArrowRight") turn(1);
-    if (e.key === "ArrowLeft") turn(-1);
-  });
-  render();
+  function closePanels() { $("aa").hidden = $("tocP").hidden = true; }
+  function applyPrefs() {
+    document.body.dataset.themeBook = prefs.theme; store.set("reader-prefs", prefs);
+    $("fonts").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === prefs.font));
+    $("themes").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.t === prefs.theme));
+    if (book) { const f = frac; layout(); page = Math.min(pages - 1, Math.round(f * pages)); show(); }
+  }
+
+  $("zl").onclick = () => turn(-1); $("zr").onclick = () => turn(1);
+  $("zc").onclick = () => { closePanels(); document.body.classList.toggle("calm"); };
+  $("aaBtn").onclick = () => { $("tocP").hidden = true; $("aa").hidden = !$("aa").hidden; };
+  $("tocBtn").onclick = () => { $("aa").hidden = true; $("tocP").hidden = !$("tocP").hidden; };
+  $("toc").onclick = e => { const b = e.target.closest("button"); if (b) { closePanels(); loadChapter(+b.dataset.i, 0); } };
+  $("smaller").onclick = () => { prefs.size = Math.max(14, prefs.size - 2); applyPrefs(); };
+  $("bigger").onclick = () => { prefs.size = Math.min(32, prefs.size + 2); applyPrefs(); };
+  $("fonts").onclick = e => { const b = e.target.closest("button"); if (b) { prefs.font = b.dataset.f; applyPrefs(); } };
+  $("themes").onclick = e => { const b = e.target.closest("button"); if (b) { prefs.theme = b.dataset.t; applyPrefs(); } };
+  $("back").onclick = () => { closePanels(); document.body.classList.remove("calm"); $("reader").hidden = true; $("shelf").hidden = false; renderShelf(); };
+  $("vp").addEventListener("contextmenu", e => e.preventDefault());
+  let x0 = null;
+  $("vp").addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+  $("vp").addEventListener("touchend", e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) turn(dx < 0 ? 1 : -1); x0 = null; });
+  document.addEventListener("keydown", e => { if ($("reader").hidden) return;
+    if (e.key === "ArrowRight" || e.key === " ") { e.preventDefault(); turn(1); } if (e.key === "ArrowLeft") turn(-1); if (e.key === "Escape") closePanels(); });
+  window.addEventListener("resize", () => { if (book && !$("reader").hidden) { const f = frac; layout(); page = Math.min(pages - 1, Math.round(f * pages)); show(); } });
+  document.querySelector('label[for="file"]').addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); $("file").click(); } });
+  $("file").onchange = async () => {
+    const f = $("file").files[0]; if (!f) return; $("err").hidden = true;
+    try { openBook(await loadEpub(f)); }
+    catch { $("err").textContent = "That file couldn't be opened as an EPUB. Check that it isn't DRM-protected and try again."; $("err").hidden = false; }
+    $("file").value = "";
+  };
+  if (document.fonts) document.fonts.ready.then(() => { if (book && !$("reader").hidden) { layout(); show(); } });
+  applyPrefs(); renderShelf();
 })();
 </script>
-
 </body>
 </html>
