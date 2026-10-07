@@ -84,7 +84,8 @@
   .nav-links{display:flex;gap:var(--s5);font-size:14px;}
   .nav-links a{color:var(--muted);font-weight:500;}
   .nav-links a:hover{color:var(--ink);}
-  @media(max-width:860px){.nav-links{display:none;}}  /* 7 links wrap at 836px and below (measured), so they hide by 860 */
+  @media(max-width:700px){.nav-links{display:none;}}
+  @media(max-width:860px){.nav-links .minor{display:none;}}  /* all 8 links wrap at 836px and below (measured); the minor ones go first */
 
   /* ── Hero ──────────────────────────────── */
   .hero{position:relative;padding:var(--s9) 0 var(--s8);overflow:hidden;}
@@ -299,10 +300,10 @@
     <div class="nav-links">
       <a href="#drengr">Drengr</a>
       <a href="#consulting">Consulting</a>
-      <a href="#origin">Origin</a>
-      <a href="#work">Track record</a>
+      <a class="minor" href="#origin">Origin</a>
+      <a class="minor" href="#work">Track record</a>
       <a href="#projects">Projects</a>
-      <a href="#how">How I work</a>
+      <a class="minor" href="#how">How I work</a>
       <a href="cv-designed.html" data-cv-open>CV</a>
       <a href="#contact">Contact</a>
     </div>
@@ -530,7 +531,7 @@
 <section class="block" id="projects">
   <div class="wrap">
     <span class="eyebrow">// what i've built</span>
-    <h2 class="sec-head">Designed, built and shipped by one engineer.</h2>
+    <h2 class="sec-head">Designed and built by one engineer.</h2>
     <p class="sec-lede">Each has its own address under <a href="https://drengr.dev">drengr.dev</a>.</p>
     <div class="projects">
       <article class="verb">
@@ -557,7 +558,7 @@
       <article class="verb">
         <span class="vnum">in development</span>
         <div class="vh"><a href="https://marram.drengr.dev">Marram</a></div>
-        <p>A local-first wellness app for women in perimenopause and menopause. It reads how she uses her phone, never what she writes (touch dynamics, keystroke timing, usage and sleep rhythm) against her own baseline, and when those shift it offers a calming exercise generated fresh each time: paced breathing, a soft-body sensory canvas, or grounding. A personal Random Forest, written in pure Dart, trains on the phone, so her data never leaves it. Wellness, not diagnosis. Flutter, for iOS and Android.</p>
+        <p>A local-first wellness app for women in perimenopause and menopause, in development. It is built to read how she uses her phone, never what she writes (touch dynamics, keystroke timing, usage and sleep rhythm), against her own baseline, and to offer a calming exercise generated fresh each time: paced breathing, a soft-body sensory canvas, or grounding. A personal Random Forest, written in pure Dart, trains on the phone, so her data is designed to stay there. Wellness, not diagnosis. Flutter, for iOS and Android.</p>
         <p class="roles"><b>Roles</b> Mobile Engineer · ML Engineer · Product Engineer</p>
         <div class="tl-chips"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Android</span><span class="chip">iOS</span><span class="chip">Machine Learning</span><span class="chip">Random Forest</span><span class="chip">On-device ML</span><span class="chip">Signal Processing</span><span class="chip">Physics Simulation</span><span class="chip">Animation</span><span class="chip">Local-first Architecture</span><span class="chip">Data Privacy</span><span class="chip">Mobile UX</span></div>
       </article>
