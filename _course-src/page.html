@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced Digital Marketing</title>
+<meta name="description" content="A six-lesson advanced digital marketing course in English, Hindi, Tamil, Telugu and Malayalam.">
+<style>
+  @font-face{font-family:'Bricolage Grotesque';font-weight:500 800;font-display:swap;src:url(../fonts/bricolage-var.woff2) format('woff2')}
+  @font-face{font-family:'Hanken Grotesk';font-weight:400;font-display:swap;src:url(../fonts/hanken-400.woff2) format('woff2')}
+  @font-face{font-family:'Hanken Grotesk';font-weight:600;font-display:swap;src:url(../fonts/hanken-600.woff2) format('woff2')}
+  :root{
+    --paper:#F4F7F8; --card:#fff; --ink:#0B1A1F; --body:#33474e; --muted:#6a7f86; --line:#dce5e8;
+    --accent:#0F4C5C; --accent-2:#11808F; --wash:#e9f2f3; --mark:#FB6A3C; --good:#1d7a4c; --bad:#c43d3d;
+    --indic:"Noto Sans Devanagari","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Malayalam","Nirmala UI","Kohinoor Devanagari","Tamil Sangam MN","Telugu Sangam MN","Malayalam Sangam MN";
+    --sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",var(--indic),sans-serif;
+    --display:"Bricolage Grotesque",-apple-system,"Segoe UI",var(--indic),sans-serif;
+  }
+  @media (prefers-color-scheme: dark){:root{
+    --paper:#0b1417; --card:#111d21; --ink:#eef4f5; --body:#c3d1d5; --muted:#8aa0a6; --line:#22343a;
+    --accent:#5fc2cf; --accent-2:#7fd3de; --wash:#14272c; --good:#5cc28d; --bad:#ef7b7b;
+  }}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--body);font:17px/1.65 var(--sans)}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px}
+  header{border-bottom:1px solid var(--line);background:var(--card)}
+  .bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px;flex-wrap:wrap}
+  .brand{font:700 15px var(--display);color:var(--accent);letter-spacing:.02em}
+  label.lang{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+  select{font:inherit;font-size:15px;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+  .hero{padding:36px 0 20px}
+  .level{display:inline-block;font-size:13px;font-weight:600;color:var(--mark);text-transform:uppercase;letter-spacing:.08em}
+  h1{font:800 clamp(30px,6vw,46px)/1.15 var(--display);color:var(--ink);margin:6px 0 10px}
+  .sub{font-size:18px;margin:0;max-width:640px}
+  nav.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin:24px 0}
+  nav.toc button{all:unset;cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font-size:15px;line-height:1.4}
+  nav.toc button[aria-current="true"]{border-color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+  nav.toc button:focus-visible,.btn:focus-visible,.opt input:focus-visible+span{outline:2px solid var(--accent-2);outline-offset:2px}
+  nav.toc .n{font-weight:700;color:var(--accent)}
+  article{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px clamp(18px,4vw,36px);margin-bottom:24px}
+  .meta{font-size:14px;color:var(--muted)}
+  h2{font:700 clamp(24px,4.5vw,32px)/1.25 var(--display);color:var(--ink);margin:6px 0 14px}
+  h3{font:700 15px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin:26px 0 8px}
+  .intro{font-size:19px;color:var(--ink)}
+  ul{padding-left:20px} li{margin:6px 0}
+  .box{border-radius:10px;padding:16px 18px;margin:8px 0}
+  .ex{background:var(--wash);border-left:4px solid var(--accent)}
+  .warn{background:transparent;border:1px dashed var(--mark)}
+  .q{border-top:1px solid var(--line);padding:16px 0}
+  .q p{margin:0 0 10px;color:var(--ink);font-weight:600}
+  .opt{display:flex;gap:10px;align-items:flex-start;margin:6px 0;cursor:pointer}
+  .opt input{margin-top:6px}
+  .btn{font:600 15px var(--sans);border:0;border-radius:8px;padding:9px 16px;background:var(--accent);color:var(--card);cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+  .fb{margin:10px 0 0;font-size:15px} .fb.ok{color:var(--good)} .fb.no{color:var(--bad)}
+  .pager{display:flex;justify-content:space-between;gap:12px;margin:0 0 28px}
+  footer{color:var(--muted);font-size:14px;padding:8px 0 40px}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <span class="brand" id="brand"></span>
+  <label class="lang"><span id="langLabel"></span><select id="lang"></select></label>
+</div></header>
+<main class="wrap">
+  <section class="hero"><span class="level" id="level"></span><h1 id="title"></h1><p class="sub" id="sub"></p></section>
+  <nav class="toc" id="toc" aria-labelledby="title"></nav>
+  <article id="lesson" aria-live="polite"></article>
+  <div class="pager"><button class="btn ghost" id="prev"></button><button class="btn" id="next"></button></div>
+  <footer id="note"></footer>
+</main>
+<script>
+const DATA = /*DATA*/null;
+const $ = id => document.getElementById(id);
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+const store = { get(k){ try { return localStorage.getItem(k); } catch { return null; } }, set(k, v){ try { localStorage.setItem(k, v); } catch {} } };
+const params = new URLSearchParams(location.search);
+let lang = [params.get('lang'), store.get('dm-lang')].find(l => l && DATA[l]) || 'en';
+let at = 0;
+
+Object.values(DATA).forEach(d => $('lang').append(new Option(d.langName, d.lang)));
+
+function list(items){ const ul = el('ul'); items.forEach(t => ul.append(el('li', null, t))); return ul; }
+
+function quiz(q, i, u){
+  const box = el('div', 'q'), fb = el('p', 'fb');
+  box.append(el('p', null, (i + 1) + '. ' + q.q));
+  q.options.forEach((o, k) => {
+    const lab = el('label', 'opt'), inp = el('input'); inp.type = 'radio'; inp.name = 'q' + at + '-' + i; inp.value = k;
+    lab.append(inp, el('span', null, o)); box.append(lab);
+  });
+  const b = el('button', 'btn ghost', u.check);
+  b.onclick = () => {
+    const pick = box.querySelector('input:checked');
+    if (!pick) return;
+    const ok = Number(pick.value) === q.answer;
+    fb.className = 'fb ' + (ok ? 'ok' : 'no'); fb.textContent = (ok ? u.correct : u.wrong) + ' ' + q.why;
+  };
+  box.append(b, fb); return box;
+}
+
+function render(){
+  const d = DATA[lang], u = d.ui, m = d.modules[at];
+  document.documentElement.lang = lang; document.title = u.courseTitle;
+  $('lang').value = lang; $('langLabel').textContent = u.language; $('brand').textContent = u.courseTitle;
+  $('level').textContent = u.level; $('title').textContent = u.courseTitle; $('sub').textContent = u.courseSub; $('note').textContent = u.note;
+  $('toc').replaceChildren(...d.modules.map((mod, i) => {
+    const b = el('button'); b.append(el('span', 'n', i + 1), el('span', null, mod.title));
+    b.setAttribute('aria-current', i === at); b.onclick = () => go(i); return b;
+  }));
+  const a = $('lesson');
+  a.replaceChildren(
+    el('div', 'meta', u.lesson + ' ' + (at + 1) + ' · ' + m.minutes + ' ' + u.minutes), el('h2', null, m.title),
+    el('p', 'intro', m.intro), list(m.points),
+    el('h3', null, u.example), el('div', 'box ex', m.example),
+    el('h3', null, u.mistake), el('div', 'box warn', m.mistake),
+    el('h3', null, u.takeaways), list(m.takeaways),
+    el('h3', null, u.quiz), ...m.quiz.map((q, i) => quiz(q, i, u)));
+  $('prev').textContent = '← ' + u.prev; $('next').textContent = u.next + ' →';
+  $('prev').disabled = at === 0; $('next').disabled = at === d.modules.length - 1;
+  $('prev').style.visibility = at === 0 ? 'hidden' : 'visible'; $('next').style.visibility = at === d.modules.length - 1 ? 'hidden' : 'visible';
+}
+function go(i){ at = i; render(); $('lesson').scrollIntoView({ block: 'start' }); }
+$('lang').onchange = e => { lang = e.target.value; store.set('dm-lang', lang); const p = new URL(location); p.searchParams.set('lang', lang); history.replaceState(null, '', p); render(); };
+$('prev').onclick = () => go(at - 1); $('next').onclick = () => go(at + 1);
+render();
+</script>
+</body>
+</html>

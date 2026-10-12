@@ -1,0 +1,212 @@
+{
+  "lang": "en",
+  "langName": "English",
+  "ui": {
+    "courseTitle": "Advanced Digital Marketing",
+    "courseSub": "Six lessons on measuring and growing a business with numbers you can defend.",
+    "level": "Advanced",
+    "minutes": "min",
+    "lesson": "Lesson",
+    "example": "Worked example",
+    "mistake": "Common mistake",
+    "takeaways": "Key takeaways",
+    "quiz": "Check yourself",
+    "check": "Check answer",
+    "correct": "Correct.",
+    "wrong": "Not quite.",
+    "language": "Language",
+    "contents": "Contents",
+    "prev": "Previous",
+    "next": "Next",
+    "note": "Original course written for this demo. Translations are machine-made and have not yet been reviewed by native speakers."
+  },
+  "modules": [
+    {
+      "title": "Unit economics: CAC, LTV and payback",
+      "minutes": 12,
+      "intro": "Every marketing decision becomes simpler once you know what a customer costs to win and what that customer is worth. Three numbers do most of the work.",
+      "points": [
+        "Customer acquisition cost (CAC) is marketing spend divided by the new paying customers it brought in during the same period.",
+        "Lifetime value (LTV) is the profit a customer brings over their whole relationship with you: monthly contribution multiplied by expected lifetime in months. With a steady monthly churn rate, expected lifetime is 1 divided by that rate.",
+        "Payback period is CAC divided by monthly contribution: how many months until a customer has repaid what it cost to win them."
+      ],
+      "example": "A learning app spends ₹2,00,000 in a month and gains 400 paying subscribers, so CAC is ₹500. Each subscriber pays ₹299 a month at a 70% gross margin, a contribution of ₹209.30 a month. Monthly churn is 5%, so the expected lifetime is 1 ÷ 0.05 = 20 months and LTV is ₹209.30 × 20 = ₹4,186. LTV to CAC is 8.37, and payback takes ₹500 ÷ ₹209.30 = 2.39 months.",
+      "mistake": "Using revenue instead of contribution for LTV. Revenue ignores the cost of serving the customer and makes every channel look more profitable than it is.",
+      "takeaways": [
+        "CAC and LTV must cover the same period and the same customers.",
+        "LTV is built on contribution, not revenue.",
+        "A short payback period protects cash, even when LTV to CAC looks healthy."
+      ],
+      "quiz": [
+        {
+          "q": "Spend is ₹1,00,000 and it brings 250 new paying customers. What is the CAC?",
+          "options": ["₹250", "₹400", "₹4,000"],
+          "answer": 1,
+          "why": "₹1,00,000 ÷ 250 = ₹400."
+        },
+        {
+          "q": "Monthly churn is 10%. With a steady churn rate, what is the expected customer lifetime?",
+          "options": ["10 months", "12 months", "100 months"],
+          "answer": 0,
+          "why": "1 ÷ 0.10 = 10 months."
+        }
+      ]
+    },
+    {
+      "title": "Experiments that tell the truth",
+      "minutes": 14,
+      "intro": "An A/B test is only as good as its design. Decide the question, the metric and the sample size before the test starts, not while it runs.",
+      "points": [
+        "Choose one primary metric in advance. Many metrics checked after the fact will produce a 'winner' by chance.",
+        "Calculate the sample size from the baseline rate, the smallest change worth detecting, the significance level and the power you want.",
+        "Do not stop a test the moment it looks significant. Repeated peeking raises the false-positive rate above the level you chose.",
+        "Check the split: if you planned 50/50 and the groups are clearly uneven, the assignment is broken and the result cannot be trusted."
+      ],
+      "example": "A sign-up page converts at 4%. You want to detect a rise to 5% at a 5% significance level (two-sided) with 80% power. Using the standard formula for two proportions, n = (1.96 + 0.8416)² × (0.04 × 0.96 + 0.05 × 0.95) ÷ 0.01² ≈ 6,742.2, so you need 6,743 visitors in each group, 13,486 in total, before you read the result.",
+      "mistake": "Running the test for a fixed number of days instead of a fixed number of visitors, then stopping early because the graph looks good.",
+      "takeaways": [
+        "One primary metric, chosen before launch.",
+        "Sample size is calculated, not guessed.",
+        "An uneven split is a bug to fix, not a result to report."
+      ],
+      "quiz": [
+        {
+          "q": "Why is checking results every day and stopping at the first significant reading a problem?",
+          "options": ["It makes the test slower", "It raises the chance of a false positive", "It lowers the conversion rate"],
+          "answer": 1,
+          "why": "Each look is another chance for random noise to cross the threshold."
+        },
+        {
+          "q": "You planned a 50/50 split but got 58% and 42%. What should you do?",
+          "options": ["Report the winner anyway", "Investigate the assignment before trusting the result", "Double the traffic"],
+          "answer": 1,
+          "why": "A clearly uneven split signals a broken assignment, which can bias the outcome."
+        }
+      ]
+    },
+    {
+      "title": "Attribution versus incrementality",
+      "minutes": 13,
+      "intro": "Attribution tells you which ads a buyer touched. Incrementality tells you which sales would not have happened without the ads. Only the second tells you whether the spend paid off.",
+      "points": [
+        "Platform reports count conversions that followed an ad, including people who would have bought anyway.",
+        "A holdout test keeps a random group from seeing the campaign. The difference in conversion rate between the groups is the campaign's real effect.",
+        "Incremental CPA is spend divided by incremental conversions. It is usually higher than the CPA a platform reports."
+      ],
+      "example": "A campaign reaches 9,00,000 people while a random 1,00,000 are held out. The exposed group converts at 3.0% (27,000 conversions) and the holdout at 2.6% (2,600). The lift is (3.0 − 2.6) ÷ 2.6 = 15.4%, and the incremental conversions are (0.030 − 0.026) × 9,00,000 = 3,600. The platform claimed 9,000 conversions, so only 40% of them were incremental. On ₹18,00,000 of spend, the reported CPA of ₹200 becomes an incremental CPA of ₹500.",
+      "mistake": "Comparing people who saw the ad with people who did not, without random assignment. Those groups differ in many ways besides the ad.",
+      "takeaways": [
+        "Attributed conversions are not caused conversions.",
+        "Random holdouts measure the real effect.",
+        "Judge channels by incremental CPA."
+      ],
+      "quiz": [
+        {
+          "q": "What makes a holdout group a fair comparison?",
+          "options": ["It is chosen at random", "It contains your best customers", "It is the same size as the exposed group"],
+          "answer": 0,
+          "why": "Random assignment makes the groups alike in everything except the campaign."
+        },
+        {
+          "q": "Spend is ₹50,000 and the test shows 100 incremental conversions. What is the incremental CPA?",
+          "options": ["₹50", "₹500", "₹5,000"],
+          "answer": 1,
+          "why": "₹50,000 ÷ 100 = ₹500."
+        }
+      ]
+    },
+    {
+      "title": "Bidding from your own numbers",
+      "minutes": 11,
+      "intro": "Automated bidding works best when you give it targets that come from your economics, not from habit.",
+      "points": [
+        "Break-even ROAS is 1 divided by your gross margin. Below it, every sale from ads loses money before any other cost.",
+        "The highest CPA you can afford on a first order is the order's contribution: average order value multiplied by gross margin. Use LTV instead only when repeat purchases are reliable.",
+        "A maximum cost per click follows from target CPA multiplied by the conversion rate of the clicks."
+      ],
+      "example": "A shop's gross margin is 40%, so break-even ROAS is 1 ÷ 0.40 = 2.5: every ₹1 of ad spend must bring ₹2.50 of revenue just to break even. With an average order of ₹2,000, the break-even CPA on a first order is ₹2,000 × 0.40 = ₹800. If you target a CPA of ₹500 and 2% of clicks convert, you can pay up to ₹500 × 0.02 = ₹10 a click.",
+      "mistake": "Setting a target ROAS from a competitor's figure or an industry average. Your margin, not theirs, decides what you can pay.",
+      "takeaways": [
+        "Break-even ROAS = 1 ÷ gross margin.",
+        "First-order CPA limit = average order value × gross margin.",
+        "Max CPC = target CPA × conversion rate."
+      ],
+      "quiz": [
+        {
+          "q": "Gross margin is 25%. What is the break-even ROAS?",
+          "options": ["2.5", "4", "25"],
+          "answer": 1,
+          "why": "1 ÷ 0.25 = 4."
+        },
+        {
+          "q": "Target CPA is ₹800 and 5% of clicks convert. What is the maximum CPC?",
+          "options": ["₹40", "₹160", "₹16"],
+          "answer": 0,
+          "why": "₹800 × 0.05 = ₹40."
+        }
+      ]
+    },
+    {
+      "title": "Retention, cohorts and lifecycle",
+      "minutes": 12,
+      "intro": "Growth that leaks is expensive. Cohort analysis shows whether customers stay, and lifecycle messages help the right ones come back.",
+      "points": [
+        "A cohort is a group that started in the same period. Track what share of each cohort is still active in each later month.",
+        "A retention curve that flattens means a core group keeps using the product. A curve that keeps falling towards zero means the product is not yet holding anyone.",
+        "RFM scoring ranks customers by recency, frequency and monetary value, so messages go to the people they suit instead of to everyone."
+      ],
+      "example": "Of 1,000 people who joined in January, 600 are active in month 1, 450 in month 2, 400 in month 3 and 390 in month 4. The drop shrinks from 150 to 50 to 10 people, so the curve is flattening at about 39%: a core is staying. Win-back messages should go to recent leavers who were frequent users, not to the whole list.",
+      "mistake": "Reporting one blended retention rate for all customers. New and old cohorts mixed together hide whether retention is getting better or worse.",
+      "takeaways": [
+        "Read retention by cohort, never blended.",
+        "A flattening curve is the signal to start scaling acquisition.",
+        "Segment before you message."
+      ],
+      "quiz": [
+        {
+          "q": "What does a retention curve that flattens tell you?",
+          "options": ["Everyone will leave eventually", "A core group keeps using the product", "Acquisition has stopped"],
+          "answer": 1,
+          "why": "A flat tail means the remaining customers are staying month after month."
+        },
+        {
+          "q": "What do the letters in RFM stand for?",
+          "options": ["Reach, frequency, media", "Recency, frequency, monetary value", "Revenue, funnel, margin"],
+          "answer": 1,
+          "why": "RFM ranks customers by how recently, how often and how much they buy."
+        }
+      ]
+    },
+    {
+      "title": "First-party data and consent",
+      "minutes": 10,
+      "intro": "Data that customers give you directly, with their clear agreement, is the most reliable data you will have and the safest to use.",
+      "points": [
+        "First-party data is what people share with you directly: sign-ups, purchases, preferences, answers to your questions.",
+        "India's Digital Personal Data Protection Act, 2023, Section 6(1), requires consent to be 'free, specific, informed, unconditional and unambiguous with a clear affirmative action'.",
+        "Ask for the least data that does the job, say what each item is for, and make saying no as easy as saying yes."
+      ],
+      "example": "A course platform wants to recommend lessons. Instead of tracking visitors across other websites, it asks one question at sign-up, 'What do you want to learn first?', with an unticked box for lesson emails. The answer shapes the home screen, and the email list holds only people who chose to join.",
+      "mistake": "Pre-ticked boxes, or one checkbox that bundles unrelated purposes. Neither is a clear affirmative action for a specific purpose.",
+      "takeaways": [
+        "First-party data is earned, not collected in the background.",
+        "Consent is specific to a purpose and given by a clear action.",
+        "Less data, clearly explained, builds trust and better lists."
+      ],
+      "quiz": [
+        {
+          "q": "Which of these is first-party data?",
+          "options": ["Answers a customer gives in your sign-up form", "A list bought from a data broker", "Browsing history collected on other websites"],
+          "answer": 0,
+          "why": "First-party data is shared with you directly by the customer."
+        },
+        {
+          "q": "Is a pre-ticked consent box a clear affirmative action?",
+          "options": ["Yes", "No"],
+          "answer": 1,
+          "why": "A box that is already ticked records no action by the person."
+        }
+      ]
+    }
+  ]
+}
