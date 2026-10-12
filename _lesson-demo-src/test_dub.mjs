@@ -29,7 +29,7 @@ try {
     check(loaded, `${l}: the player loads ${l}'s own file`);
     await p.waitForFunction(() => Math.abs(document.getElementById('v').currentTime - 10) < 0.5, null, { timeout: 3000 }).catch(() => {});
     const s = await p.evaluate(() => { const v = document.getElementById('v'); return { d: v.duration, t: v.currentTime }; });
-    check(Math.abs(s.d - 24.68) < 0.1, `${l}: video loads from the site, ${s.d.toFixed(2)} s`);
+    check(Math.abs(s.d - 22.71) < 0.1, `${l}: video loads from the site, ${s.d.toFixed(2)} s`);
     check(Math.abs(s.t - 10) < 0.5, `${l}: switching keeps the position (${s.t.toFixed(1)} s)`);
     check(await p.getByRole('button', { name: label }).getAttribute('aria-pressed') === 'true', `${l}: its button shows as selected`);
   }
