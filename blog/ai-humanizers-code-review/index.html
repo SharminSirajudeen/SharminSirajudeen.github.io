@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers · Sharmin Sirajudeen</title>
+<meta name="description" content="I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.">
+<link rel="canonical" href="https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F4C5C'/><text x='16' y='22' font-size='18' font-family='monospace' fill='white' text-anchor='middle'>S</text></svg>">
+<link rel="preload" href="/fonts/hanken-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/bricolage-var.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="author" content="Sharmin Sirajudeen">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Sharmin Sirajudeen">
+<meta property="og:title" content="I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers">
+<meta property="og:description" content="I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.">
+<meta property="og:url" content="https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/">
+<meta property="og:image" content="https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers">
+<meta property="article:published_time" content="2026-11-24">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers">
+<meta name="twitter:description" content="I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.">
+<meta name="twitter:image" content="https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/og.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I read the code behind GitHub's most-starred AI humanizers and watermark removers", "description": "I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.", "datePublished": "2026-11-24", "dateModified": "2026-11-24", "image": "https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/og.png", "mainEntityOfPage": "https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/", "wordCount": 2387, "author": {"@type": "Person", "name": "Sharmin Sirajudeen", "url": "https://sharminsirajudeen.github.io/", "sameAs": ["https://github.com/SharminSirajudeen"]}}</script>
+<style>
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/bricolage-var.woff2) format('woff2')}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/hanken-400.woff2) format('woff2')}
+@font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/hanken-600.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/jetbrains-400.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/jetbrains-600.woff2) format('woff2')}
+:root{--paper:#F4F7F8;--ink:#0B1A1F;--body:#33474e;--muted:#6a7f86;--faint:#9aabb1;--line:#dce5e8;--teal:#0F4C5C;
+--teal-bright:#11808F;--teal-wash:#e9f2f3;--screen:#08171C;--display:"Bricolage Grotesque",-apple-system,Segoe UI,sans-serif;
+--sans:"Hanken Grotesk",-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;--mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--teal-bright)}
+nav{position:sticky;top:0;z-index:50;background:rgba(244,247,248,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-family:var(--mono);font-weight:600;color:var(--ink);font-size:15px;display:flex;align-items:center;gap:9px;text-decoration:none}
+.brand .sq{width:22px;height:22px;border-radius:6px;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:13px}
+.nav-links{display:flex;gap:24px;font-size:14px}
+.nav-links a{color:var(--muted);font-weight:600;text-decoration:none}
+.nav-links a:hover{color:var(--ink)}
+.post-head,.prose,.list{max-width:720px;margin:0 auto;padding:0 24px}
+.post-head{padding-top:56px;padding-bottom:8px}
+.kicker{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.03em;margin:0 0 14px}
+h1{font-family:var(--display);font-weight:700;color:var(--ink);font-size:clamp(2rem,5vw,2.9rem);line-height:1.08;letter-spacing:-.02em;margin:0}
+.dek{font-size:1.15rem;color:var(--body);margin:18px 0 0}
+.prose{padding-bottom:64px}
+.prose h2{font-family:var(--display);font-weight:700;color:var(--ink);font-size:1.55rem;line-height:1.2;letter-spacing:-.01em;margin:2.1em 0 .55em}
+.prose a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+.prose code{font-family:var(--mono);font-size:.84em;background:var(--teal-wash);color:var(--teal);border-radius:5px;padding:.1em .35em}
+.prose pre{background:var(--screen);color:#d7e6ea;border-radius:10px;padding:16px 18px;overflow-x:auto;font-size:13.5px;line-height:1.6}
+.prose pre code{background:none;color:inherit;padding:0;font-size:inherit}
+.prose blockquote{margin:1.1em 0;padding:12px 18px;border-left:3px solid var(--teal-bright);background:#fff;border-radius:0 8px 8px 0;color:var(--ink)}
+.prose blockquote p{margin:0}
+.table-wrap{overflow-x:auto;margin:1.4em 0;border:1px solid var(--line);border-radius:10px;background:#fff}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.45}
+th{font-family:var(--mono);font-size:12px;color:var(--muted);font-weight:600;background:var(--teal-wash);text-align:left}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.fig{margin:1.4em 0}
+.fig svg{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.fig text{font-family:var(--sans);text-anchor:middle;font-size:13px;fill:var(--ink)}
+.fig .t-title{text-anchor:start;font-size:15px;font-weight:600}
+.fig .t-name{font-weight:600}
+.fig .t-body{font-size:11.5px;fill:var(--muted)}
+.fig .t-ink{font-size:11.5px}
+.fig .box{fill:#fff;stroke:#9aabb1;stroke-width:1.25}
+.fig .accent{fill:var(--teal-wash);stroke:var(--teal-bright);stroke-width:2}
+.fig .band{fill:var(--paper);stroke:var(--line);stroke-width:1.25}
+figcaption{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+.list{padding-top:56px;padding-bottom:64px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px 24px;text-decoration:none;margin-top:28px}
+.card h2{font-family:var(--display);font-weight:700;color:var(--ink);font-size:1.35rem;line-height:1.2;margin:6px 0 8px}
+.card p{color:var(--body);margin:0}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-family:var(--mono);font-size:12.5px}
+.foot-in{max-width:1080px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-in a{color:var(--muted)}
+</style>
+</head>
+<body>
+<nav><div class="nav-in"><a class="brand" href="/"><span class="sq">S</span>Sharmin&nbsp;Sirajudeen</a>
+<div class="nav-links"><a href="/">Home</a><a href="/blog/">Blog</a><a href="/cv-designed.html">CV</a></div></div></nav>
+<main>
+<header class="post-head"><p class="kicker">24 November 2026 &middot; 10 min read</p><h1>I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers</h1><p class="dek">I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.</p></header>
+<article class="prose">
+<h2 id="why-i-read-the-code-first">Why I read the code first</h2>
+<p>I wanted a humanizer for AI-assisted drafts and wanted to know what AI watermark removers do, so I took the most-starred GitHub repos in both categories and read them before installing anything. The star counts and the code told different stories. The best humanizer was good, and a merged version matched it on my test at less than half the input tokens.</p>
+<p>What I did on 24 November 2026:</p>
+<ol>
+<li>Searched GitHub for humanizer and watermark remover repos and sorted the results by stars.</li>
+<li>Cloned the top ones and read each: the license, the size, the tests, every host the code contacts, and whether the code does what the README says.</li>
+<li>Merged the three humanizers that complemented each other, then tested the merge against the most-starred original on 20 AI-written samples, scored by two separate checkers.</li>
+</ol>
+<p>I also ran the top watermark remover on files I built and on real images from ChatGPT and Gemini.</p>
+<h2 id="the-repos-by-the-numbers">The repos, by the numbers</h2>
+<p>Stars ranged from 3,445 to 72,713, and the count said little about what each repo contained.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Repository</th>
+<th style="text-align: right;">Stars</th>
+<th>Created</th>
+<th>License</th>
+<th>What is inside</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/blader/humanizer">blader/humanizer</a></td>
+<td style="text-align: right;">72,713</td>
+<td>Jan 2026</td>
+<td>MIT</td>
+<td>One 504-line instruction file (33.6 KB) with 26 patterns ranked by strength</td>
+</tr>
+<tr>
+<td><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a></td>
+<td style="text-align: right;">28,247</td>
+<td>Aug 2026</td>
+<td>MIT</td>
+<td>A Python service and agent skill that strips provenance metadata and hidden Unicode: 26,000 lines of Python, 76 test files</td>
+</tr>
+<tr>
+<td><a href="https://github.com/petergyang/no-ai-slop">petergyang/no-ai-slop</a></td>
+<td style="text-align: right;">13,745</td>
+<td>Jul 2026</td>
+<td>MIT</td>
+<td>A 97-line skill and a 43-line self-check</td>
+</tr>
+<tr>
+<td>A hosted humanizer</td>
+<td style="text-align: right;">12,583</td>
+<td>Jul 2026</td>
+<td>All rights reserved</td>
+<td>Documentation and a link to a hosted app; no engine code</td>
+</tr>
+<tr>
+<td><a href="https://github.com/conorbronsdon/avoid-ai-writing">conorbronsdon/avoid-ai-writing</a></td>
+<td style="text-align: right;">6,065</td>
+<td>Mar 2026</td>
+<td>MIT</td>
+<td>A skill, a 3,762-line JavaScript detector, tests and evals</td>
+</tr>
+<tr>
+<td><a href="https://github.com/lynote-ai/humanize-text">lynote-ai/humanize-text</a></td>
+<td style="text-align: right;">3,445</td>
+<td>May 2026</td>
+<td>MIT</td>
+<td>A Python pipeline: LLM rewrite plus a translation chain; needs API keys</td>
+</tr>
+</tbody>
+</table></div>
+<p>Star counts are from GitHub search on 24 November 2026; lines and sizes are from my clones that day. <a href="https://github.com/op7418/Humanizer-zh">op7418/Humanizer-zh</a> (23,635 stars) describes itself as a Chinese edition of blader/humanizer, so I did not review it separately.</p>
+<h2 id="a-12500-star-humanizer-with-no-code-to-read">A 12,500-star humanizer with no code to read</h2>
+<p>The third result for "humanizer" had 12,583 stars and no engine code. Its files are a README, a user manual, API documentation, badges and the pages of its documentation site. Its license reserves all rights, and the README links to a hosted app.</p>
+<p>That is a normal way to run a product, and the README is open about it. It means the stars point at a landing page. I was looking for something I could read and run on my own machine, so there was nothing here for me to evaluate.</p>
+<h2 id="the-top-watermark-remover-cleans-metadata">The top watermark remover cleans metadata</h2>
+<p>guillaumemeyer/watermarks-remover, at 28,247 stars, removes provenance data. It strips C2PA manifests, EXIF and XMP fields, document properties and invisible Unicode characters, in formats from PNG and MP4 to DOCX and PPTX. Its README lists what it covers, and visible marks drawn into the pixels are not on that list.</p>
+<p>From the name, I had expected visible watermarks. The mismatch was in my assumption, not in its documentation.</p>
+<p>I ran it on files I built and on two real AI images, then checked the bytes myself:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Test input</th>
+<th>Removed</th>
+<th>Left unchanged</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text with 15 hidden characters: zero-width spaces and joiners, tag characters, a right-to-left override</td>
+<td>All 15</td>
+<td>The visible words</td>
+</tr>
+<tr>
+<td>PNG with text metadata, an XMP block labelling it AI-generated, and a C2PA-style block</td>
+<td>All three blocks</td>
+<td>Every pixel</td>
+</tr>
+<tr>
+<td>JPEG with 2 EXIF tags</td>
+<td>Both tags, with no recompression</td>
+<td>Every pixel</td>
+</tr>
+<tr>
+<td>Real ChatGPT image (1448 × 1086) with a 24,922-byte C2PA manifest</td>
+<td>The manifest; the file went from 2,239,927 to 2,214,993 bytes</td>
+<td>Every pixel</td>
+</tr>
+<tr>
+<td>Real Gemini image with the visible sparkle</td>
+<td>Nothing, as the file had no metadata</td>
+<td>Every pixel, so the sparkle stays</td>
+</tr>
+</tbody>
+</table></div>
+<p>Two details matter if you rely on it. After cleaning the ChatGPT image, its own report still said C2PA was present. The flag came from the four bytes <code>cai:</code> occurring by chance inside the compressed pixel data, and its inspector marks that finding as a likely false positive.</p>
+<p>The ChatGPT manifest also records a <code>c2pa.watermarked</code> action, the C2PA standard's marker for an invisible watermark added to the content. A metadata tool leaves pixels alone by design, so that watermark stays.</p>
+<p>It is also one of the most carefully built repos I opened: 26,000 lines of Python, 76 test files with 22,000 lines of tests, a security policy, and a README that says what the tool cannot do. One folder made me look twice: <code>stealer/</code>. It implements watermark stealing, a published research method from ETH Zurich. It is not a credential stealer.</p>
+<h2 id="the-72000-star-humanizer-is-good-and-it-is-one-prompt">The 72,000-star humanizer is good, and it is one prompt</h2>
+<p>Siqi Chen's blader/humanizer is the strongest of the group. It is a single instruction file for AI agents, built on Wikipedia's "Signs of AI writing" guide, and it does three things well:</p>
+<ul>
+<li>It ranks 26 patterns by how reliably each one signals AI text, so a model acts on strong tells at once and needs several weak ones before it edits.</li>
+<li>It tells the model to treat pasted text as material to edit, never as instructions, which blocks a draft that says "ignore your rules".</li>
+<li>It makes the model check that no fact, name, number or quote was lost before it answers.</li>
+</ul>
+<p>Its README is honest about scope: it edits for human readers, and AI detectors still flag most of its output.</p>
+<p>The trade-offs come from the format. The whole file loads on every run, and in my test that was 12,300 input tokens per run, nearly all of it instructions. Nothing checks the output mechanically, so every tell has to be caught by the model reading carefully. It also has no mode that audits a draft without rewriting it.</p>
+<h2 id="two-smaller-repos-had-what-it-lacked">Two smaller repos had what it lacked</h2>
+<p>Peter Yang's no-ai-slop (13,745 stars) is 97 lines built around keeping the writer's voice. Its rule is the minimum effective edit: fix the tells, leave strong human sentences alone. It names tells the bigger file does not list, such as colon reveals ("The best part: it learns.") and synonym cycling, and it adds a portability test: a sentence that could move unchanged to another company says nothing about this one. It also has a detect mode that audits a draft without rewriting it, and a 43-line checklist the model runs on its own output.</p>
+<p>Conor Bronsdon's avoid-ai-writing (6,065 stars) has the only deterministic detector of the three. It is a JavaScript engine that scores text from 0 to 100 and can gate a CI pipeline, plus a verifier that compares a rewrite against its original. The engine lives in one 3,762-line file, copied into each sub-skill's folder. I used it unchanged as the independent scorer in my test.</p>
+<h2 id="a-different-approach-translation-chains">A different approach: translation chains</h2>
+<p>lynote-ai/humanize-text (3,445 stars) is a real application with readable code, and it takes another route. An LLM rewrites the draft into Chinese and then Japanese, and machine translation carries it through Finnish back to English, with every step traced. It runs with your own keys for an LLM and a translation service.</p>
+<p>Round-trip translation changes a lot of wording, which suits some goals. I wanted the smallest edit that keeps the writer's voice, so it did not fit my use, and I left it out of the merge.</p>
+<h2 id="merging-them-into-humanize-prose">Merging them into humanize-prose</h2>
+<p>All three humanizers I kept are MIT-licensed, so I merged them into <a href="https://github.com/SharminSirajudeen/humanize-prose">humanize-prose</a>, with each author's copyright notice in its NOTICE.md.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Taken from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pattern catalog ranked by strength, the fact check, the rule against following instructions inside the text, file and embedded modes</td>
+<td>blader/humanizer</td>
+</tr>
+<tr>
+<td>Minimum-effective-edit and voice rules, detect mode, the portability test, colon reveals, synonym cycling, the self-check</td>
+<td>no-ai-slop</td>
+</tr>
+<tr>
+<td>A deterministic scan, and a check that a rewrite kept the original's facts</td>
+<td>avoid-ai-writing's idea, rewritten as one Python file</td>
+</tr>
+</tbody>
+</table></div>
+<p>The instruction file is 12.7 KB against blader's 33.6 KB. The script, <code>check.py</code>, is 155 lines with no dependencies and two commands:</p>
+<pre><code class="language-bash">python3 scripts/check.py scan draft.md            # mechanical tells; exit 1 on a strong one
+python3 scripts/check.py verify draft.md new.md   # numbers, names, links and code a rewrite dropped
+</code></pre>
+<p><code>scan</code> skips code, links, blockquotes and quoted text, so a document that discusses a tell is not punished for quoting it. The repo has 15 tests, including one that runs the scanner over its own README and instruction file.</p>
+<h2 id="how-i-tested-it">How I tested it</h2>
+<figure class="fig">
+<svg viewBox="0 0 760 296" role="img" aria-labelledby="fig-title">
+<title id="fig-title">Both skills rewrote the same 20 samples; two checkers scored them</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#9aabb1"/></marker></defs>
+<text class="t-title" x="24" y="34">Both skills rewrote the same 20 samples; two checkers scored them</text>
+<g fill="none" stroke="#9aabb1" stroke-width="1.25">
+<path d="M160 140H198" marker-end="url(#arrow)"/><path d="M334 140H353V100H372" marker-end="url(#arrow)"/>
+<path d="M334 140H353V180H372" marker-end="url(#arrow)"/><path d="M522 100H541V122H560" marker-end="url(#arrow)"/>
+<path d="M522 180H541V158H560" marker-end="url(#arrow)"/></g>
+<rect class="box" x="24" y="112" width="136" height="56" rx="8"/><text class="t-name" x="92" y="136">20 prompts</text><text class="t-body" x="92" y="152">facts, no style</text>
+<rect class="box" x="198" y="112" width="136" height="56" rx="8"/><text class="t-name" x="266" y="136">20 samples</text><text class="t-body" x="266" y="152">by Sonnet 5.5</text>
+<rect class="box" x="372" y="72" width="150" height="56" rx="8"/><text class="t-name" x="447" y="96">blader/humanizer</text><text class="t-body" x="447" y="112">one rewrite each</text>
+<rect class="box" x="372" y="152" width="150" height="56" rx="8"/><text class="t-name" x="447" y="176">humanize-prose</text><text class="t-body" x="447" y="192">one rewrite each</text>
+<rect class="box accent" x="560" y="104" width="176" height="72" rx="8"/><text class="t-name" x="648" y="128">Scored twice</text><text class="t-ink" x="648" y="144">check.py</text><text class="t-ink" x="648" y="160">avoid-ai-writing</text>
+<rect class="band" x="24" y="232" width="712" height="40" rx="8"/><text class="t-ink" x="380" y="256">Every call: same model and wrapper, the skill as the whole system prompt, no tools or user settings</text>
+</svg>
+<figcaption>Test flow: 20 samples, 2 skills, 2 checkers, 60 model calls.</figcaption>
+</figure>
+<p>The prompts named a topic, the facts a rewrite must keep and a length, and asked for no style, so the tells came from the model's own habits. Each call ran from an empty folder with the skill file as the entire system prompt. Tools, skills, MCP servers, saved sessions and user settings were off.</p>
+<p>Both skills were asked for embedded mode, which returns only the final text. A rewrite took about 5 seconds either way: 4.7 s on average for blader/humanizer and 5.1 s for humanize-prose. The harness is two short Python scripts, <code>run.py</code> and <code>score.py</code>, in the repo's <code>evals/</code> folder.</p>
+<h2 id="results-the-same-cleanup-at-56-fewer-input-tokens">Results: the same cleanup at 56% fewer input tokens</h2>
+<p>humanize-prose matched blader/humanizer on removing tells and keeping facts, and used 56% fewer input tokens per run. blader/humanizer's rewrites had more varied sentence rhythm.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Measure, 20 samples</th>
+<th style="text-align: right;">Original</th>
+<th style="text-align: right;">blader/humanizer</th>
+<th style="text-align: right;">humanize-prose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strong tells (check.py)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Weak tells (check.py)</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>avoid-ai-writing findings</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>Facts dropped (items)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr>
+<td>Samples with a fact dropped</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr>
+<td>Words per text, mean</td>
+<td style="text-align: right;">166</td>
+<td style="text-align: right;">141</td>
+<td style="text-align: right;">137</td>
+</tr>
+<tr>
+<td>Input tokens per run, mean</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">12,300</td>
+<td style="text-align: right;">5,389</td>
+</tr>
+<tr>
+<td>Output tokens per run, mean</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">553</td>
+<td style="text-align: right;">639</td>
+</tr>
+</tbody>
+</table></div>
+<p>All five avoid-ai-writing findings on humanize-prose are statistical: sentence lengths or punctuation too even across about 140 words. None is a word or a phrase. Output tokens run well above the length of the text, so they include the model's reasoning and vary between runs; input tokens are fixed by the size of the instructions.</p>
+<p>The nurse manager's LinkedIn post (sample 17) shows how close the two ran. The original:</p>
+<blockquote>
+<p>Here's the truth: nights strip away everything unnecessary. There are fewer people, fewer resources, and no one to escalate to at 3 a.m. except the person standing next to you. So you learn quickly that teamwork isn't a value on a poster. It's a survival skill.</p>
+</blockquote>
+<p>blader/humanizer:</p>
+<blockquote>
+<p>Nights have fewer people and fewer resources, and at 3 a.m. there is no one to escalate to except the person standing next to you. You learn fast that teamwork isn't a value on a poster. You need it to get through the shift.</p>
+</blockquote>
+<p>humanize-prose:</p>
+<blockquote>
+<p>Nights have fewer people, fewer resources, and no one to escalate to at 3 a.m. except the person standing next to you. You learn fast that teamwork isn't a value on a poster. You need it to get through the shift.</p>
+</blockquote>
+<p>Both cut the "Here's the truth" opener and swapped the "survival skill" kicker for a plain sentence. In the support reply (sample 12), both dropped "We're happy to help with anything else you need" and ended on the refund timeline. Every sample and both rewrites are in <a href="https://github.com/SharminSirajudeen/humanize-prose/blob/main/evals/outputs.md">evals/outputs.md</a>.</p>
+<h2 id="my-own-checker-had-two-bugs-and-both-hurt-my-skill">My own checker had two bugs, and both hurt my skill</h2>
+<p>The first scores had humanize-prose at 3 strong tells and blader/humanizer at none. All three were en dashes in ranges: "CAD 140,000 – 165,000" in the job post and "April 3 – August 30" in the museum text. My instructions tell the model to keep dashes in number ranges, and it did; my scanner flagged every spaced en dash anyway. blader/humanizer had turned the same salary into "140,000 to 165,000", which is also fine.</p>
+<p>The second bug was in <code>verify</code>. It counted "Offline Mode" becoming "offline mode" as a dropped name, which inflated the facts-dropped count for both skills: 18 against 14 before the fix, 9 against 7 after.</p>
+<p>I fixed both, added regression tests, and re-scored the same saved outputs without calling the model again. The fixes and the raw outputs are in the repo, so anyone can check them.</p>
+<h2 id="what-this-test-can-and-cannot-tell-you">What this test can and cannot tell you</h2>
+<p>The samples were cleaner than I expected. Twenty texts from Claude Sonnet 5.5, averaging 166 words, carried 3 strong tells between them: one em dash, one "happy to help" and one "isn't X. It's Y." So this run measured cost and damage more than cleanup.</p>
+<ul>
+<li>One rewrite per sample per skill. A second run would move some numbers.</li>
+<li>The model ran without tools, so humanize-prose's script could not run during the rewrite. This tested the instructions alone.</li>
+<li>I wrote <code>check.py</code> alongside humanize-prose. That is why every output was also scored by avoid-ai-writing's detector, which I did not write.</li>
+<li>Neither skill tries to get past AI detectors, and this test did not measure that.</li>
+</ul>
+<p>The next test needs messier input, such as drafts from an older model, where a humanizer has more to fix.</p>
+<h2 id="what-i-check-before-installing-a-repo-now">What I check before installing a repo now</h2>
+<p>Stars tell me where to start reading. These six checks took minutes per repo and changed what I installed:</p>
+<ol>
+<li>The license. "All rights reserved" means I can read the README, not reuse the code.</li>
+<li>That the code exists and does what the README says.</li>
+<li>The tests, and whether they pass.</li>
+<li>Every host the code contacts. A search for URLs across the source takes a minute.</li>
+<li>Names that look alarming. The <code>stealer/</code> folder was a research method, and reading it took five minutes.</li>
+<li>A run on my own input, scored by something I did not write.</li>
+</ol>
+<h2 id="sources-and-data">Sources and data</h2>
+<ul>
+<li><a href="https://github.com/SharminSirajudeen/humanize-prose">humanize-prose</a>: the skill, <code>check.py</code>, and the test harness with every raw output and result in <a href="https://github.com/SharminSirajudeen/humanize-prose/tree/main/evals">evals/</a></li>
+<li><a href="https://github.com/blader/humanizer">blader/humanizer</a>, version 4.0.0, by Siqi Chen</li>
+<li><a href="https://github.com/petergyang/no-ai-slop">petergyang/no-ai-slop</a>, by Peter Yang</li>
+<li><a href="https://github.com/conorbronsdon/avoid-ai-writing">conorbronsdon/avoid-ai-writing</a>, by Conor Bronsdon</li>
+<li><a href="https://github.com/lynote-ai/humanize-text">lynote-ai/humanize-text</a></li>
+<li><a href="https://github.com/guillaumemeyer/watermarks-remover">guillaumemeyer/watermarks-remover</a>, and its <a href="https://github.com/guillaumemeyer/watermarks-remover/blob/main/stealer/README.md">stealer/ README</a> on the research behind the folder</li>
+<li><a href="https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing">Wikipedia: Signs of AI writing</a>, the guide blader/humanizer is built on</li>
+</ul>
+</article>
+</main>
+<footer><div class="foot-in"><span>&copy; 2026 Sharmin Sirajudeen</span><a href="https://github.com/SharminSirajudeen">github.com/SharminSirajudeen</a></div></footer>
+</body>
+</html>
