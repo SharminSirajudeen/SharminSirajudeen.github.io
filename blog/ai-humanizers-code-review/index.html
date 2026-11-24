@@ -24,7 +24,7 @@
 <meta name="twitter:title" content="I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers">
 <meta name="twitter:description" content="I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.">
 <meta name="twitter:image" content="https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/og.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I read the code behind GitHub's most-starred AI humanizers and watermark removers", "description": "I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.", "datePublished": "2026-11-24", "dateModified": "2026-11-24", "image": "https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/og.png", "mainEntityOfPage": "https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/", "wordCount": 2530, "author": {"@type": "Person", "name": "Sharmin Sirajudeen", "url": "https://sharminsirajudeen.github.io/", "sameAs": ["https://github.com/SharminSirajudeen"]}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "I read the code behind GitHub's most-starred AI humanizers and watermark removers", "description": "I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.", "datePublished": "2026-11-24", "dateModified": "2026-11-24", "image": "https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/og.png", "mainEntityOfPage": "https://sharminsirajudeen.github.io/blog/ai-humanizers-code-review/", "wordCount": 2657, "author": {"@type": "Person", "name": "Sharmin Sirajudeen", "url": "https://sharminsirajudeen.github.io/", "sameAs": ["https://github.com/SharminSirajudeen"]}}</script>
 <style>
 @font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:500 800;font-display:swap;src:url(/fonts/bricolage-var.woff2) format('woff2')}
 @font-face{font-family:'Hanken Grotesk';font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/hanken-400.woff2) format('woff2')}
@@ -86,7 +86,7 @@ footer{border-top:1px solid var(--line);padding:32px 0;color:var(--muted);font-f
 <nav><div class="nav-in"><a class="brand" href="/"><span class="sq">S</span>Sharmin&nbsp;Sirajudeen</a>
 <div class="nav-links"><a href="/">Home</a><a href="/blog/">Blog</a><a href="/cv-designed.html">CV</a></div></div></nav>
 <main>
-<header class="post-head"><p class="kicker">24 November 2026 &middot; 11 min read</p><h1>I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers</h1><p class="dek">I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.</p></header>
+<header class="post-head"><p class="kicker">24 November 2026 &middot; 12 min read</p><h1>I read the code behind GitHub&#x27;s most-starred AI humanizers and watermark removers</h1><p class="dek">I read six of the most-starred repos, merged the three humanizers that complemented each other, and tested the result against the 72,000-star original on 20 samples.</p></header>
 <article class="prose">
 <h2 id="why-i-read-the-code-first">Why I read the code first</h2>
 <p>I wanted a humanizer for AI-assisted drafts and wanted to know what AI watermark removers do, so I took the most-starred GitHub repos in both categories and read them before installing anything. The star counts and the code told different stories. The best humanizer was good, and a merged version matched it on my test at less than half the input tokens.</p>
@@ -267,7 +267,7 @@ python3 scripts/check.py verify draft.md new.md   # numbers, names, links and co
 <p>The prompts named a topic, the facts a rewrite must keep and a length, and asked for no style, so the tells came from the model's own habits. Each call ran from an empty folder with the skill file as the entire system prompt. Tools, skills, MCP servers, saved sessions and user settings were off.</p>
 <p>Both skills were asked for embedded mode, which returns only the final text. A rewrite took about 5 seconds either way: 4.7 s on average for blader/humanizer and 5.1 s for humanize-prose. The harness is two short Python scripts, <code>run.py</code> and <code>score.py</code>, in the repo's <code>evals/</code> folder.</p>
 <h2 id="results-the-same-cleanup-at-55-fewer-input-tokens">Results: the same cleanup at 55% fewer input tokens</h2>
-<p>humanize-prose matched blader/humanizer on removing tells and keeping facts, and used 55% fewer input tokens per run.</p>
+<p>humanize-prose matched blader/humanizer on removing tells and keeping facts, and used 55% fewer input tokens per run. The same held on 20 new prompts written after the skill was final.</p>
 <p>My first version lost on rhythm. The avoid-ai-writing detector flagged even sentence lengths or punctuation in 4 of its 20 rewrites and in none of blader's. I made flat rhythm a named tell, added a self-check that any text of five or more sentences has at least one under 10 words, and reran the humanize-prose side. Its sentence lengths now vary a little more than blader's on average, a spread of 0.52 against 0.50, and the flagged rewrites dropped from 4 to 3. blader's still have none.</p>
 <div class="table-wrap"><table>
 <thead>
@@ -336,6 +336,49 @@ python3 scripts/check.py verify draft.md new.md   # numbers, names, links and co
 </tbody>
 </table></div>
 <p>All three avoid-ai-writing findings on humanize-prose are statistical: sentence lengths or punctuation too even across about 140 words. None is a word or a phrase. Spread is the standard deviation of sentence length divided by the mean, with sentences split the way avoid-ai-writing splits them. Output tokens run well above the length of the text, so they include the model's reasoning and vary between runs; input tokens are fixed by the size of the instructions.</p>
+<p>Because I tuned the rhythm rule on those 20 samples, I wrote 20 new prompts and committed them to the repo before running anything. On that held-out set, both skills removed all 4 strong tells, and each dropped 12 facts, in the same 5 samples. humanize-prose varied its sentence lengths more, with a spread of 0.56 against 0.53, and the detector flagged uniform rhythm in 1 rewrite from each skill.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Held-out, 20 new prompts</th>
+<th style="text-align: right;">Original</th>
+<th style="text-align: right;">blader/humanizer</th>
+<th style="text-align: right;">humanize-prose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Strong tells (check.py)</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>avoid-ai-writing findings</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr>
+<td>Sentence-length spread, mean</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">0.53</td>
+<td style="text-align: right;">0.56</td>
+</tr>
+<tr>
+<td>Facts dropped (items)</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">12</td>
+</tr>
+<tr>
+<td>Input tokens per run, mean</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">12,309</td>
+<td style="text-align: right;">5,605</td>
+</tr>
+</tbody>
+</table></div>
 <p>The nurse manager's LinkedIn post (sample 17) shows how close the two ran. The original:</p>
 <blockquote>
 <p>Here's the truth: nights strip away everything unnecessary. There are fewer people, fewer resources, and no one to escalate to at 3 a.m. except the person standing next to you. So you learn quickly that teamwork isn't a value on a poster. It's a survival skill.</p>
@@ -357,7 +400,7 @@ python3 scripts/check.py verify draft.md new.md   # numbers, names, links and co
 <p>The samples were cleaner than I expected. Twenty texts from Claude Sonnet 5.5, averaging 166 words, carried 3 strong tells between them: one em dash, one "happy to help" and one "isn't X. It's Y." So this run measured cost and damage more than cleanup.</p>
 <ul>
 <li>One rewrite per sample per skill. A second run would move some numbers.</li>
-<li>I tuned the rhythm rule over four reruns of humanize-prose on these same 20 samples, so its rhythm figures are a development result, not a held-out test.</li>
+<li>I tuned the rhythm rule over four reruns on the first 20 samples. The held-out set checks it, but that is one run of 20 more.</li>
 <li>The model ran without tools, so humanize-prose's script could not run during the rewrite. This tested the instructions alone.</li>
 <li>I wrote <code>check.py</code> alongside humanize-prose. That is why every output was also scored by avoid-ai-writing's detector, which I did not write.</li>
 <li>Neither skill tries to get past AI detectors, and this test did not measure that.</li>
