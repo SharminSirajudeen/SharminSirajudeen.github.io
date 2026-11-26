@@ -235,7 +235,7 @@
       <a href="#projects">Projects</a>
       <a class="minor" href="#hackathons">Hackathons</a>
       <a href="blog/">Blog</a>
-      <a href="cv-designed.html?v=20261126i" data-cv-open>CV</a>
+      <a href="cv-designed.html?v=20261126j" data-cv-open>CV</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -269,7 +269,7 @@
       </div>
 
       <div class="cta-row">
-        <a class="btn btn-primary" href="cv-designed.html?v=20261126i" data-cv-open>View CV</a>
+        <a class="btn btn-primary" href="cv-designed.html?v=20261126j" data-cv-open>View CV</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/sharmin-sirajudeen/">LinkedIn</a>
         <a class="btn btn-ghost" href="https://github.com/SharminSirajudeen">GitHub</a>
         <a class="btn btn-ghost" href="https://drengr.dev">Drengr&nbsp;↗</a>
@@ -316,8 +316,8 @@
         <div class="tl-role">Senior Android Engineer, <span class="co">Talabat</span></div>
         <ul class="tl-list">
           <li><b>Grew with the company.</b> Joined a tech team of about 25 and stayed five and a half years as it grew into one of MENA's largest food-delivery platforms, already part of Delivery Hero.</li>
-          <li><b>Owned the core app.</b> Owned nearly the whole customer Android app in the early years, then every area except home and order tracking as the team grew around it.</li>
-          <li><b>Led the Carriage rewrite.</b> After Talabat acquired Carriage, I was brought in, outside my own squad, to supervise Netguru, the external team rewriting its Android app (Project Sea). The first day became walking them through the code, and from the second day the Android rewrite was mine to deliver. I received an appreciation certificate for it.</li>
+          <li><b>Owned the core app.</b> Owned nearly the whole customer Android app in the early years, then every area except home, search and discovery, and order tracking as dedicated squads formed around them.</li>
+          <li><b>Led the Carriage rewrite.</b> After Talabat acquired Carriage, I was brought in, outside my own squad, to supervise Netguru, the external team rewriting its Android app (Project Sea), a rewrite that spanned screens owned by several squads, including home and search and discovery. The first day became walking them through the code, and from the second day the Android rewrite was mine to deliver. I received an appreciation certificate for it.</li>
           <li><b>Saved a launch.</b> An external team spent nine months on the menu screen and it still was not shippable. Working in a codebase that was new to me, I found the cause, a RecyclerView inside a NestedScrollView inside a CoordinatorLayout, which threw away view recycling, fixed its performance over the last days of December to meet a committed 1 January 2018 launch, and paid down the remaining complexity as tech debt in the weeks after.</li>
           <li><b>Decided by experiment.</b> Brought in-app analytics and A/B testing with Apptimize to the app, and helped lead the move to Kotlin and to Agile and Scrum.</li>
           <li><b>One team with the business.</b> Worked closely with design, payments, operations and marketing on everything that shipped.</li>
@@ -490,7 +490,7 @@
       <a href="https://drengr.dev">drengr.dev</a>
       <a href="https://github.com/SharminSirajudeen">github.com/SharminSirajudeen</a>
       <a href="https://www.linkedin.com/in/sharmin-sirajudeen/">linkedin.com/in/sharmin-sirajudeen</a>
-      <a href="cv-designed.html?v=20261126i" data-cv-open>CV</a>
+      <a href="cv-designed.html?v=20261126j" data-cv-open>CV</a>
     </div>
   </div>
 </section>
@@ -514,7 +514,7 @@
       </span>
       <div class="cv-actions">
         <button class="cv-switch" id="cvSwitch" type="button">⇄ switch look</button>
-        <a class="cv-dl" id="cvDownload" href="Sharmin_Sirajudeen_CV_Designed.pdf?v=20261126i" download="Sharmin_Sirajudeen_CV.pdf">↓ <span class="lbl">Download PDF</span></a>
+        <a class="cv-dl" id="cvDownload" href="Sharmin_Sirajudeen_CV_Designed.pdf?v=20261126j" download="Sharmin_Sirajudeen_CV.pdf">↓ <span class="lbl">Download PDF</span></a>
         <button class="cv-x" data-cv-close type="button" aria-label="Close CV">×</button>
       </div>
     </div>
@@ -526,8 +526,8 @@
 (function(){
   var modal=document.getElementById('cvModal'),frame=document.getElementById('cvFrame'),
       dl=document.getElementById('cvDownload'),sw=document.getElementById('cvSwitch'),cur='designed',
-      docs={designed:'cv-designed.html?v=20261126i',minimal:'cv.html?v=20261126i'},
-      pdfs={designed:'Sharmin_Sirajudeen_CV_Designed.pdf?v=20261126i',minimal:'Sharmin_Sirajudeen_CV.pdf?v=20261126i'};
+      docs={designed:'cv-designed.html?v=20261126j',minimal:'cv.html?v=20261126j'},
+      pdfs={designed:'Sharmin_Sirajudeen_CV_Designed.pdf?v=20261126j',minimal:'Sharmin_Sirajudeen_CV.pdf?v=20261126j'};
   var panel=modal.querySelector('.cv-panel'),xBtn=modal.querySelector('.cv-x'),lastFocus=null;
   function load(v){cur=v;frame.src=docs[v];dl.setAttribute('href',pdfs[v]);}
   function show(){lastFocus=document.activeElement;
