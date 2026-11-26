@@ -147,6 +147,7 @@
   .shot{display:block;margin:-22px -22px 18px;border-bottom:1px solid var(--line);background:#f4f7f8;}
   .shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;}
   .shot.wide img{aspect-ratio:16/9;}
+  .demos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;} .demos figure{margin:0;} .demos video{display:block;width:100%;height:auto;border-radius:8px;background:#000;} .demos figcaption{font-size:12px;line-height:1.45;margin-top:6px;color:var(--body);}
   .shot.vid{background:#0b0b0b;display:flex;justify-content:center;} .shot.vid video{display:block;height:340px;width:auto;max-width:100%;}
   .verb .links{margin-top:12px;font-size:14px;} .verb .links a{color:var(--teal);font-weight:600;text-decoration:none;margin-right:18px;white-space:nowrap;} .verb .links a:hover{text-decoration:underline;}
   .verb .roles{margin-top:10px;font-size:13.5px;}
@@ -549,6 +550,11 @@
         <div class="vh"><a href="https://actuator.drengr.dev">Actuator</a></div>
         <p>A single Rust binary that lets AI agents see a phone screen and act on it: an MCP server that drives Android emulators, iOS simulators and cloud device farms from screenshots, not element trees. It finds a target by sight and taps by coordinate, so it reaches apps other tools can't, even ones drawn entirely on a canvas. On iOS, touch goes in through IndigoHID mach ports, which I reverse-engineered, and a headless XCUITest runner of my own replaces WebDriverAgent. Listed in the official MCP registry in March 2026, launched publicly in June 2026.</p>
         <p class="links"><a href="https://actuator.drengr.dev">See it work</a><a href="https://github.com/SharminSirajudeen/drengr-hands">Source on GitHub</a></p>
+        <div class="demos">
+          <figure><video src="img/products/actuator-demo-1.mp4" poster="img/products/actuator-demo-1.jpg" controls muted playsinline preload="none"></video><figcaption><b>Self-evolving agent.</b> YouTube's renderer hides the UI tree and returns 0 elements, so the agent pauses the video, gets 29 elements back, and carries on.</figcaption></figure>
+          <figure><video src="img/products/actuator-demo-2.mp4" poster="img/products/actuator-demo-2.jpg" controls muted playsinline preload="none"></video><figcaption><b>Human steering.</b> Told mid-task to play the latest Star Wars trailer, it clears the search, reads the upload dates and plays the newest.</figcaption></figure>
+          <figure><video src="img/products/actuator-demo-3.mp4" poster="img/products/actuator-demo-3.jpg" controls muted playsinline preload="none"></video><figcaption><b>Gestures.</b> It swipes through a fast-scrolling Shorts feed, one video after another.</figcaption></figure>
+        </div>
         <p class="roles"><b>Roles</b> Systems Engineer · Backend Engineer · Mobile Engineer · AI/ML Engineer · QA / Test Automation Engineer</p>
         <div class="tl-chips"><span class="chip">Rust</span><span class="chip">Model Context Protocol (MCP)</span><span class="chip">Android</span><span class="chip">ADB</span><span class="chip">iOS</span><span class="chip">Swift</span><span class="chip">XCUITest</span><span class="chip">Xcode</span><span class="chip">Reverse Engineering</span><span class="chip">Computer Vision</span><span class="chip">Vision-Language Models</span><span class="chip">LLM Integration</span><span class="chip">Ollama</span><span class="chip">Node.js</span><span class="chip">npm</span><span class="chip">macOS</span><span class="chip">Linux</span><span class="chip">Systems Programming</span><span class="chip">Test Automation</span><span class="chip">CLI Development</span></div>
       </article>
