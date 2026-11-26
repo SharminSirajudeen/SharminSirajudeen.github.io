@@ -109,7 +109,7 @@
   @page{size:A4;margin:0;}
   @media print{
     body{background:#fff;}
-    .page{box-shadow:none;margin:0;width:210mm;min-height:auto;padding:14mm 14mm 11mm;}
+    .page{box-shadow:none;margin:0;width:210mm;min-height:auto;padding:10mm 14mm 7mm;}
     a{color:var(--muted)!important;}
     section,.job{break-inside:avoid;}
   }
@@ -144,8 +144,8 @@
       (<b>1M+ installs</b>), owned the Android architecture and its technical direction for five years, set the
       engineering standards the mobile team built to, and was the <b>highest code contributor</b> to the customer app.
       Deep in native Android (Kotlin, Jetpack Compose, Coroutines) and Flutter, with systems work in Rust.
-      Founder of <span class="co">Drengr</span>, a software company: contract engineering and five products,
-      among them <b>Actuator</b>, which gives AI agents eyes and hands on real phones.
+      Now building my own products as founder of <span class="co">Drengr</span>, from <b>Actuator</b>, which gives
+      AI agents eyes and hands on real phones, to <b>Marram</b>, a private wellness companion for women.
     </p>
   </section>
 
@@ -159,17 +159,19 @@
       </div>
       <div class="where">Dubai, UAE · drengr.dev</div>
       <ul>
-        <li>A software company: contract engineering and five products. <b>Actuator</b> is live; Analytics, Marram and Dunelight are in development; Graspline is free, in testing.</li>
-        <li><b>Actuator</b> (live): gives AI agents eyes and hands on real phones and simulators. Observe→act
-            loop returning a situation report after every action (screen change, navigation, crash, stuck).
-            Works where there is <b>no accessibility tree</b> — Flutter, games, web-views, custom canvas — by
-            falling back to vision and normalized coordinates. Ships as an <b>MCP server</b>, so any AI host
-            drives the device and needs no key of its own; also runs headless in CI. Replaced WebDriverAgent
-            with a host-less XCUITest runner embedded in the binary — identical on a laptop and in CI.</li>
-        <li><b>Analytics</b> (in development): zero-code mobile &amp; web analytics SDK that captures real network
-            traffic and behaviour, redacts PII on-device, and discovers and names business events
-            automatically — no tracking plan required. One capture core across native, Flutter, React Native,
-            web-views and games; native Android / iOS / Flutter SDKs, <b>ClickHouse</b> analytics.</li>
+        <li>A software company. I design and build every product myself, and take on contract engineering.</li>
+        <li><b>Actuator</b> (live): gives AI agents eyes and hands on real phones and simulators. One Rust binary and
+            <b>MCP server</b> that reports what changed after every action and falls back to vision where there is
+            <b>no accessibility tree</b>, so it reaches Flutter, games and canvas apps. Its own XCUITest runner replaces
+            WebDriverAgent.</li>
+        <li><b>Analytics</b> (in development): product analytics with no tracking code. Screen changes, taps, network
+            calls and crashes become named business events, and personal data is redacted on the device before upload.</li>
+        <li><b>Graspline</b> (free, in testing): a student pastes a textbook question on engineering-graphics
+            projections and it draws the full construction step by step, checking every measurement. Teachers
+            generate practice sets with answer keys.</li>
+        <li><b>Marram</b> and <b>Dunelight</b> (in development): private wellness companions for women, through
+            perimenopause and menopause, and through the first year after birth. On-device, no account, no server.
+            Wellness, not diagnosis.</li>
       </ul>
     </div>
 
