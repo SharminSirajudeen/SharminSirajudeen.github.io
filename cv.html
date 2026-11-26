@@ -74,7 +74,7 @@
   .personal .sep{color:var(--line);margin:0 7px;}
 
   @page{size:A4;margin:0;}
-  @media print{body{background:#fff;}.page{box-shadow:none;margin:0;width:210mm;min-height:auto;padding:10mm 15mm 7mm;}a{color:var(--muted)!important;}section,.job{break-inside:avoid;}}
+  @media print{body{background:#fff;}.page{box-shadow:none;margin:0;width:210mm;min-height:auto;padding:8mm 14mm 6mm;}a{color:var(--muted)!important;}section,.job{break-inside:avoid;}}
 </style>
 </head>
 <body>
@@ -102,7 +102,6 @@
       after its acquisition. At <span class="co">Floward</span> (<b>1M+ installs</b>) I led a full revamp into a
       modular, clean architecture, brought in Flutter, owned payments and every release, and set the standards the
       Android team built to. Deep in Kotlin, Jetpack Compose, Coroutines and Flutter, with systems work in Rust.
-      Now building my own products as founder of <span class="co">Drengr</span>.
     </p>
   </section>
 
@@ -116,12 +115,19 @@
       </div>
       <div class="where">Dubai, UAE · drengr.dev</div>
       <ul>
-        <li>My own software company. <b>Actuator</b> (live) gives AI agents eyes and hands on real phones and
-            simulators: one Rust binary and <b>MCP server</b> that falls back to vision where there is no
-            accessibility tree, with its own XCUITest runner.</li>
-        <li>Also building <b>Analytics</b> (product analytics with no tracking code), <b>Graspline</b> (engineering
-            graphics drawn step by step) and <b>Marram</b> and <b>Dunelight</b> (private wellness companions for
-            women; wellness, not diagnosis).</li>
+        <li>A software company. I design and build every product myself.</li>
+        <li><b>Actuator</b> (live): gives AI agents eyes and hands on real phones and simulators. One Rust binary and
+            <b>MCP server</b> that reports what changed after every action and falls back to vision where there is
+            <b>no accessibility tree</b>, so it reaches Flutter, games and canvas apps. Its own XCUITest runner replaces
+            WebDriverAgent.</li>
+        <li><b>Analytics</b> (in development): product analytics with no tracking code. Screen changes, taps, network
+            calls and crashes become named business events, and personal data is redacted on the device before upload.</li>
+        <li><b>Graspline</b> (free, in testing): a student pastes a textbook question on engineering-graphics
+            projections and it draws the full construction step by step, checking every measurement. Teachers
+            generate practice sets with answer keys.</li>
+        <li><b>Marram</b> and <b>Dunelight</b> (in development): private wellness companions for women, through
+            perimenopause and menopause, and through the first year after birth. On-device, no account, no server.
+            Wellness, not diagnosis.</li>
       </ul>
     </div>
 
@@ -134,9 +140,7 @@
       <ul>
         <li><b>Led a complete revamp</b> of the Android app for a gifting platform across the Middle East and the UK
             (<b>customer app: 1M+ installs</b>), modularising it on a clean architecture, and set its technical
-            direction for five years.</li>
-        <li><b>Brought in Flutter</b> beside native Android so features ship from one codebase, and kept the two
-            working together.</li>
+            direction for five years. <b>Brought in Flutter</b> beside native Android so features ship from one codebase.</li>
         <li><b>Owned payments</b> with KNET, Checkout.com, Adyen and Google Pay on coroutine-based modules. Carried the
             latest provider integration through a complex, multi-team rollout and built the reference implementation
             the Flutter team adopted.</li>
@@ -200,16 +204,12 @@
         <div class="edu-d">B.Tech, Computer Engineering</div>
         <div class="edu-m">SHM Engineering College - University of Kerala, India · 2011</div>
       </div>
+          <div class="edu">
+        <div class="edu-d">Personal</div>
+        <div class="edu-m"><b>Nationality:</b> Indian · <b>Based in:</b> Dubai, UAE · <b>Languages:</b> English (fluent) · <b>Date of birth:</b> 11 Nov 1989</div>
+      </div>
     </section>
   </div>
-
-  <section style="margin-top:12px;">
-    <h2>Personal</h2>
-    <p class="personal">
-      <b>Nationality:</b> Indian<span class="sep">·</span><b>Based in:</b> Dubai, UAE<span class="sep">·</span>
-      <b>Languages:</b> English (fluent)<span class="sep">·</span><b>Date of birth:</b> 11 Nov 1989
-    </p>
-  </section>
 
 </div>
 </body>
