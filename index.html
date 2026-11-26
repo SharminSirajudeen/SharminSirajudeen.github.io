@@ -582,6 +582,38 @@
   </div>
 </section>
 
+<!-- ── HACKATHONS ── -->
+<section class="block" id="hackathons">
+  <div class="wrap">
+    <span class="eyebrow">// ai hackathons</span>
+    <h2 class="sec-head">Two AI hackathons, autumn 2026.</h2>
+    <p class="sec-lede">Both builds put a check outside the model that the model can't talk its way past. Both repos
+      are public, with the measurements and their limits written down.</p>
+    <div class="projects">
+      <article class="verb">
+        <span class="vnum">meta · nov 2026</span>
+        <div class="vh"><a href="https://github.com/SharminSirajudeen/haptura">Haptura</a></div>
+        <p>Built for Meta's Global AI Developer Hackathon, Startup track. Before a phone agent taps, Haptura asks Android
+          which app owns the window under that point and refuses the tap if it isn't the task's app. Meta's model, Muse,
+          proposes every action and the gate decides. When an attack dialog appeared mid-task, the attacker's app received
+          touches in 9 of 9 runs for both Muse Spark and Muse Wonder without the gate, and in none with it, and all 18 gated
+          runs still finished the task. On a real Galaxy S26 it refused 21 of 21 taps aimed at attack dialogs.</p>
+        <div class="tl-chips"><span class="chip">Android</span><span class="chip">Muse Spark</span><span class="chip">Muse Wonder</span><span class="chip">Python</span><span class="chip">Swift</span><span class="chip">Agent safety</span></div>
+      </article>
+      <article class="verb">
+        <span class="vnum">nebius × nvidia · oct 2026</span>
+        <div class="vh"><a href="https://github.com/SharminSirajudeen/entorhinal">Entorhinal</a></div>
+        <p>Built for the Nebius × NVIDIA Global AI Hackathon, Personal AI track. A memory for an AI assistant that notices
+          when something new makes an old fact untrue, and checks a question against it before answering. On 12 scenarios
+          from the public STALE benchmark it got 18 of 36 answers right, against 6 of 36 for the same Nemotron model reading
+          the whole history. It refused 6 of 12 questions resting on a fact that was no longer true, where that model
+          refused none.</p>
+        <div class="tl-chips"><span class="chip">NVIDIA Nemotron</span><span class="chip">Nebius Token Factory</span><span class="chip">Python</span><span class="chip">Agent memory</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ── HOW I WORK ── -->
 <section class="block" id="how">
   <div class="wrap">
