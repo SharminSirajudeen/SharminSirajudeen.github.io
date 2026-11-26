@@ -161,27 +161,6 @@
   @media(max-width:480px){.hood-grid{grid-template-columns:1fr;}}
 
   /* ── Origin — dark device screen ───────── */
-  .screen{background:var(--screen);color:#cfe0e3;border-top:none;position:relative;overflow:hidden;}
-  .screen::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:48px 48px;}
-  .screen .wrap{position:relative;}
-  .screen .eyebrow{color:#5ec6d6;}
-  .screen .eyebrow::before{background:var(--amber);}
-  .screen .sec-head{color:#fff;max-width:24ch;}
-  .origin-body{font-size:1.06rem;color:#a9c0c5;max-width:64ch;margin:var(--s5) 0 0;line-height:1.66;}
-  .origin-body b{color:#eaf3f4;font-weight:600;}
-  .tests{display:flex;gap:5px;margin:var(--s6) 0 var(--s2);flex-wrap:wrap;}
-  .t{width:22px;height:22px;border-radius:5px;}
-  .t.red{background:var(--red);box-shadow:0 0 14px rgba(229,72,77,.4);}
-  .t.green{background:var(--green);}
-  .tests-cap{font-family:var(--mono);font-size:12px;color:#6b8a90;}
-  blockquote{margin:var(--s8) 0 0;padding:0 0 0 22px;border-left:3px solid var(--amber);}
-  blockquote q{font-family:var(--display);font-weight:600;font-size:clamp(1.4rem,3.4vw,2.1rem);line-height:1.25;color:#fff;letter-spacing:-.015em;}
-  blockquote q .hl{color:#ffb38f;}
-  blockquote q::before,blockquote q::after{content:"";}
-  .journey{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:var(--s7);font-family:var(--mono);font-size:13px;}
-  .journey .j{color:#7fa3a9;padding:5px 10px;border:1px solid rgba(255,255,255,.1);border-radius:7px;}
-  .journey .j.now{color:#08171C;background:#5ec6d6;border-color:#5ec6d6;font-weight:600;}
-  .journey .arrow{color:#456;}
 
   /* ── Timeline ──────────────────────────── */
   .tl{margin-top:var(--s7);border-left:2px solid var(--line);padding-left:var(--s6);position:relative;}
@@ -221,8 +200,6 @@
 
   .hero{padding:96px 0 56px;}
   @media(max-width:900px){.hero{padding:40px 0 36px;}}
-  #origin{clip-path:circle(0% at 80% 54%);}
-  @media(prefers-reduced-motion:reduce){#origin{clip-path:none !important;}}
 
   /* ── CV modal ───────────────────────────── */
   .cv-modal{position:fixed;inset:0;z-index:200;display:none;}
@@ -249,8 +226,6 @@
   .cv-frame{flex:1 1 auto;width:100%;border:0;background:#e9edf0;}
   @media(max-width:560px){.cv-panel{top:0;width:100vw;height:100vh;border-radius:0;}.cv-dl .lbl{display:none;}}
 </style>
-<!-- #origin starts clipped to 0% and is revealed by the scroll script; without JS it would never appear. -->
-<noscript><style>#origin{clip-path:none !important;}</style></noscript>
 </head>
 <body>
 
@@ -485,41 +460,6 @@
   </div>
 </section>
 
-<!-- ── ORIGIN (dark device screen) ── -->
-<section class="block screen" id="origin">
-  <div class="wrap">
-    <span class="eyebrow">// where it started</span>
-    <h2 class="sec-head">Years of watching test suites rot faster than we could maintain them.</h2>
-    <p class="origin-body">
-      For over a decade I built Android apps. I was genuinely thrilled when I first found <b>Espresso</b> —
-      a framework from Google, deeply integrated with the SDK, that could simulate real user behaviour. I
-      wrote hundreds of tests. Then reality set in. Tests passed locally and failed on CI over animation
-      timing. Tests that worked on a Pixel broke on a Samsung. A designer moved a button into a
-      <b>BottomSheet</b> and forty tests turned red overnight — none of them testing that button. I spent
-      more time maintaining the suite than it ever saved me. I moved through Appium, UIAutomator, Maestro —
-      each a refinement of the same idea: match elements by ID or XPath, and break the moment the UI evolves.
-    </p>
-
-    <div class="tests" aria-hidden="true">
-      <span class="t red"></span><span class="t red"></span><span class="t red"></span><span class="t green"></span><span class="t red"></span><span class="t red"></span><span class="t green"></span><span class="t red"></span><span class="t red"></span><span class="t red"></span><span class="t green"></span><span class="t red"></span>
-    </div>
-    <div class="tests-cap">// "the UI tests are red again" — and everyone nods like it's weather</div>
-
-    <blockquote>
-      <q>If Espresso — <span class="hl">Google's best</span> — was the ceiling, the problem wasn't the
-      implementation. It was the entire approach.</q>
-    </blockquote>
-
-    <div class="journey">
-      <span class="j">Espresso</span><span class="arrow">→</span>
-      <span class="j">UIAutomator</span><span class="arrow">→</span>
-      <span class="j">Appium</span><span class="arrow">→</span>
-      <span class="j">Maestro</span><span class="arrow">→</span>
-      <span class="j now">Drengr</span>
-    </div>
-  </div>
-</section>
-
 <!-- ── CONTACT ── -->
 <section class="block contact" id="contact">
   <div class="wrap">
@@ -624,26 +564,6 @@
 })();
 </script>
 
-<script>
-/* dark "where it started" band opens as a circle when it scrolls into view */
-(function(){
-  var o=document.getElementById('origin'); if(!o) return;
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches){o.style.clipPath='none';return;}
-  var max=0,raf=null;
-  function frame(){
-    raf=null;
-    var r=o.getBoundingClientRect(),w=window.innerWidth,h=window.innerHeight;
-    var rv=Math.min(1,Math.max(0,(h-r.top)/(h*0.82)));
-    if(rv>max) max=rv;
-    if(max>=0.995){o.style.clipPath='none';window.removeEventListener('scroll',onScroll);return;}
-    o.style.clipPath='circle('+(max*Math.hypot(w,h)*1.15).toFixed(0)+'px at '+(w*0.5-r.left).toFixed(0)+'px '+(h*0.45-r.top).toFixed(0)+'px)';
-  }
-  function onScroll(){if(!raf)raf=requestAnimationFrame(frame);}
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',onScroll);
-  window.addEventListener('load',frame);frame();
-})();
-</script>
 
 </body>
 </html>
