@@ -147,6 +147,7 @@
   .shot{display:block;margin:-22px -22px 18px;border-bottom:1px solid var(--line);background:#f4f7f8;}
   .shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;}
   .shot.wide img{aspect-ratio:16/9;}
+  .shot.vid{background:#0b0b0b;display:flex;justify-content:center;} .shot.vid video{display:block;height:340px;width:auto;max-width:100%;}
   .verb .links{margin-top:12px;font-size:14px;} .verb .links a{color:var(--teal);font-weight:600;text-decoration:none;margin-right:18px;white-space:nowrap;} .verb .links a:hover{text-decoration:underline;}
   .verb .roles{margin-top:10px;font-size:13.5px;}
   .verb .vnum{position:absolute;right:14px;top:10px;font-family:var(--mono);font-size:12px;color:var(--faint);}
@@ -543,7 +544,7 @@
     <p class="sec-lede">Each has its own address under <a href="https://drengr.dev">drengr.dev</a>.</p>
     <div class="projects">
       <article class="verb">
-        <a class="shot" href="https://actuator.drengr.dev"><img src="img/products/actuator.jpg" alt="Actuator home page: eyes and hands for AI agents on mobile apps" loading="lazy" width="960" height="600"></a>
+        <div class="shot vid"><video src="img/products/actuator-canvas.mp4" poster="img/products/actuator-canvas-poster.jpg" controls muted playsinline loop preload="none" width="540" height="1172" aria-label="Actuator on a phone: the whole screen is one canvas with no accessibility tree, and it finds and taps the TAP ME box by sight wherever it moves (4x speed)"></video></div>
         <span class="vnum">live</span>
         <div class="vh"><a href="https://actuator.drengr.dev">Actuator</a></div>
         <p>A single Rust binary that lets AI agents see a phone screen and act on it: an MCP server that drives Android emulators, iOS simulators and cloud device farms from screenshots, not element trees. It finds a target by sight and taps by coordinate, so it reaches apps other tools can't, even ones drawn entirely on a canvas. On iOS, touch goes in through IndigoHID mach ports, which I reverse-engineered, and a headless XCUITest runner of my own replaces WebDriverAgent. Listed in the official MCP registry in March 2026, launched publicly in June 2026.</p>
