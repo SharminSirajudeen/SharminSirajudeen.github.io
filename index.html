@@ -144,6 +144,10 @@
   .projects > :last-child:nth-child(odd){grid-column:1/-1;}  /* an odd last card takes the whole row */
   @media(max-width:720px){.projects{grid-template-columns:1fr;}}
   .verb .vh a{color:inherit;text-decoration:none;} .verb .vh a:hover{color:var(--teal);}
+  .shot{display:block;margin:-22px -22px 18px;border-bottom:1px solid var(--line);background:#f4f7f8;}
+  .shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;}
+  .shot.wide img{aspect-ratio:16/9;}
+  .verb .links{margin-top:12px;font-size:14px;} .verb .links a{color:var(--teal);font-weight:600;text-decoration:none;margin-right:18px;white-space:nowrap;} .verb .links a:hover{text-decoration:underline;}
   .verb .roles{margin-top:10px;font-size:13.5px;}
   .verb .vnum{position:absolute;right:14px;top:10px;font-family:var(--mono);font-size:12px;color:var(--faint);}
   .stack{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s6);}
@@ -539,37 +543,47 @@
     <p class="sec-lede">Each has its own address under <a href="https://drengr.dev">drengr.dev</a>.</p>
     <div class="projects">
       <article class="verb">
+        <a class="shot" href="https://actuator.drengr.dev"><img src="img/products/actuator.jpg" alt="Actuator home page: eyes and hands for AI agents on mobile apps" loading="lazy" width="960" height="600"></a>
         <span class="vnum">live</span>
         <div class="vh"><a href="https://actuator.drengr.dev">Actuator</a></div>
         <p>A single Rust binary that lets AI agents see a phone screen and act on it: an MCP server that drives Android emulators, iOS simulators and cloud device farms from screenshots, not element trees. It finds a target by sight and taps by coordinate, so it reaches apps other tools can't, even ones drawn entirely on a canvas. On iOS, touch goes in through IndigoHID mach ports, which I reverse-engineered, and a headless XCUITest runner of my own replaces WebDriverAgent. Listed in the official MCP registry in March 2026, launched publicly in June 2026.</p>
+        <p class="links"><a href="https://actuator.drengr.dev">See it work</a><a href="https://github.com/SharminSirajudeen/drengr-hands">Source on GitHub</a></p>
         <p class="roles"><b>Roles</b> Systems Engineer · Backend Engineer · Mobile Engineer · AI/ML Engineer · QA / Test Automation Engineer</p>
         <div class="tl-chips"><span class="chip">Rust</span><span class="chip">Model Context Protocol (MCP)</span><span class="chip">Android</span><span class="chip">ADB</span><span class="chip">iOS</span><span class="chip">Swift</span><span class="chip">XCUITest</span><span class="chip">Xcode</span><span class="chip">Reverse Engineering</span><span class="chip">Computer Vision</span><span class="chip">Vision-Language Models</span><span class="chip">LLM Integration</span><span class="chip">Ollama</span><span class="chip">Node.js</span><span class="chip">npm</span><span class="chip">macOS</span><span class="chip">Linux</span><span class="chip">Systems Programming</span><span class="chip">Test Automation</span><span class="chip">CLI Development</span></div>
       </article>
       <article class="verb">
+        <a class="shot" href="https://analytics.drengr.dev"><img src="img/products/analytics.jpg" alt="Drengr Analytics home page: the data names itself" loading="lazy" width="960" height="600"></a>
         <span class="vnum">in development</span>
         <div class="vh"><a href="https://analytics.drengr.dev">Analytics</a></div>
         <p>A product analytics SDK for mobile and web apps that captures events by itself, so developers write no tracking code. It watches screen changes, taps, network calls and crashes and turns them into named business events. Personal data it recognises is redacted or sealed on the device before upload. Multi-tenant backend: Cloudflare Workers and Durable Objects for ingestion, Supabase Postgres with row-level security for tenants and keys, and a ClickHouse event store on a self-hosted server.</p>
+        <p class="links"><a href="https://analytics.drengr.dev">analytics.drengr.dev</a><a href="https://github.com/SharminSirajudeen/drengr-sdk">SDKs on GitHub</a></p>
         <p class="roles"><b>Roles</b> Backend / Data Engineer · Mobile Engineer · Full-Stack Engineer</p>
         <div class="tl-chips"><span class="chip">Kotlin</span><span class="chip">Android</span><span class="chip">Swift</span><span class="chip">iOS</span><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">JavaScript</span><span class="chip">TypeScript</span><span class="chip">Rust</span><span class="chip">ClickHouse</span><span class="chip">PostgreSQL</span><span class="chip">Supabase</span><span class="chip">Cloudflare Workers</span><span class="chip">Durable Objects</span><span class="chip">Cloudflare R2</span><span class="chip">Vercel</span><span class="chip">Linux</span><span class="chip">SDK Development</span><span class="chip">Data Engineering</span><span class="chip">Encryption</span><span class="chip">Multi-tenant Architecture</span></div>
       </article>
       <article class="verb">
+        <a class="shot wide" href="https://www.youtube.com/watch?v=9jYdacbQoxc"><img src="img/products/graspline.jpg" alt="Graspline drawing a projection-of-solids construction step by step" loading="lazy" width="960" height="600"></a>
         <span class="vnum">free, in testing</span>
         <div class="vh"><a href="https://graspline.drengr.dev">Graspline</a></div>
         <p>An engineering graphics (descriptive geometry) solver for first-year engineering students and their teachers. A student types a textbook question and Graspline draws the whole construction step by step, checking every measurement numerically, for projections of points, lines, planes and solids. A small fine-tuned model reads the question and a deterministic geometry engine draws and verifies it, which keeps running costs near zero. Teachers can generate practice sets with answer keys.</p>
+        <p class="links"><a href="https://www.youtube.com/watch?v=9jYdacbQoxc">▶ Watch the demo on YouTube</a><a href="https://graspline.drengr.dev">Open Graspline</a></p>
         <p class="roles"><b>Roles</b> Full-Stack Engineer · AI/ML Engineer · Frontend Engineer</p>
         <div class="tl-chips"><span class="chip">JavaScript</span><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">SVG/Canvas</span><span class="chip">Python</span><span class="chip">LLM Fine-tuning</span><span class="chip">Computational Geometry</span></div>
       </article>
       <article class="verb">
+        <a class="shot" href="https://marram.drengr.dev"><img src="img/products/marram.jpg" alt="Marram home page: a private companion through perimenopause and menopause" loading="lazy" width="960" height="600"></a>
         <span class="vnum">in development</span>
         <div class="vh"><a href="https://marram.drengr.dev">Marram</a></div>
-        <p>A local-first wellness app for women in perimenopause and menopause, in development. It is built to read how she uses her phone, never what she writes (touch dynamics, keystroke timing, usage and sleep rhythm), against her own baseline, and to offer a calming exercise generated fresh each time: paced breathing, a soft-body sensory canvas, or grounding. A personal Random Forest, written in pure Dart, trains on the phone, so her data is designed to stay there. Wellness, not diagnosis. Flutter, for iOS and Android.</p>
+        <p>A local-first wellness app for women in perimenopause and menopause, in development. It is built to read how she uses her phone, never what she writes (touch dynamics, keystroke timing, usage and sleep rhythm), against her own baseline, and to offer a calming exercise generated fresh each time: paced breathing, a soft-body sensory canvas, or grounding. A personal Random Forest, written in pure Dart, trains on the phone, so her data is designed to stay there. Its program follows menopause-specific CBT, 12 self-paced weeks and 35 sessions backed by 37 citations. Wellness, not diagnosis. Flutter, for iOS and Android.</p>
+        <p class="links"><a href="https://marram.drengr.dev">marram.drengr.dev</a></p>
         <p class="roles"><b>Roles</b> Mobile Engineer · ML Engineer · Product Engineer</p>
         <div class="tl-chips"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Android</span><span class="chip">iOS</span><span class="chip">Machine Learning</span><span class="chip">Random Forest</span><span class="chip">On-device ML</span><span class="chip">Signal Processing</span><span class="chip">Physics Simulation</span><span class="chip">Animation</span><span class="chip">Local-first Architecture</span><span class="chip">Data Privacy</span><span class="chip">Mobile UX</span></div>
       </article>
       <article class="verb">
+        <a class="shot" href="https://dunelight.drengr.dev"><img src="img/products/dunelight.jpg" alt="Dunelight home page: a private companion for the first year after birth" loading="lazy" width="960" height="600"></a>
         <span class="vnum">in development</span>
         <div class="vh"><a href="https://dunelight.drengr.dev">Dunelight</a></div>
         <p>Marram&#39;s sister app, in development, for the first year after birth: about her, not the baby. It shares Marram&#39;s on-device sensing engine, has a wellness program of its own for the postpartum year, and is built so that what she writes stays on her phone. Wellness, not diagnosis. Flutter, for iOS and Android.</p>
+        <p class="links"><a href="https://dunelight.drengr.dev">dunelight.drengr.dev</a></p>
         <p class="roles"><b>Roles</b> Mobile Engineer · ML Engineer · Product Engineer</p>
         <div class="tl-chips"><span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Android</span><span class="chip">iOS</span><span class="chip">Machine Learning</span><span class="chip">Random Forest</span><span class="chip">On-device ML</span><span class="chip">Signal Processing</span><span class="chip">Animation</span><span class="chip">Local-first Architecture</span><span class="chip">Data Privacy</span><span class="chip">Mobile UX</span></div>
       </article>
@@ -593,6 +607,7 @@
       are public, with the measurements and their limits written down.</p>
     <div class="projects">
       <article class="verb">
+        <a class="shot wide" href="https://www.youtube.com/watch?v=UaFilR5qpPs"><img src="img/products/haptura.jpg" alt="Haptura demo video title card" loading="lazy" width="960" height="600"></a>
         <span class="vnum">meta · nov 2026</span>
         <div class="vh"><a href="https://github.com/SharminSirajudeen/haptura">Haptura</a></div>
         <p>Built for Meta's Global AI Developer Hackathon, Startup track. Before a phone agent taps, Haptura asks Android
@@ -600,9 +615,11 @@
           proposes every action and the gate decides. When an attack dialog appeared mid-task, the attacker's app received
           touches in 9 of 9 runs for both Muse Spark and Muse Wonder without the gate, and in none with it, and all 18 gated
           runs still finished the task. On a real Galaxy S26 it refused 21 of 21 taps aimed at attack dialogs.</p>
+        <p class="links"><a href="https://www.youtube.com/watch?v=UaFilR5qpPs">▶ Watch the demo on YouTube</a><a href="https://github.com/SharminSirajudeen/haptura">Source on GitHub</a></p>
         <div class="tl-chips"><span class="chip">Android</span><span class="chip">Muse Spark</span><span class="chip">Muse Wonder</span><span class="chip">Python</span><span class="chip">Swift</span><span class="chip">Agent safety</span></div>
       </article>
       <article class="verb">
+        <a class="shot wide" href="https://www.youtube.com/watch?v=fcfKaAglyyE"><img src="img/products/entorhinal.jpg" alt="Entorhinal demo: the same question answered with and without the memory" loading="lazy" width="960" height="600"></a>
         <span class="vnum">nebius × nvidia · oct 2026</span>
         <div class="vh"><a href="https://github.com/SharminSirajudeen/entorhinal">Entorhinal</a></div>
         <p>Built for the Nebius × NVIDIA Global AI Hackathon, Personal AI track. A memory for an AI assistant that notices
@@ -610,6 +627,7 @@
           from the public STALE benchmark it got 18 of 36 answers right, against 6 of 36 for the same Nemotron model reading
           the whole history. It refused 6 of 12 questions resting on a fact that was no longer true, where that model
           refused none.</p>
+        <p class="links"><a href="https://www.youtube.com/watch?v=fcfKaAglyyE">▶ Watch the demo on YouTube</a><a href="https://github.com/SharminSirajudeen/entorhinal">Source on GitHub</a></p>
         <div class="tl-chips"><span class="chip">NVIDIA Nemotron</span><span class="chip">Nebius Token Factory</span><span class="chip">Python</span><span class="chip">Agent memory</span></div>
       </article>
     </div>
